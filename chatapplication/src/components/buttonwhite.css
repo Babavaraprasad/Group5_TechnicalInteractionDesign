@@ -1,0 +1,71 @@
+@import "palette.css";
+
+.default-button-div {
+    position: fixed;
+    /*margin-left: 550px; /*move button to the right so that it doesn't cover existing components*/
+}
+
+.btnwhite {
+    position: fixed;
+    position: absolute;
+    border-radius: 8px;
+    border: 1px solid var(--Outline);
+    /*font-family: "Roboto";*/
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3 ease;
+    letter-spacing: 0.070em;
+    text-transform: capitalize;
+   
+}
+
+.btnwhite:hover {
+    /*transform: translateY(-2px);*/
+    background-color: var(--Surface1);
+}
+
+.btnwhite:hover:focus {
+    background-color: var(--Surface1);
+}
+.btnwhite:active {
+    box-shadow: 2px 2px 5px var(--Primary);
+}
+
+
+/*Button colors and Styles*/
+
+.btn--white--default--solid {
+    background-color: var(--Surface);
+    color:  var(--Primary);
+}
+
+/*Button sizes*/
+
+.btn--white--width170--height60{
+    width: 170px;
+    height: 60px;
+    
+}
+.btn--white--width230--height50{
+    width: 230px;
+    height: 50px;    
+}
+.btn--white--width195--height50{
+    width: 195px;
+    height: 50px;   
+}
+.btn--white--width120--height50{
+    width: 120px;
+    height: 50px;
+} 
+.btn--white--width140--height40{
+    width: 140px;
+    height: 40px;
+}
+.btn--white--width70--height40{
+    width: 70px;
+    height: 40px;
+}
