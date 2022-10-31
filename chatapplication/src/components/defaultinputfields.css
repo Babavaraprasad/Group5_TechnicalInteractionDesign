@@ -1,0 +1,80 @@
+@import "palette.css";
+.general-input-div {
+    display: flex;
+    width: 400px;
+    height: 100px;
+}
+
+.inputfield  {
+    display: flex;
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+.l-div {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 86px;
+}
+
+.div-input {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    outline: none;
+   
+}
+
+input {
+    margin-top: 20px;
+    text-align: left;
+    top: 0px;
+    outline: none;
+    border: 0;
+    padding: 3px;
+    width: 280px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    display: flex;
+    letter-spacing: 0.02em;
+    color: var(--OnSurface);
+    
+}
+
+label {
+    position: absolute;
+    height: 20px;
+    left: 2px;
+    right: 242px;
+    top: 0px;
+    margin-left: 15px;
+    margin-top: 80px;
+
+    /* Heading3 */
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    
+    }
+
+/*Form styles*/
+
+.default--input {
+    
+    border: 1px solid var(--OnSurface);
+    padding:  0em 2em;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 2;
+    width: 280px;
+    height: 62px;
+
+}
