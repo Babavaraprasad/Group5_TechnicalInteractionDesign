@@ -1,15 +1,13 @@
 import React from 'react'
 import './searcharea.css';
-/*import { AiOutlineSearch } from 'react-icons/ai';*/
 
 
 const STYLES = "search-area"
 
 export const Searcharea = ({ 
-    children, 
     type, 
     onClick, 
-    searchStyle, 
+    searchStyle,
     
 }) => {
 
@@ -19,7 +17,6 @@ export const Searcharea = ({
             <div className={`searcharea ${checkSearchStyle}`}onClick={onClick} type={type} action="/url" method="GET">
                 <img className={"search-icon"} src="Group.png" alt="search-icon"/>
                 <input type="text" placeholder='Search...' />
-                {children} 
             </div>
         </div>
         

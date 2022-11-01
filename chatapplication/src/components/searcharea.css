@@ -1,8 +1,6 @@
 @import "palette.css";
 
 .searcharea {
-    /*margin-top: 10px;
-    margin-left: 10px;*/ /*just moved a little to make it look good.*/
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -19,7 +17,6 @@
 input[type=text] {
     width: 380px;
     text-align: left;
-    top: 0px;
     outline: none;
     border: 0;
     padding: 5px;

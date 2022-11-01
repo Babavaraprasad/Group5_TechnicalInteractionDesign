@@ -1,11 +1,9 @@
 @import "palette.css";
 
 .largeinputfield  {
-    display: flex;
-    width: 650px;
-    height: 100px;
-    margin-top: 100px;
-    margin-left: 10px;
+    width: 500px;
+    
+    
 }
 
 .large-l-div {
@@ -16,17 +14,15 @@
 }
 
 .large-input-fields-textarea {
-    display: flex;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 0.02em;
     outline: none;
-    border: 0;
 }
 .large-input-fields-textarea{
+    margin-top: 10px;
     text-align: left;
-    top: 0px;
     padding: 3px;
     width: 600px;
     height: 70px;
@@ -36,17 +32,16 @@
     letter-spacing: 0.02em;
     color: var(--OnSurface);
     resize: none;
+    border: 1px solid var(--OnSurface);
+    padding:  0em 2em;
+    border-radius: 4px;
 }
 
 
 label {
-    position: absolute;
     height: 20px;
-    left: 2px;
-    right: 242px;
-    top: 0px;
     margin-left: 15px;
-    margin-top: 80px;
+    margin-bottom: 10px;
 
     /* Heading3 */
     font-style: italic;
@@ -64,13 +59,6 @@ label {
 /*Form styles*/
 
 .large--input--field--area {
-    
-    border: 1px solid var(--OnSurface);
-    padding:  0em 2em;
-    border-radius: 4px;
     font-size: 14px;
-    line-height: 2;
-    width: 600px;
-    height: 80px;
-
+    line-height: 2px;
 }

@@ -41,13 +41,9 @@ export const Button = ({
 /*
 //COMPONENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT!
 
-<div className='App'>
     <Button onClick={() => {console.log("You clicked on me!")}}
     type="button"
-    buttonSize="btn--width120--height50"
-    >
-    Button</Button>
-</div>
+    buttonSize="btn--width120--height50">Button</Button>
 
 
 */

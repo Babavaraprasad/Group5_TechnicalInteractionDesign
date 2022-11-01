@@ -1,10 +1,5 @@
 @import "palette.css";
 
-.default-button-div {
-    position: fixed;
-    /*margin-left: 550px; /*move button to the right so that it doesn't cover existing components*/
-}
-
 .btnwhite {
     position: fixed;
     position: absolute;
