@@ -19,7 +19,6 @@
     border: 0;
     padding: 3px;
     line-height: 20px;
-    /* identical to box height, or 143% */
     display: flex;
     letter-spacing: 0.02em;
     color: var(--OnSurface);
@@ -29,7 +28,7 @@
     font-size: 14px;
     line-height: 2;
     width: 595px;
-    height: 62px;
+    height: 36px;
     padding:  0em 2em;
     border-radius: 4px;
     font-size: 14px;

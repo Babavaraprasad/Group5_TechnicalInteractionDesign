@@ -20,15 +20,13 @@ export const DefaultInputFields = ({
       onClick={onClick}
       type={type}
     >
-      
-        <div className="label-div">
-          <label for="">{labelText}</label>
-        </div>
+      <div className="label-div">
+        <label for="">{labelText}</label>
+      </div>
 
-        <div className="div-input">
-          <input className="input-input" type="text" placeholder={placeholder} />
-        </div>
-      
+      <div className="div-input">
+        <input className="input-input" type="text" placeholder={placeholder} />
+      </div>
     </div>
   );
 };
