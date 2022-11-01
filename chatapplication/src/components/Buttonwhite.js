@@ -41,12 +41,10 @@ export const Buttonwhite = ({
 /* 
 COMPONENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT!
 
-    <div>
         <Buttonwhite onClick={() => {console.log("You clicked on me!")}}
         type="button"
         buttonSize="btn--white--width195--height50"
         >
         Button</Buttonwhite>
-     </div>
 
 */

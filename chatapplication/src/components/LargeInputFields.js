@@ -1,49 +1,45 @@
-import React from 'react'
-import './largeinputfields.css';
+import React from "react";
+import "./largeinputfields.css";
 
-const STYLES =  "large--input--field--area";
+const STYLES = "large--input--field--area";
 
-export const LargeInputFields = ({ 
-    children, 
-    type, 
-    onClick, 
-    largeStyle, 
+export const LargeInputFields = ({
+  type,
+  onClick,
+  largeStyle,
+  labelText,
+  placeholder,
 }) => {
+  const checkLargeStyle = STYLES.includes(largeStyle) ? largeStyle : STYLES;
 
-    const checkLargeStyle = STYLES.includes(largeStyle) ? largeStyle : STYLES;
-
-    return (
-        
-        <div className={`largeinputfield ${checkLargeStyle}`}onClick={onClick} type={type}>
-            {children}
+  return (
+    <div
+      className={`largeinputfield ${checkLargeStyle}`}
+      onClick={onClick}
+      type={type}
+    >
+      
+        <div className="large-label-div">
+          <label for="...">{labelText}</label>
         </div>
-    )
-}
 
+        <div className="large-input">
+          <textarea
+            className="large-input-fields-textarea"
+            name="inputfield"
+            rows="8"
+            cols="50"
+            placeholder={placeholder}
+          ></textarea>
+        </div>
+      </div>
+    
+  );
+};
 
 /*
 //COMPOINENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT.
 
-<div>
-    <div>
-      <LargeInputFields onClick={() => {console.log("You clicked on me!")}}
-        type="text-area"
-        formStyle="large--input--field--area"
-        >
-
-        <div className='large-l-div'>
-
-          <div className='large-label-div'>
-          <label for="...">Name</label>
-          </div>
-
-          <div className='large-input'>
-              <textarea className='large-input-fields-textarea' name="inputfield" rows="8" cols="50" placeholder='Name'></textarea>
-          </div>
-
-        </div>
-        </LargeInputFields>
-    </div>
-  </div>
+<LargeInputFields labelText={'egg'} placeholder={'egg'}></LargeInputFields>
 
 */

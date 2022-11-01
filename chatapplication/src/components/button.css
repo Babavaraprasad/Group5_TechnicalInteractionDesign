@@ -1,13 +1,6 @@
 @import "palette.css";
 
-.default-button-div {
-    position: fixed;
-    /*margin-left: 550px; /*move button to the right so that it doesn't cover existing components*/
-}
-
 .btn {
-    position: fixed;
-    position: absolute;
     border-radius: 8px;
     /*font-family: "Roboto";*/
     font-style: normal;
@@ -30,7 +23,7 @@
     background-color: var(--Primary60);
 }
 .btn:active {
-    box-shadow: 2px 2px 5px var(--Primary60);
+    box-shadow: 2px 2px 5px var(--Primary);
 }
 
 
