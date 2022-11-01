@@ -26,7 +26,11 @@ export default function Modal() {
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
             <h2>Hello Group 5</h2>
-            <p> You can add your own components</p>
+            <p> You can add your own components <br />
+            Hello Again <br />
+            Goodbye now
+
+            </p>
             <button className="close-modal" onClick={toggleModal}>❌</button>
           </div>
         </div>
