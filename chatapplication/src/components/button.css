@@ -23,7 +23,7 @@
     background-color: var(--Primary60);
 }
 .btn:active {
-    box-shadow: 2px 2px 5px var(--Primary60);
+    box-shadow: 2px 2px 5px var(--Primary);
 }
 
 
