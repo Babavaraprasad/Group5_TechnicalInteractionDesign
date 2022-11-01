@@ -10,13 +10,6 @@ export default function Modal() {
     setModal(!modal);
   };
 
-  //
-  if(modal) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
-
   return (
   <>
       <button onClick={toggleModal} className="btn-modal"> Open🚀</button>
@@ -28,7 +21,7 @@ export default function Modal() {
             <h2>Hello Group 5</h2>
             <p> You can add your own components <br />
             Hello Again <br />
-            Goodbye now
+            Goodbye
 
             </p>
             <button className="close-modal" onClick={toggleModal}>❌</button>
