@@ -1,6 +1,7 @@
 import './LoginPage.css';
 import {Button} from "./components/Button"
 import {DefaultInputFields} from "./components/DefaultInputFields"
+import {PopUp} from "./components/PopUp"
 
 
 function LoginPage() {
@@ -28,7 +29,7 @@ function LoginPage() {
           Sign up to find out more!
 
           </p>
-          <Button onClick={() => {console.log("You clicked on me!")}}
+          <Button onClick={toggleModal}
             type="button"
             buttonSize="btn--width120--height50">Register</Button>
         </div>
