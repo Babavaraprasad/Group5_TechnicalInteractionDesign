@@ -1,0 +1,13 @@
+@import "palette.css";
+
+/* Changing colour of the hyperlink to match the design system */
+a {
+    color: var(--Hyperlink);
+  }
+  
+  a:hover {
+    color: var(--HyperlinkHover);
+  }
+
+
+  
