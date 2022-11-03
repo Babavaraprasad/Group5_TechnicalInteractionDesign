@@ -1,9 +1,6 @@
 import './App.css';
 import Registration from './Pages/Registration';
 import PopUp from "./components/PopUp";
-import 
-
-
 function App() {
   return (
    <div><Registration/>
