@@ -1,17 +1,29 @@
+h2
+{
+    text-align: center;
+}
+h4{
+    margin-left: 15px;
+}
 .routingContent
 {
     
-    width: 176px;
+    width: 250px;
     height: 15px;
     color: #000000;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 14px;
+    line-height: 35px;
+  margin-left: 15px;
 }
 .btn--width140--height40
 {
     margin-top: 30px;
-
+  /*position: relative;
+    margin-left: 320px;
+    */
 }
+
+

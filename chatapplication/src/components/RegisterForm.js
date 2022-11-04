@@ -8,15 +8,17 @@ import {Link} from 'react-router-dom';
 {
     return(
        <Layout>
-        <div className="title"><h3>REGISTRATION PAGE</h3></div>
+        <div><h2>REGISTRATION PAGE</h2></div>
         <h4>Personal Information</h4>
         <form> 
-      <div><DefaultInputFields labelText={'First Name*'} placeholder={'type firstname here'}></DefaultInputFields></div>
-      <div><DefaultInputFields labelText={'Last Name*'} placeholder={'type lastname here'}></DefaultInputFields></div>
-      <div><DefaultInputFields labelText={'Email'} placeholder={'type email here'}></DefaultInputFields></div>
-      <div><DefaultInputFields labelText={'Password'} placeholder={'Enter password'}></DefaultInputFields></div>
-      <div><DefaultInputFields labelText={'Confirm Password *'} placeholder={'confirm the password'}></DefaultInputFields></div>
-      <div><Button onClick={() => {console.log("You clicked on me!")}}type="button" buttonSize="btn--width140--height40">Button</Button></div>
+      <div><DefaultInputFields labelText={'First Name*'} placeholder={'please type your firstname'}></DefaultInputFields></div>
+      <div><DefaultInputFields labelText={'Last Name*'} placeholder={'please type your lastname'}></DefaultInputFields></div>
+      <div><DefaultInputFields labelText={'Email'} placeholder={'please type your email'}></DefaultInputFields></div>
+      <div><DefaultInputFields labelText={'Password'} placeholder={'choose your password'}></DefaultInputFields></div>
+      <div><DefaultInputFields labelText={'Confirm Password *'} placeholder={'confirm your password'}></DefaultInputFields></div>
+      <div className='routingContent'>Already registered? Go to <Link to ="/">Login</Link></div>
+      <div><Button onClick={() => {console.log("You clicked on me!")}}type="button" buttonSize="btn--width140--height40">Register</Button></div>
+    
       </form>
       </Layout>);
 }
