@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./PopUp.css";
+import {Button} from "./Button.js";
+
 
 export default function Modal() {
   //Usestate - using "setModal" to change the state of "modal"
@@ -12,19 +14,22 @@ export default function Modal() {
 
   return (
   <>
-      <button onClick={toggleModal} className="btn-modal"> Open🚀</button>
+      <Button onClick={toggleModal} className="btn-modal"
+            type="button"
+            buttonSize="btn--width120--height50">Register
+      </Button>
 
       {modal && (
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <h2>Hello Group 5</h2>
-            <p> You can add your own components <br />
-            Hello Again <br />
-            Goodbye
+            <h2>Register</h2>
+            <p> You have been registered succesfully.<br />
+            Please Login to continue <br />
 
             </p>
             <button className="close-modal" onClick={toggleModal}>❌</button>
+          
           </div>
         </div>
       )}

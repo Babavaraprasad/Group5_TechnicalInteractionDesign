@@ -1,7 +1,7 @@
 import './LoginPage.css';
 import {Button} from "./components/Button"
 import {DefaultInputFields} from "./components/DefaultInputFields"
-import {PopUp} from "./components/PopUp"
+import PopUp from "./components/PopUp"
 
 
 function LoginPage() {
@@ -20,19 +20,19 @@ function LoginPage() {
         <div className="vertical-line"></div>
 
         <div className="card-column">
-          <h1>New here</h1>
+          <h1>Sign Up</h1>
           <p>Guest Student chatroom is a 
           place where new and previous 
           guest students create and 
-          maintain relationships.
+          maintain relationships. <br />
 
-          Sign up to find out more!
+          <h3>Register find out more!</h3>
 
           </p>
-          <Button onClick={toggleModal}
-            type="button"
-            buttonSize="btn--width120--height50">Register</Button>
+          <PopUp/>
+
         </div>
+
       </div>
     );
   }
