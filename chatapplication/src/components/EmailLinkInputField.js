@@ -23,7 +23,7 @@ export const EmailLinkInputField = ({
       >
         <div className="email-l-div">
           <div className="email-label-div">
-            <label for="...">{labelText}</label>
+            <label>{labelText}</label>
             <div className="input">
               <input
                 className="email-link-input"

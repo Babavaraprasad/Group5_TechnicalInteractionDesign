@@ -2,22 +2,67 @@ import './LoginPage.css';
 import {Button} from '../components/Button'
 import {DefaultInputFields} from '../components/DefaultInputFields'
 import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
 
-
+//used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
+    const [formState, setFormState] = useState({
+      emailText: "",
+      password: "",
+      emailError: "",
+      passwordError: ""
+    });
+
+    function handleEmailChange(event){
+       setFormState({...formState, emailText:event.target.value, emailError:""});
+    }
+
+    function handlePasswordChange(event){
+      setFormState({...formState, password:event.target.value, passwordError:""});
+    }
+
+    function validate(){
+      const emailText = formState.emailText;
+      const password = formState.password;
+
+      let emailError = "";
+      let passwordError = "";
+
+      if (emailText.length === 0){
+        emailError="Email field must not be empty!";
+        setFormState({...formState, emailError: emailError});
+      }
+  
+      if (password.length === 0){
+        passwordError = "Password field must not be empty!";
+        setFormState({...formState, passwordError: passwordError});
+      }
+
+      return emailError === "" && passwordError === "";
+    }
+
+    function onSubmitHandler(event)
+    {
+      if (!validate()) {
+        
+      }
+      event.preventDefault();
+  }
+  
+
     return (
       <div className="card">
-        <div className="card--column">
+        <form className="card--column" onSubmit={onSubmitHandler}>
           <h1 className="title">Welcome back!</h1>
-          <DefaultInputFields labelText={'Email'} placeholder={'Email'}></DefaultInputFields>
-          <DefaultInputFields labelText={'Password'} placeholder={'Password'}></DefaultInputFields>
-          <a>forgot your password?</a>         
-          <Button onClick={() => {console.log("You clicked on me!")}}
-            type="button" buttonSize="btn--width140--height40">
+          <DefaultInputFields onChange={handleEmailChange} labelText={'Email'} placeholder={'Email'} error={formState.emailError}></DefaultInputFields>
+          <DefaultInputFields onChange={handlePasswordChange} type={'password'} labelText={'Password'} placeholder={'Password'} error={formState.passwordError}></DefaultInputFields>
+          <a>Forgot your password?</a>         
+          <Button
+            type="submit" buttonSize="btn--width140--height40">
                 Login
            </Button>
           
-        </div>
+        </form>
 
         <div className="vertical-line"></div>
 
