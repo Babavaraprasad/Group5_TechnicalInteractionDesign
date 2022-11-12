@@ -60,3 +60,7 @@ label {
     line-height: 2;
     width: 280px;
 }
+
+.error-message{
+    color: var(--Error);
+}
