@@ -44,6 +44,7 @@ label {
   align-items: center;
   letter-spacing: 0.05em;
   text-transform: capitalize;
+  margin-top: 18px;
 }
 /*Form styles*/
 .default--input {

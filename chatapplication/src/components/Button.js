@@ -41,11 +41,3 @@ export const Button = ({
   );
 };
 
-/*
-//COMPONENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT!
-    <Button onClick={() => {console.log("You clicked on me!")}}
-    type="button"
-    buttonSize="btn--width120--height50" 
-    buttonStyle={"btn--white" or "btn--default"}>
-    Button</Button>
-*/

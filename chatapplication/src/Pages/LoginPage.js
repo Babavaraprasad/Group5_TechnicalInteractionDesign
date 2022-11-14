@@ -28,7 +28,7 @@ function LoginPage() {
       passwordError: "",
     });
   }
-  
+
   function validate() {
     const emailText = formState.emailText;
     const password = formState.password;
@@ -54,6 +54,10 @@ function LoginPage() {
     }
     event.preventDefault();
   }
+
+  let StaticTextNewhere =
+    "Guest Student chatroom is a place where new and previous guest students create and maintain relationships.";
+  let SignupContent = "Sign up to find out more!";
 
   return (
     <div className="card">
@@ -82,11 +86,8 @@ function LoginPage() {
 
       <div className="card--column">
         <h1 className="title">New here?</h1>
-        <p>
-          Guest Student chatroom is a place where new and previous guest
-          students create and maintain relationships.
-        </p>
-        <p>Sign up to find out more!</p>
+        <p>{StaticTextNewhere}</p>
+        <p>{SignupContent}</p>
         <Link to="/registration">
           <Button
             onClick={() => {
