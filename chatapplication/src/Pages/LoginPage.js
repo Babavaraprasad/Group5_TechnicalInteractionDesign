@@ -56,12 +56,13 @@ function LoginPage() {
           <h1 className="title">Welcome back!</h1>
           <DefaultInputFields onChange={handleEmailChange} labelText={'Email'} placeholder={'Email'} error={formState.emailError}></DefaultInputFields>
           <DefaultInputFields onChange={handlePasswordChange} type={'password'} labelText={'Password'} placeholder={'Password'} error={formState.passwordError}></DefaultInputFields>
-          <a>Forgot your password?</a>         
-          <Button
-            type="submit" buttonSize="btn--width140--height40">
-                Login
-           </Button>
-          
+          <a>Forgot your password?</a>  
+          <Link to="/profile">     
+            <Button
+              type="submit" buttonSize="btn--width140--height40">
+                  Login
+            </Button>
+           </Link>  
         </form>
 
         <div className="vertical-line"></div>

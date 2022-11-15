@@ -5,6 +5,7 @@ import App from './App';
 import LoginPage from './Pages/LoginPage';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import ProfilePage from './Pages/ProfilePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +13,7 @@ root.render(
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="registration" element={<App />}/>
+          <Route exact path="/profile" element={<ProfilePage />} />
         </Routes>
     </BrowserRouter>
 );

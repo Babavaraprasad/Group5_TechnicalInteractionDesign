@@ -1,0 +1,17 @@
+.profile--page--layout{
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile--avatar--bio{
+    text-align: center;
+}
+
+.profile--info div{
+    margin-bottom: 100px;
+}
+
+.profile--setting button{
+    margin-bottom: 20px;
+}
