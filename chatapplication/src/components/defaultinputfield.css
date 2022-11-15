@@ -59,4 +59,5 @@ label {
 }
 .error-message {
   color: var(--Error);
+  font-size: small;
 }

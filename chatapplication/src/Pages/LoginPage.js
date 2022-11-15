@@ -3,6 +3,7 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import Parse from "parse/dist/parse.min.js";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -39,20 +40,50 @@ function LoginPage() {
     if (emailText.length === 0) {
       emailError = "Email field must not be empty!";
       setFormState({ ...formState, emailError: emailError });
-    }
-
-    if (password.length === 0) {
+    } else if (password.length === 0) {
       passwordError = "Password field must not be empty!";
       setFormState({ ...formState, passwordError: passwordError });
     }
 
-    return emailError === "" && passwordError === "";
+    //return emailError === "" && passwordError === "";
   }
 
+ 
+
   function onSubmitHandler(event) {
-    if (!validate()) {
-    }
     event.preventDefault();
+    if (!validate()) {
+      const totaldata = {
+        emailText: formState.emailText,
+        password: formState.password,
+      };
+      loginverfify(totaldata);
+      console.log(formState.emailText);
+      console.log(formState.password);
+    } else {
+      console.log("cannot validate");
+    }
+  }
+
+  async function loginverfify(totaldata) {
+    const parseQuery = new Parse.Query("NewCandidate");
+    try {
+      parseQuery.equalTo("Email", totaldata.emailText);
+      const Person = await parseQuery.first();
+      console.log(Person);
+
+      console.log("Email: ", Person.get("Email"));
+      console.log("password: ", Person.get("Password"));
+      const fetchemail=Person.get("Email");
+      const fetchpassword= Person.get("Password");
+      const variable =
+        ( formState.emailText===fetchemail && formState.password === fetchpassword)
+          ? "hurray logged in"
+          : "Cannot Login, Email or Password is incorrect!!";
+      console.log(variable);
+    } catch (error) {
+      alert(`Error! ${"email and password doesnot match"}`);
+    }
   }
 
   let StaticTextNewhere =
