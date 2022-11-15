@@ -1,11 +1,11 @@
-
 import './App.css';
-
+import Registration from './Pages/Registration';
+import PopUp from "./components/PopUp";
 function App() {
   return (
-    <div className="App">
-    </div>
+   <div><Registration/>
+<PopUp/>
+</div>
   );
 }
-
 export default App;
