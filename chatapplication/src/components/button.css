@@ -1,64 +1,67 @@
 @import "palette.css";
 
 .btn {
-    border-radius: 8px;
-    /*font-family: "Roboto";*/
-    font-style: normal;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.3 ease;
-    letter-spacing: 0.070em;
-    text-transform: capitalize;
-   
+  border-radius: 8px;
+  /*font-family: "Roboto";*/
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3 ease;
+  letter-spacing: 0.07em;
+  text-transform: capitalize;
 }
-
-.btn:hover {
-    /*transform: translateY(-2px);*/
-    background-color: var(--Primary60);
+.btn--default:hover {
+  background-color: var(--Primary60);
 }
-
-.btn:hover:focus {
-    background-color: var(--Primary60);
+.btn--default:hover:focus {
+  background-color: var(--Primary60);
 }
-.btn:active {
-    box-shadow: 2px 2px 5px var(--Primary);
+.btn--default:active {
+  box-shadow: 2px 2px 5px var(--Primary);
 }
-
-
+.btn--white:hover {
+  background-color: var(--Surface1);
+}
+.btn--white:hover:focus {
+  background-color: var(--Surface1);
+}
+.btn--white:active {
+  box-shadow: 2px 2px 5px var(--Primary);
+}
 /*Button colors and Styles*/
-
-.btn--default--solid {
-    background-color: var(--Primary);
-    color:  var(--OnPrimary);
-    border: none;
+.btn--default {
+  background-color: var(--Primary);
+  color: var(--OnPrimary);
+  border: none;
 }
-
+.btn--white {
+  background-color: var(--Surface);
+  color: var(--Primary);
+}
 /*Button sizes*/
-
-.btn--width170--height60{
-    width: 170px;
-    height: 60px;
-    
+.btn--width170--height60 {
+  width: 170px;
+  height: 60px;
 }
-.btn--width230--height50{
-    width: 230px;
-    height: 50px;    
+.btn--width230--height50 {
+  width: 230px;
+  height: 50px;
 }
-.btn--width195--height50{
-    width: 195px;
-    height: 50px;   
+.btn--width195--height50 {
+  width: 195px;
+  height: 50px;
 }
-.btn--width120--height50{
-    width: 120px;
-    height: 50px;
-} 
-.btn--width140--height40{
-    width: 140px;
-    height: 40px;
+.btn--width120--height50 {
+  width: 120px;
+  height: 50px;
 }
-.btn--width70--height40{
-    width: 70px;
-    height: 40px;
+.btn--width140--height40 {
+  width: 140px;
+  height: 40px;
+}
+.btn--width70--height40 {
+  width: 70px;
+  height: 40px;
 }

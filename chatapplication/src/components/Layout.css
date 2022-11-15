@@ -1,4 +1,4 @@
-.Structure
+.Background--styling--registerform
 {
     background-color:#F5F5F5;
     border-radius: 5px;
@@ -9,12 +9,4 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     margin: auto;
     position: absolute;
-    
 }
-/* background-color:#FCFCF8;
-    border-radius: 6px;
-    width: 760px;
-    height: 600px;
-    left: 340px;
-    top: 59px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); */
