@@ -8,8 +8,9 @@
     text-align: center;
 }
 
-.profile--info div{
-    margin-bottom: 100px;
+.personal--info{
+    width: 400px;
+    margin-bottom: 60px;
 }
 
 .profile--setting button{

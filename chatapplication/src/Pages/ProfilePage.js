@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "../components/Button";
 import { UserAvatar } from "../components/UserAvatar";
 import avartarImg from "../images/main-avatar-image.png";
+import { AcademicSkill } from '../components/AcademicSkill'
 
 export default function ProfilePage() {
   return (
@@ -26,6 +27,11 @@ export default function ProfilePage() {
           <h5>Name</h5>
           <h5>Age</h5>
           <h5>Academic Skills</h5>
+          <div className="skill--section">
+            <AcademicSkill skillName="Programming" skillRating="4"></AcademicSkill>
+            <AcademicSkill skillName="Graphic Design" skillRating="4"></AcademicSkill>
+            <AcademicSkill skillName="Project Management" skillRating="3"></AcademicSkill>
+          </div>
         </div>
 
         <div className="study--info">
