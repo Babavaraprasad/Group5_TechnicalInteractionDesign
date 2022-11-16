@@ -17,7 +17,7 @@ export const EmailLinkInputField = ({
   return (
     <div>
       <div
-        className={`emailinputfield ${checkemailLinkStyle}`}
+        className={`email-input-field ${checkemailLinkStyle}`}
         onClick={onClick}
         type={type}
       >
