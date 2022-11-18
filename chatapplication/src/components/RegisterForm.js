@@ -8,54 +8,43 @@ function RegisterForm() {
   return (
     <Layout>
       <div>
-        <h2 className="Page-title">REGISTRATION PAGE</h2>
+        <h2 className="Page-title">Register New Account</h2>
       </div>
-      <h4 className="Header-title">Personal Information</h4>
-      <form>
-        <div>
-          <DefaultInputField
-            labelText={"First Name*"}
-            placeholder={"please type your firstname"}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Last Name*"}
-            placeholder={"please type your lastname"}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Email"}
-            placeholder={"please type your email"}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Password"}
-            placeholder={"choose your password"}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Confirm Password *"}
-            placeholder={"confirm your password"}
-          ></DefaultInputField>
-        </div>
+      <form className="registration-form">
+        <DefaultInputField
+          labelText={"First Name*"}
+          placeholder={"Please type your First Name"}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Last Name*"}
+          placeholder={"Please type your Last Name"}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Email"}
+          placeholder={"Please type your Email"}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Password"}
+          placeholder={"Choose your Password"}
+          type={"password"}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Confirm Password *"}
+          placeholder={"Confirm your Password"}
+          type={"password"}
+        ></DefaultInputField>
+
         <div className="route-content-loginpage">
           Already registered? Go to <Link to="/">Login</Link>
         </div>
-        <div>
-          <Button
-            onClick={() => {
-              console.log("You clicked on me!");
-            }}
-            type="button"
-            buttonSize="btn--width140--height40"
-          >
-            Register
-          </Button>
-        </div>
+
+        <Button type="button" buttonSize="btn--width140--height40">
+          Register
+        </Button>
       </form>
     </Layout>
   );

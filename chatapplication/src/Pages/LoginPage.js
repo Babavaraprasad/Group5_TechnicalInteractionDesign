@@ -90,9 +90,6 @@ function LoginPage() {
         <p>{SignupContent}</p>
         <Link to="/registration">
           <Button
-            onClick={() => {
-              console.log("You clicked on me!");
-            }}
             type="button"
             buttonSize="btn--width140--height40"
             buttonStyle={"btn--white"}
