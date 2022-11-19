@@ -12,82 +12,104 @@ function RegisterForm(props) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-const [Error, setError] = useState({
-  firstnameError: "",
-  lastnameError: "",
-  emailError: "",
-  passwordError: "",
-  confirmPasswordError:""
-});
-
+  const [Error, setError] = useState({
+    firstnameError: "",
+    lastnameError: "",
+    emailError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+  });
 
   function onchangefirstname(e) {
     setFirstname(e.target.value);
-    setError({...Error,  firstnameError:""});
-    
+    setError({ ...Error, firstnameError: "" });
   }
+
   function onchangeLastname(e) {
     setLastname(e.target.value);
-    setError({...Error,  lastnameError:""});
+    setError({ ...Error, lastnameError: "" });
   }
+
   function onchangeEmail(e) {
     setEmail(e.target.value);
-    setError({...Error,  emailError:""});
+    setError({ ...Error, emailError: "" });
   }
+
   function onchangePassword(e) {
     setPassword(e.target.value);
-    setError({...Error,passwordError:""});
+    setError({ ...Error, passwordError: "" });
   }
+
   function onchangeConfirmPassword(e) {
     setConfirm(e.target.value);
-    setError({...Error,confirmPasswordError:""});
+    setError({ ...Error, confirmPasswordError: "" });
   }
-console.log(firstname);
- 
-  function submitRegistration(event) {
+
+  console.log(firstname);
+
+  async function submitRegistration(event) {
     event.preventDefault();
 
-let firstnameError="";
-let lastnameError="";
-let emailError="";
-let passwordError="";
-let confirmPasswordError="";
+    let firstnameError = "";
+    let lastnameError = "";
+    let emailError = "";
+    let passwordError = "";
+    let confirmPasswordError = "";
 
-    if(firstname.length===0)
-    {firstnameError="First name field cannot not be empty!!";
+    let hasError = false;
 
-    setError({...Error, firstnameError: firstnameError});
-  }
-    else if(lastname.trim()==="")
-    {
-      lastnameError="Last name field cannot not be empty!!";
-      setError({...Error, lastnameError: lastnameError});
+    if (firstname.length === 0) {
+      firstnameError = "First name field cannot not be empty!";
+      setError({ ...Error, firstnameError: firstnameError });
+      hasError = true;
     }
-    else if(email.trim()==="")
-    {
-      emailError="Email field cannot be empty!!";
-      setError({...Error, emailError:emailError});
+
+    if (lastname.trim() === "") {
+      lastnameError = "Last name field cannot not be empty!";
+      setError({ ...Error, lastnameError: lastnameError });
+      hasError = true;
     }
-    else if(password.trim()==="")
-    {
-      passwordError="Password field cannot be empty!!";
-      setError({...Error, passwordError:passwordError});
+
+    if (email.trim() === "") {
+      emailError = "Email field cannot be empty!";
+      setError({ ...Error, emailError: emailError });
+      hasError = true;
     }
-    else if(confirm.trim()==="")
-    {
-      confirmPasswordError="Confirm password field cannot be empty!!";
-      setError({...Error, confirmPasswordError:confirmPasswordError});
+
+    if (password.trim() === "") {
+      passwordError = "Password field cannot be empty!";
+      setError({ ...Error, passwordError: passwordError });
+      hasError = true;
     }
-    else {
-      const totaldata = {
-        Firstname: firstname,
-        lastname: lastname,
-        Email: email,
-        Password: password,
-        ConfirmPassword: confirm,
+
+    if (confirm.trim() === "") {
+      confirmPasswordError = "Confirm password field cannot be empty!";
+      setError({ ...Error, confirmPasswordError: confirmPasswordError });
+      hasError = true;
+    }
+
+    if (password !== confirm) {
+      confirmPasswordError = "Password does not match!";
+      setError({ ...Error, confirmPasswordError: confirmPasswordError });
+      hasError = true;
+    }
+
+    if (!hasError) {
+      const registrationData = {
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        password: password,
       };
-      console.log(totaldata);
-      props.data(totaldata);
+
+      console.log(registrationData);
+
+      //put the logic of what happens after registration inside try
+      try {
+        await props.registerFunction(registrationData);
+      } catch (error) {
+        setError({ ...Error, confirmPasswordError: error.message });
+      }
     }
   }
 
@@ -97,7 +119,7 @@ let confirmPasswordError="";
         <h2 className="Page-title">REGISTRATION PAGE</h2>
       </div>
       <h4 className="Header-title">Personal Information</h4>
-      <form onSubmit={submitRegistration}>
+      <form>
         <div>
           <DefaultInputField
             labelText={"First Name*"}
@@ -143,8 +165,8 @@ let confirmPasswordError="";
         </div>
         <div>
           <Button
-            onClick={submitRegistration}
             type="button"
+            onClick={submitRegistration}
             buttonSize="btn--width140--height40"
           >
             Register
