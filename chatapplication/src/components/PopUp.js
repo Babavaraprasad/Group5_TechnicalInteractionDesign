@@ -16,7 +16,7 @@ export default function Modal() {
 
       {modal && (
         <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
+          <div onClick={toggleModal} className="popup--overlay"></div>
           <div className="modal-content">
             <h2>Hello Group 5</h2>
             <p> You can add your own components <br />

@@ -17,13 +17,13 @@ export const EmailLinkInputField = ({
   return (
     <div>
       <div
-        className={`emailinputfield ${checkemailLinkStyle}`}
+        className={`email-input-field ${checkemailLinkStyle}`}
         onClick={onClick}
         type={type}
       >
         <div className="email-l-div">
           <div className="email-label-div">
-            <label for="...">{labelText}</label>
+            <label>{labelText}</label>
             <div className="input">
               <input
                 className="email-link-input"
