@@ -1,22 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import LoginPage from "./Pages/LoginPage";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Parse from "parse/dist/parse.min.js";
-import Registration from "./Pages/Registration";
-import ProfilePage from './Pages/ProfilePage';
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="registration" element={<Registration />}/>
-          <Route exact path="/profile" element={<ProfilePage />} />
-        </Routes>
-    </BrowserRouter>
+  <App></App>
 );
 
 // If you want to start measuring performance in your app, pass a function

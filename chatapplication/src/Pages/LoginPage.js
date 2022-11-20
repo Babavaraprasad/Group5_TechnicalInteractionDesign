@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Parse from "parse/dist/parse.min.js";
+import Parse from "parse";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
