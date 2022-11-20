@@ -3,11 +3,17 @@ import Layout from "./Layout";
 import { DefaultInputField } from "./DefaultInputField";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
+import {UserChatProfile} from "./UserChatProfile"
 
 function RegisterForm() {
   return (
-    <Layout>
+  <div>
+    <UserChatProfile/>
+  </div>
+  /*
+  <Layout>
       <div>
+      <UserChatProfile/>
         <h2 className="Page-title">REGISTRATION PAGE</h2>
       </div>
       <h4 className="Header-title">Personal Information</h4>
@@ -58,6 +64,7 @@ function RegisterForm() {
         </div>
       </form>
     </Layout>
+    */
   );
 }
 export default RegisterForm;

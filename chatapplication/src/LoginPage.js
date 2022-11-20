@@ -2,13 +2,16 @@ import './LoginPage.css';
 import {Button} from "./components/Button"
 import {DefaultInputFields} from "./components/DefaultInputFields"
 import PopUp from "./components/PopUp"
+import {UserChatProfile} from "./UserChatProfile"
 
 
 function LoginPage() {
     return (
+      
       <div className="card">
         <div className="card-column">
           <h1>Welcome back!</h1>
+          <UserChatProfile/>
           <DefaultInputFields labelText={'Email'} placeholder={'Email'}></DefaultInputFields>
           <DefaultInputFields labelText={'Password'} placeholder={'Password'}></DefaultInputFields>
           <a>forgot your password?</a>
@@ -32,9 +35,8 @@ function LoginPage() {
           <PopUp/>
 
         </div>
-
-      </div>
-    );
-  }
+        </div>
+        );
+      }
 
   export default LoginPage;
