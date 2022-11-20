@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="registration" element={<App />}/>
+          <Route exact path="registration" element={<Registration />}/>
           <Route exact path="/profile" element={<ProfilePage />} />
         </Routes>
     </BrowserRouter>

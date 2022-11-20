@@ -1,18 +1,50 @@
+/* @import "palette.css"; */
+
+.profile--page{
+    margin-left: 40px;
+    display:block;
+}
+
 .profile--page--layout{
     margin: 20px;
     display: flex;
-    justify-content: space-around;
+    border-radius: 30px;
 }
 
 .profile--avatar--bio{
+    width: 300px;
     text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--Secondary80);
+    border-radius: 5px;
+    padding: 20px;
+    margin-right: 40px;
 }
 
 .personal--info{
-    width: 400px;
-    margin-bottom: 60px;
+    width: 1000px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--Secondary80);
+    border-radius: 5px;
+    padding: 20px;
 }
 
-.profile--setting button{
+.study--info{
+    width: 1000px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--Secondary80);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.profile--controls {
+    margin-top: 60px;
+}
+
+.profile--controls button{
     margin-bottom: 20px;
 }

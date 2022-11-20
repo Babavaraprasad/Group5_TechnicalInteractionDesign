@@ -1,6 +1,6 @@
 import "./AcademicSkill.css";
 import React, { useState }  from "react";
-import { Icon } from '@iconify/react';
+import { Icon } from "@iconify/react";
 
 export const AcademicSkill = ({ skillName, skillRating }) => {
   return (
