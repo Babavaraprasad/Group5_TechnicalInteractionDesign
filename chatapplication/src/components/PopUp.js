@@ -3,7 +3,7 @@ import "./PopUp.css";
 import {Button} from "./Button.js";
 
 
-export default function Modal() {
+function PopUp(props) {
   //Usestate - using "setModal" to change the state of "modal"
   const [modal, setModal] = useState(false);
   
@@ -36,3 +36,4 @@ export default function Modal() {
   </>
   )
 }
+export default PopUp;
