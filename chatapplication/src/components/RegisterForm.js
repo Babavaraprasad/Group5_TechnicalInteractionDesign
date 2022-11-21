@@ -45,8 +45,6 @@ function RegisterForm(props) {
     setError({ ...Error, confirmPasswordError: "" });
   }
 
-  console.log(firstname);
-
   async function submitRegistration(event) {
     event.preventDefault();
 
@@ -160,7 +158,7 @@ function RegisterForm(props) {
           Already registered? Go to <Link to="/">Login</Link>
         </div>
 
-        <Button
+        <Button 
           type="button"
           buttonSize="btn--width140--height40"
           onClick={submitRegistration}
