@@ -45,8 +45,6 @@ function RegisterForm(props) {
     setError({ ...Error, confirmPasswordError: "" });
   }
 
-  console.log(firstname);
-
   async function submitRegistration(event) {
     event.preventDefault();
 
@@ -120,63 +118,57 @@ function RegisterForm(props) {
   /*
   <Layout>
       <div>
-      <UserChatProfile/>
-        <h2 className="Page-title">REGISTRATION PAGE</h2>
+        <h2 className="Page-title">Register New Account</h2>
       </div>
-      <h4 className="Header-title">Personal Information</h4>
-      <form>
-        <div>
-          <DefaultInputField
-            labelText={"First Name*"}
-            placeholder={"please type your firstname"}
-            onChange={onchangefirstname}
-            error={Error.firstnameError}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Last Name*"}
-            placeholder={"please type your lastname"}
-            onChange={onchangeLastname}
-            error={Error.lastnameError}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Email"}
-            placeholder={"please type your email"}
-            onChange={onchangeEmail}
-            error={Error.emailError}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Password"}
-            placeholder={"choose your password"}
-            onChange={onchangePassword}
-            error={Error.passwordError}
-          ></DefaultInputField>
-        </div>
-        <div>
-          <DefaultInputField
-            labelText={"Confirm Password *"}
-            placeholder={"confirm your password"}
-            onChange={onchangeConfirmPassword}
-            error={Error.confirmPasswordError}
-          ></DefaultInputField>
-        </div>
+      <form className="registration-form">
+        <DefaultInputField
+          labelText={"First Name*"}
+          placeholder={"Please type your First Name"}
+          onChange={onchangefirstname}
+          error={Error.firstnameError}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Last Name*"}
+          placeholder={"Please type your Last Name"}
+          onChange={onchangeLastname}
+          error={Error.lastnameError}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Email"}
+          placeholder={"Please type your Email"}
+          onChange={onchangeEmail}
+          error={Error.emailError}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Password"}
+          placeholder={"Choose your Password"}
+          type={"password"}
+          onChange={onchangePassword}
+          error={Error.passwordError}
+        ></DefaultInputField>
+
+        <DefaultInputField
+          labelText={"Confirm Password *"}
+          placeholder={"Confirm your Password"}
+          type={"password"}
+          onChange={onchangeConfirmPassword}
+          error={Error.confirmPasswordError}
+        ></DefaultInputField>
+
         <div className="route-content-loginpage">
           Already registered? Go to <Link to="/">Login</Link>
         </div>
-        <div>
-          <Button
-            type="button"
-            onClick={submitRegistration}
-            buttonSize="btn--width140--height40"
-          >
-            Register
-          </Button>
-        </div>
+
+        <Button 
+          type="button"
+          buttonSize="btn--width140--height40"
+          onClick={submitRegistration}
+        >
+          Register
+        </Button>
       </form>
     </Layout>
     */
