@@ -16,6 +16,15 @@ export const ChatInboxCard = ({
     ? status
     : MESSAGESTATUS[1];
 
+  const messageTime = new Date(time)
+  const hour = messageTime.getHours();
+  const minute = messageTime.getMinutes(); 
+  const day = messageTime.getDay();
+  const currentTime = new Date();
+  const yesterday = new Date(currentTime.getTime() - (24*60*60*1000));
+  const lastWeek = new Date(currentTime.getTime() - (7*24*60*60*1000));
+  const displayTime = messageTime < lastWeek ? `${day}` : messageTime < yesterday ? `${day}`: "hjello";  
+  
   return (
     <div className={"inbox--card"} onClick={onClick} avatar={avatar}>
       <UserAvatar
@@ -32,7 +41,7 @@ export const ChatInboxCard = ({
           <p>{name}</p>
           <p>{lastMessage}</p>
         </div>
-        <p className="inbox--card--time">{time}</p>
+        <p className="inbox--card--time">{displayTime}</p>
       </div>
     </div>
   );

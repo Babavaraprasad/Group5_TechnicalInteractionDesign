@@ -3,6 +3,7 @@ import Registration from './Pages/Registration';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
+import ChatroomPage from './Pages/ChatroomPage';
 import Parse from "parse/dist/parse.min.js";
 
 const Parse_application_id='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/" element={<LoginPage />} />
       <Route exact path="/registration" element={<Registration />} />
       <Route exact path="/profile" element={<ProfilePage />} />
+      <Route exact path="/chat" element={<ChatroomPage />} />
     </Routes>
   </BrowserRouter>
   );

@@ -31,10 +31,11 @@
 }
 
 .inbox--card--name--message{
-    width: 295px;
+    width: 275px;
     height: inherit;
     color: var(--OnSurface);
     line-height: 8px;
+    padding: 10px;
 }
 
 .inbox--card--time{
