@@ -1,6 +1,5 @@
 import "./AcademicSkill.css";
 import React, { useState }  from "react";
-import { Icon } from "@iconify/react";
 
 export const AcademicSkill = ({ skillName, skillRating }) => {
   return (
@@ -16,9 +15,9 @@ function starDisplay(skillRating){
 
     for(let i = 0; i < 5; i++){
         if(Number(skillRating) > i){
-            content.push(<Icon icon="ic:round-star" color="#50a161" inline={true}/>);
+            content.push(<p className="star">&#9733;</p>);
         } else {
-            content.push(<Icon icon="ic:round-star-border" color="#50a161" inline={true} />);
+            content.push(<p className="star">&#9734;</p>);
         }
     }
 

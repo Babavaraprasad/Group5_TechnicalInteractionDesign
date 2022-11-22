@@ -13,3 +13,8 @@
 .skill--title{
     margin-right: auto;
 }
+
+.star{
+    color: #50a161; 
+    display: inline;
+}
