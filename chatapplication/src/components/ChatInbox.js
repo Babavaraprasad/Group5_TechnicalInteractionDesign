@@ -33,7 +33,7 @@ export const ChatInbox = ({}) => {
               console.log("You clicked on me!");
             }}
             avatar={avartarImg}
-            name={`Chat Id: ${data}`}
+            name={`Chat Id: ${data.get("chat_id")}`}
             lastMessage={`${data.get("content")}`}
             time={`${data.get("timestamp")}`}
           ></ChatInboxCard>
