@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatInbox.css";
 import { ChatInboxCard } from "../components/ChatInboxCard";
-import avartarImg from "../images/ida-avatar.png";
 
 export const ChatInbox = ({}) => {
   const [queryResults, setQueryResults] = useState();
@@ -11,6 +10,7 @@ export const ChatInbox = ({}) => {
     const LatestMessageQuery = new Parse.Query("Message");
     //list the message based on descending time
     LatestMessageQuery.descending("timestamp");
+    LatestMessageQuery.includeAll();
 
     try {
       let messageOrder = await LatestMessageQuery.find();
@@ -22,6 +22,14 @@ export const ChatInbox = ({}) => {
     }
   };
 
+  const getUserName = (message) => {
+    try{
+      return `${message.get("user").get("firstName")} ${message.get("user").get("lastName")}`;
+    } catch (_error) {
+      return "Some user";
+    }
+  }
+
   return (
     <div>
       <button onClick={() => queryMessage()}>Click</button>
@@ -29,15 +37,15 @@ export const ChatInbox = ({}) => {
         queryResults.map((data, index) => (
           <div key={`${index}`}>
             <ChatInboxCard
-            onClick={() => {
-              console.log("You clicked on me!");
-            }}
-            avatar={avartarImg}
-            name={`Chat Id: ${data.get("chat_id")}`}
-            lastMessage={`${data.get("content")}`}
-            time={`${data.get("timestamp")}`}
-          ></ChatInboxCard>
-        </div>
+              onClick={() => {
+                console.log("You clicked on me!");
+              }}
+              avatar={`${JSON.parse(JSON.stringify(data.get("user").get("Image"))).url}`}
+              name={`${getUserName(data)}`}
+              lastMessage={`${data.get("content")}`}
+              time={`${data.get("timestamp")}`}
+            ></ChatInboxCard>
+          </div>
         ))}
       {queryResults !== undefined && queryResults.length <= 0 ? (
         <p>{"No results here!"}</p>
@@ -47,10 +55,6 @@ export const ChatInbox = ({}) => {
 };
 
 /*
-1. find the chat_id with the message_id inside
-2. get the user_id, (the one that is not "mine") -- where do we keep "my" user id?
-3. map the list to get the name, avatar, and message itself
-
-<p>{`Chat: ${content}`}</p>
-            <p>{`Time: ${content.get("timestamp")}`}</p>
+1. find the chat include the messages inside and list in message time descending order
+2. select chat, set read status (learn from "home" in back4app slack clone)
 */

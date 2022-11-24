@@ -28,7 +28,6 @@ function starDisplay(skillRating){
 
 /*
 //COMPONENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT!
-npm install --save-dev @iconify/react
 import {AcademicSkill} from '../components/AcademicSkill'
     <div>
         <AcademicSkill skillName="Python" skillRating="3"> 
