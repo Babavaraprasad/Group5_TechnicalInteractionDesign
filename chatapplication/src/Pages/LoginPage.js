@@ -3,7 +3,9 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Parse from "parse";
+import Parse, { User } from "parse";
+import ProfilePage from "./ProfilePage";
+import { ChatLayout } from "../components/chat-components/ChatLayout";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -82,7 +84,7 @@ function LoginPage() {
           : "Cannot Login, Email or Password is incorrect!!";
       console.log(variable);
     } catch (error) {
-      alert(`Error! ${"email and password doesnot match"}`);
+      //alert(`Error! ${"email and password doesnot match"}`);
     }
   }
 
@@ -91,7 +93,8 @@ function LoginPage() {
   let SignupContent = "Sign up to find out more!";
 
   return (
-    <div className="card">
+   
+   <div className="card">
       <form className="card--column" onSubmit={onSubmitHandler}>
         <h1 className="title">Welcome back!</h1>
         <DefaultInputField
@@ -130,6 +133,7 @@ function LoginPage() {
         </Link>
       </div>
     </div>
+    //<ChatLayout chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatLayout>
   );
 }
 
