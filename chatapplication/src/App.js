@@ -4,10 +4,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
 import Parse from "parse/dist/parse.min.js";
+import PopUp from "./components/PopUp";
 
-const Parse_application_id='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
+const Parse_application_id='3mi9ZqXheK4giQrfbj1Lr0YMea1Xh8htrniG2Bs6';
 const Parse_host_URL='https://parseapi.back4app.com';
-const Parse_Javascript_key='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
+const Parse_Javascript_key='6TfX9LutYmZlnSfyLvP0JAuguBwAMKg4NLpSQUtN';
 
 
 Parse.initialize(Parse_application_id, Parse_Javascript_key);
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/" element={<LoginPage />} />
       <Route exact path="/registration" element={<Registration />} />
       <Route exact path="/profile" element={<ProfilePage />} />
+      <Route exact path="/registration/popup" element={<PopUp />} />
     </Routes>
   </BrowserRouter>
   );

@@ -1,15 +1,12 @@
 .registration-form {
-  display: flex;
-  flex-direction: column;
+  display:flex;
+  flex-direction:column;
   align-items: center;
   margin-right: 80px;
   padding-bottom: 50px;
 }
 .Page-title {
-  text-align: center;
-}
-.Header-title {
-  margin-right: 200px;
+  text-align: right;
 }
 .route-content-loginpage {
   width: 250px;

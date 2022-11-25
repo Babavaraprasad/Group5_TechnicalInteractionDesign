@@ -105,6 +105,7 @@ function RegisterForm(props) {
       //put the logic of what happens after registration inside try
       try {
         await props.registerFunction(registrationData);
+        console.log(props.success);
       } catch (error) {
         setError({ ...Error, confirmPasswordError: error.message });
       }
