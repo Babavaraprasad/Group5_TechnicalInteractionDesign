@@ -1,26 +1,25 @@
 import Parse from "parse/dist/parse.min.js";
 
+function GetChatSubscription(chatId) {
+    const parseApplicationId ='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
+    const serverUrl ='wss://senditgroup5.b4a.io';
+    const parseJsKey ='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
 
-const parseApplicationId ='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
-const serverUrl ='wss://senditgroup5.b4a.io';
-const parseJsKey ='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
+    const client = new Parse.LiveQueryClient({
+        applicationId: parseApplicationId,
+        serverURL: serverUrl, // Example: 'wss://livequerytutorial.back4app.io'
+        javascriptKey: parseJsKey
+    });
 
+    client.open();
 
-const client = new Parse.LiveQueryClient({
-    applicationId: parseApplicationId,
-    serverURL: serverUrl, // Example: 'wss://livequerytutorial.back4app.io'
-    javascriptKey: parseJsKey
-});
+    //show recent messages | code taken from: https://docs.parseplatform.org/js/guide/#queries and https://www.back4app.com/docs/platform/parse-server-live-query-example
 
-client.open();
-
-//show recent messages | code taken from: https://docs.parseplatform.org/js/guide/#queries and https://www.back4app.com/docs/platform/parse-server-live-query-example
-function GetChatSubscription(chatID){
     const query = new Parse.Query('Message');
-    query.ascending('createdAt').equalTo('chat', chatID);
+    query.ascending('createdAt').equalTo('chat', new Parse.Object('Chat', {id: chatId}));
     const subscription = client.subscribe(query);
 
-    return subscription; 
+    return subscription;
 }
 
 //show old messages 
@@ -50,4 +49,4 @@ function ConvertResultToMessage(result) {
     };
 }
 
-export {GetChatMessages, GetChatSubscription}
+export {GetChatMessages, ConvertResultToMessage, GetChatSubscription}
