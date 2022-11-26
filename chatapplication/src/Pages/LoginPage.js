@@ -3,7 +3,8 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Parse from "parse";
+import Parse from "parse/dist/parse.min.js";
+import {useNavigate} from "react-router-dom";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -13,7 +14,14 @@ function LoginPage() {
     emailError: "",
     passwordError: "",
   });
-
+  const navigate=useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+  const getCurrentUser = async function () {
+    const currentUser = await Parse.User.current();
+    // Update state variable holding current user
+    setCurrentUser(currentUser);
+    return currentUser;
+  };
   function handleEmailChange(event) {
     setFormState({
       ...formState,
@@ -44,7 +52,6 @@ function LoginPage() {
       passwordError = "Password field must not be empty!";
       setFormState({ ...formState, passwordError: passwordError });
     }
-
     //return emailError === "" && passwordError === "";
   }
 
@@ -66,25 +73,23 @@ function LoginPage() {
   }
 
   async function loginverfify(totaldata) {
-    const parseQuery = new Parse.Query("NewCandidate");
-    try {
-      parseQuery.equalTo("Email", totaldata.emailText);
-      const Person = await parseQuery.first();
-      console.log(Person);
-
-      console.log("Email: ", Person.get("Email"));
-      console.log("password: ", Person.get("Password"));
-      const fetchemail=Person.get("Email");
-      const fetchpassword= Person.get("Password");
-      const variable =
-        ( formState.emailText===fetchemail && formState.password === fetchpassword)
-          ? "hurray logged in"
-          : "Cannot Login, Email or Password is incorrect!!";
-      console.log(variable);
-    } catch (error) {
-      alert(`Error! ${"email and password doesnot match"}`);
-    }
+   const usernameValue = totaldata.emailText;;
+  const passwordValue = totaldata.password;
+  try {
+    const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
+    alert(`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
+    navigate("/profile");
+    const currentUser = await Parse.User.current();
+    console.log(loggedInUser === currentUser);
+    setFormState({...formState,emailText:""});
+    setFormState({...formState,password:""});
+    getCurrentUser();
+    return true;
+  } catch (error) {
+    alert(`Error! ${error.message}`);
+    return false;
   }
+}
 
   let StaticTextNewhere =
     "Guest Student chatroom is a place where new and previous guest students create and maintain relationships.";
@@ -102,7 +107,7 @@ function LoginPage() {
         ></DefaultInputField>
         <DefaultInputField
           onChange={handlePasswordChange}
-          type={"password"}
+          type={"Password"}
           labelText={"Password"}
           placeholder={"Password"}
           error={formState.passwordError}
@@ -121,9 +126,6 @@ function LoginPage() {
         <p>{SignupContent}</p>
         <Link to="/registration">
           <Button
-            onClick={() => {
-              console.log("You clicked on me!");
-            }}
             type="button"
             buttonSize="btn--width140--height40"
             buttonStyle={"btn--white"}
