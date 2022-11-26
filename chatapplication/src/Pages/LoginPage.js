@@ -8,6 +8,7 @@ import ProfilePage from "./ProfilePage" ;
 import { ChatWindow } from "../components/chat-components/ChatLayout";
 import { Logo } from "../components/Logo";
 import { Slogan } from "../components/Slogan";
+import { ClipArt } from "../components/ClipArt"
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -94,9 +95,15 @@ function LoginPage() {
 
   return (
     <div className="main-container">
+
       <Logo></Logo>
       <Slogan></Slogan>
     
+    <div className="clipart-and-card">
+    
+      <ClipArt className="clipart-1" imgUrl={"clipart1.png"}></ClipArt>
+     
+   <div>
     <div className="card-container">
     <div className="card">
         <form className="card--column" onSubmit={onSubmitHandler}>
@@ -139,6 +146,17 @@ function LoginPage() {
         </div>
       </div>
     </div>
+    </div>
+
+        <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>
+    
+        
+    </div>
+
+      <div className="clipart-3-container">
+        <ClipArt className="clipart-3" imgUrl={"clipart2.jpg"}></ClipArt>
+      </div>
+
   </div>
 
 
@@ -147,3 +165,6 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+/*<ClipArt className="clipart-1" imgUrl={"clipart2.jpg"}></ClipArt>
+          <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>*/
