@@ -2,7 +2,7 @@ import React from "react";
 import "./ChatInboxCard.css";
 import { UserAvatar } from "./UserAvatar";
 
-const MESSAGESTATUS = ["read", "unread"];
+const MESSAGESTATUS = ["unread", "read", "reading"];
 
 export const ChatInboxCard = ({
   avatar,
@@ -47,7 +47,7 @@ export const ChatInboxCard = ({
       : `${hour}:${minute}`;
 
   return (
-    <div className={"inbox--card"} onClick={onClick} avatar={avatar}>
+    <div className={`inbox--card ${checkStatus}`} onClick={onClick} avatar={avatar}>
       <UserAvatar
         onClick={() => {
           console.log("You clicked on me!");
@@ -58,11 +58,11 @@ export const ChatInboxCard = ({
       ></UserAvatar>
 
       <div className="inbox--card--content">
-        <div className={`inbox--card--name--time ${checkStatus}`}>
+        <div className={`inbox--card--name--time`}>
           <p>{name}</p>
           <p className="inbox--card--time">{displayTime}</p>
         </div>
-        <p className={`inbox--card--message ${checkStatus}`}>{lastMessage}</p>
+        <p className="inbox--card--message">{lastMessage}</p>
       </div>
     </div>
   );
@@ -82,6 +82,7 @@ import avartarImg from "../images/ida-avatar.png";
         name="Ida"
         lastMessage="Message content here"
         time="19:23"
+        status="unread"
       ></ChatInboxCard>
     </div>
 */

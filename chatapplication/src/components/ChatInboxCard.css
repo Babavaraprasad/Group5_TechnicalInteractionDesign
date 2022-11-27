@@ -53,6 +53,10 @@
     font-weight: 400;
 }
 
+.reading{
+    background: var(--SecondaryContainer);
+}
+
 .unread{
     font-weight: 600;
 }
