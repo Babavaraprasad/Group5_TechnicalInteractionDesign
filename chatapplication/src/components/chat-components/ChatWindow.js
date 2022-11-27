@@ -1,5 +1,5 @@
 import React from "react";
-import "./chat-layout.css";
+import "./chat-window.css";
 import { ChatBubble } from "./ChatBubble";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
@@ -12,7 +12,7 @@ function CreateChatRow(message, loggedInUserId) {
     const rowStyle = isReceiver ? "chat-row-receiver" : "chat-row-sender";
    
     return (
-            <div className={rowStyle}>
+            <div className={rowStyle} key={message.messageId}>
                 <ChatBubble bubbleStyle={bubbleStyle} seen={message.seen} time={message.date}>{message.content}</ChatBubble>
             </div>
     );
@@ -51,6 +51,8 @@ export const ChatWindow = ({
               if (!firstLoad){
                 fetchOldMessages();
               }
+                
+              divRef.current.scrollIntoView({ behavior: 'instant' });
         });
 
     return (

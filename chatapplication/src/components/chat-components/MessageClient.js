@@ -38,10 +38,12 @@ async function GetChatMessages(chatID, limit) {
 }
 
 function ConvertResultToMessage(result) {
+    const id = result.id;
     const userId = result.get('user');
     const  date = result.get('timestamp')
     const content = result.get('content')
     return {
+        messageId: id,
         userId: userId.id,
         date: date,
         seen: false,
