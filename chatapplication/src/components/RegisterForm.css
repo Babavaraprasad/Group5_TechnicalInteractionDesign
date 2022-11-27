@@ -14,7 +14,7 @@
 .route-content-loginpage {
   width: 250px;
   height: 15px;
-  color: #000000;
+  color: var(--OnSurface);
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;

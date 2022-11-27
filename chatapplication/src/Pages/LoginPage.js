@@ -3,7 +3,11 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Parse from "parse";
+import Parse, { User } from "parse";
+import ProfilePage from "./ProfilePage" ;
+import { ChatWindow } from "../components/chat-components/ChatWindow";
+import { Logo } from "../components/Logo";
+import { Slogan } from "../components/Slogan";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -48,8 +52,6 @@ function LoginPage() {
     //return emailError === "" && passwordError === "";
   }
 
- 
-
   function onSubmitHandler(event) {
     event.preventDefault();
     if (!validate()) {
@@ -82,7 +84,7 @@ function LoginPage() {
           : "Cannot Login, Email or Password is incorrect!!";
       console.log(variable);
     } catch (error) {
-      alert(`Error! ${"email and password doesnot match"}`);
+      //alert(`Error! ${"email and password doesnot match"}`);
     }
   }
 
@@ -91,45 +93,56 @@ function LoginPage() {
   let SignupContent = "Sign up to find out more!";
 
   return (
+    /*<div className="main-container">
+      <Logo></Logo>
+      <Slogan></Slogan>
+    
+    <div className="card-container">
     <div className="card">
-      <form className="card--column" onSubmit={onSubmitHandler}>
-        <h1 className="title">Welcome back!</h1>
-        <DefaultInputField
-          onChange={handleEmailChange}
-          labelText={"Email"}
-          placeholder={"Email"}
-          error={formState.emailError}
-        ></DefaultInputField>
-        <DefaultInputField
-          onChange={handlePasswordChange}
-          type={"password"}
-          labelText={"Password"}
-          placeholder={"Password"}
-          error={formState.passwordError}
-        ></DefaultInputField>
-        <a>Forgot your password?</a>
-        <Button type="submit" buttonSize="btn--width140--height40">
-          Login
-        </Button>
-      </form>
-
-      <div className="vertical-line"></div>
-
-      <div className="card--column">
-        <h1 className="title">New here?</h1>
-        <p>{StaticTextNewhere}</p>
-        <p>{SignupContent}</p>
-        <Link to="/registration">
-          <Button
-            type="button"
-            buttonSize="btn--width140--height40"
-            buttonStyle={"btn--white"}
-          >
-            Register
+        <form className="card--column" onSubmit={onSubmitHandler}>
+          <div className="title">Welcome back!</div>
+          <DefaultInputField
+            onChange={handleEmailChange}
+            labelText={"Email"}
+            placeholder={"Email"}
+            error={formState.emailError}
+          ></DefaultInputField>
+          <DefaultInputField
+            onChange={handlePasswordChange}
+            type={"password"}
+            labelText={"Password"}
+            placeholder={"Password"}
+            error={formState.passwordError}
+          ></DefaultInputField>
+          <a>Forgot your password?</a>
+          <Button type="submit" buttonSize="btn--width140--height40">
+            Login
           </Button>
-        </Link>
+        </form>
+
+        <div className="vertical-line"></div>
+
+        <div className="card--column">
+          <div className="title">New here?</div>
+          <p>{StaticTextNewhere}</p>
+          <p>{SignupContent}</p>
+          <Link to="/registration">
+            <Button
+              id="button-id"
+              type="button"
+              buttonSize="btn--width140--height40"
+              buttonStyle={"btn--white"}
+            >
+              Register
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
+  </div>*/
+
+
+  <ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>
   );
 }
 

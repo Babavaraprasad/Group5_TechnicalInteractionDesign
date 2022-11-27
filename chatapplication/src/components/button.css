@@ -1,5 +1,8 @@
 @import "palette.css";
-
+.default-button-container{
+  display: flex;
+  justify-content: center;
+}
 .btn {
   border-radius: 8px;
   /*font-family: "Roboto";*/
@@ -12,6 +15,11 @@
   letter-spacing: 0.07em;
   text-transform: capitalize;
 }
+
+a:link {
+  text-decoration: none;
+}
+
 .btn--default:hover {
   background-color: var(--Primary60);
 }
