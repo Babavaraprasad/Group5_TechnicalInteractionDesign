@@ -1,0 +1,16 @@
+.user-info{
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+#profile-picture{
+    height: 100px;
+    width: 100px;
+}
+
+.user-name{
+    padding: 10px;
+}
