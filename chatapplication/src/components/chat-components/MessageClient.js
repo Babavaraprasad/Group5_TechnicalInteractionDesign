@@ -37,6 +37,7 @@ async function GetChatMessages(chatID, limit) {
     return messages; 
 }
 
+//Convert back4app message to message
 function ConvertResultToMessage(result) {
     const id = result.id;
     const userId = result.get('user');
