@@ -14,7 +14,7 @@ const SIZES = [
   "btn--width140--height40",
   "btn--width70--height40",
 ];
-//It is not a wrapper. This pattern(children prop) allows you to put other children inside(i.e images)
+//It is not a wrapper. This pattern(children prop) allows you to put other children inside(i.e images) and has the potential of becoming a wrapper
 export const Button = ({
   children,
   type,
@@ -29,7 +29,7 @@ export const Button = ({
     ? buttonSize 
     : SIZES[0];
   return (
-    <div className="default-button-wrapper">
+    <div className="default-button-container">
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
