@@ -1,12 +1,15 @@
 .user-info{
     background-color: white;
     color: black;
-    display: flex;
+    display: table-row;
     align-items: center;
     padding: 10px;
 }
 
 #profile-picture{
+    display: flex;
+    align-items: center;
+    padding: 10px;
     height: 100px;
     width: 100px;
 }
