@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import {useNavigate} from "react-router-dom";
+import usernameContext from "../components/UsernameContext";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -16,6 +17,8 @@ function LoginPage() {
   });
   const navigate=useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
+
+
   const getCurrentUser = async function () {
     const currentUser = await Parse.User.current();
     // Update state variable holding current user
@@ -78,12 +81,19 @@ function LoginPage() {
   try {
     const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
     alert(`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
-    navigate("/profile");
+    getCurrentUser();
+    const currentUser1 = await Parse.User.current();
+    const currentUser2=currentUser1.id;
+    console.log(currentUser2);
+    //<usernameContext.userdataProvider value={getCurrentUser()}/>
+    navigate("/profile", {state:{data:{currentUser2}}});
+    //<usernameContext.userdataProvider/>
     const currentUser = await Parse.User.current();
     console.log(loggedInUser === currentUser);
     setFormState({...formState,emailText:""});
     setFormState({...formState,password:""});
     getCurrentUser();
+    
     return true;
   } catch (error) {
     alert(`Error! ${error.message}`);

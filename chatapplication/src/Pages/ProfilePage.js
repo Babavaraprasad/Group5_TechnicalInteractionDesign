@@ -3,9 +3,42 @@ import React from "react";
 import { Button } from "../components/Button";
 import { UserAvatar } from "../components/UserAvatar";
 import avartarImg from "../images/main-avatar-image.png";
-import { AcademicSkill } from '../components/AcademicSkill'
+import { AcademicSkill } from '../components/AcademicSkill';
+import { useContext ,createContext,useState, useEffect} from "react";
+import usernameContext from "../components/UsernameContext";
+import { useLocation } from "react-router-dom";
+import Parse from "parse";
 
 export default function ProfilePage() {
+
+  const [studentdata, setStudentdata]=useState({firstname:"",
+   lastname:"",
+})
+//const user=useContext(usernameContext);
+const location=useLocation();
+const useriddata=location.state.data.currentUser2;
+
+/*async function getStudentdata(useriddata)
+{
+  const ParseQuery= Parse.Query("User");
+  let todo= await ParseQuery.find(useriddata);
+  if(todo !==null)
+  {
+  try
+  {
+  const name =ParseQuery.get("firstName");
+  const lastname=ParseQuery.get("lastName");
+  setStudentdata({...studentdata,firstname:name,lastname:lastname});
+  }
+  catch(error)
+  {alert(`error message: ${error.message}`)}
+}else
+  {alert("There are no records with given email")}
+}
+
+console.log(useriddata);
+*/
+
   return (
     <div className="profile--page">
       <div className="profile--page--layout">
@@ -18,7 +51,7 @@ export default function ProfilePage() {
             statusIcon="icon--for--size250"
             imgUrl={avartarImg}
           ></UserAvatar>
-          <h4>Name</h4>
+          <h4>{useriddata}</h4>
           <p>Bio</p>
           
           <div className="profile--controls">
@@ -47,7 +80,7 @@ export default function ProfilePage() {
         <div className="profile--info">
           <div className="personal--info">
             <h3>Personal Information</h3>
-            <h5>Name</h5>
+            <h5 >Name</h5>
             <h5>Age</h5>
             <h5>Academic Skills</h5>
             <div className="skill--section">
