@@ -9,6 +9,7 @@ import { ChatWindow } from "../components/chat-components/ChatWindow";
 import { Logo } from "../components/Logo";
 import { Slogan } from "../components/Slogan";
 import { ClipArt } from "../components/ClipArt"
+import { ChatPageLayout } from "./ChatPageLayout";
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -158,6 +159,7 @@ function LoginPage() {
 
   </div>
 
+    /*<ChatPageLayout></ChatPageLayout>*/
 
   /*<ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>*/
   );
