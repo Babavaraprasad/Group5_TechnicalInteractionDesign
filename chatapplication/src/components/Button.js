@@ -41,3 +41,10 @@ export const Button = ({
   );
 };
 
+/*
+<Button
+  type="button"
+  buttonSize="btn--width140--height40"
+  buttonStyle={"btn--white"}
+>
+*/
