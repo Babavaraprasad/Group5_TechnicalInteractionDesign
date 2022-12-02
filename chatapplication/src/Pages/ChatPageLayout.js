@@ -17,6 +17,7 @@ export const ChatPageLayout = () => {
             <div className="right--container">
 
                 <div className="sender-card">Sender</div>
+                
                 <ChatWindow></ChatWindow>
 
                 <div className="text-input">Send a message</div>
@@ -28,3 +29,4 @@ export const ChatPageLayout = () => {
     );
   };
   
+  /*<ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>*/
