@@ -27,14 +27,11 @@ export const ChatPageLayout = () => {
       <div className="right--container">
         <div className="sender-card">Sender</div>
         {currentChat !== null && (
-          <p>{currentChat.id}</p>
           //console.log(currentChat.id),
-          /*
           <ChatWindow
             chatId={currentChat.id}
             loggedInUserId="CSldIhjC2W"
           />
-          */
         )}
 
         <div className="text-input">Send a message</div>

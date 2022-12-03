@@ -24,20 +24,20 @@ export const ChatWindow = ({
 }) => {
         const divRef = useRef(null);
         const [messages, setMessages] = useState([]);
-        const [firstLoad, setFirstLoad] = useState(false);
         const [ , setNewMessageSubscription] = useState(undefined);
 
+        //show old and new messages 
         useEffect( () => {
-            async function fetchOldMessages() {
+            async function SetUpChat() {
                 // You can await here
-                if (!firstLoad){ //firstLoad is a boolean var which will be true after the first load. 
-                    setFirstLoad(true); // don't run GetChatMessages more than 1 times | setFirstLoad makes the firstLoad true | Since it's trues, other renders won't run this code. Only the first one will fetch old messages
                     const oldMessages = await GetChatMessages(chatId, 1000);
-                    setMessages(oldMessages); //whent fetching old messages is done, scroll
+                    setMessages(oldMessages); 
+                    
+                    //whent fetching old messages is done, scroll
                     divRef.current.scrollIntoView({ behavior: 'instant' }); //code and use of useEffect and useRef hook is inspired and taken by stackoverflow https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
                     
                     const subscription = GetChatSubscription(chatId);
-                 
+                    //everytime a new message is created in b4app, subcription.on() will be called with the message parameter
                     subscription.on('create', message => { //step 3.1 create event code taken from: https://www.back4app.com/docs/platform/parse-server-live-query-example
                         const newMessage = ConvertResultToMessage(message);
                         setMessages(previousMessages => [...previousMessages, newMessage]); //the variable messages is an array and we add the element message to it. But we are not able to display those changes. setMessages helps us to see these changes
@@ -45,15 +45,12 @@ export const ChatWindow = ({
                     });
 
                     setNewMessageSubscription(subscription);
-                }
-              }
+            }
 
-              if (!firstLoad){
-                fetchOldMessages();
-              }
+            SetUpChat();
                 
-              divRef.current.scrollIntoView({ behavior: 'instant' });
-        });
+            divRef.current.scrollIntoView({ behavior: 'instant' });
+        },[chatId]);
 
     return (
          <div className={"layout"}>

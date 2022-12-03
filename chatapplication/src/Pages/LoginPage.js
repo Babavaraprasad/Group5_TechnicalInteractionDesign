@@ -166,7 +166,7 @@ function LoginPage() {
 
   </div>
 
-    /*<ChatPageLayout></ChatPageLayout>*/
+    //<ChatPageLayout></ChatPageLayout>
 
   /*<ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>*/
   );
