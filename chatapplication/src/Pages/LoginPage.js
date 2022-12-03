@@ -1,7 +1,7 @@
 import "./LoginPage.css";
 import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Parse, { User } from "parse";
 import ProfilePage from "./ProfilePage" ;
@@ -95,7 +95,7 @@ function LoginPage() {
       //alert(`Error! ${"email and password doesnot match"}`);
     }
   }
-}
+
 
   let StaticTextNewhere =
     "Guest Student chatroom is a place where new and previous guest students create and maintain relationships.";
@@ -170,7 +170,7 @@ function LoginPage() {
 
   /*<ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>*/
   );
-
+  }
 export default LoginPage;
 
 /*<ClipArt className="clipart-1" imgUrl={"clipart2.jpg"}></ClipArt>

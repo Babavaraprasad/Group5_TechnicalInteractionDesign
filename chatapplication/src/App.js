@@ -3,14 +3,12 @@ import Registration from './Pages/Registration';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
-import ChatroomPage from './Pages/ChatroomPage';
 import Parse from "parse/dist/parse.min.js";
-import PopUp from "./components/PopUp";
+import { ChatPageLayout } from './Pages/ChatPageLayout';
 
-const Parse_application_id='3mi9ZqXheK4giQrfbj1Lr0YMea1Xh8htrniG2Bs6';
+const Parse_application_id='iGGclABDkQ4dkphbfmHIFyDQAymrHtm5hzYGqEoy';
 const Parse_host_URL='https://parseapi.back4app.com';
-const Parse_Javascript_key='6TfX9LutYmZlnSfyLvP0JAuguBwAMKg4NLpSQUtN';
-
+const Parse_Javascript_key='UJL0HBwieX5r4RoYvesJHG5MMxUIZCFCtQVL17dI';
 
 Parse.initialize(Parse_application_id, Parse_Javascript_key);
 Parse.serverURL = Parse_host_URL;
@@ -22,8 +20,7 @@ function App() {
       <Route exact path="/" element={<LoginPage />} />
       <Route exact path="/registration" element={<Registration />} />
       <Route exact path="/profile" element={<ProfilePage />} />
-      <Route exact path="/chat" element={<ChatroomPage />} />
-      <Route exact path="/registration/popup" element={<PopUp />} />
+      <Route exact path="/chat" element={<ChatPageLayout />} />
     </Routes>
   </BrowserRouter>
   );
