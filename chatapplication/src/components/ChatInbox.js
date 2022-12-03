@@ -10,15 +10,14 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
   useEffect(() => {
     const createInbox = async function () {
       //find the current user object in the User class
-      //removed previous piece code for taking the user because user was already in the if statement using this piece of code: currentUserChat.containedIn("user_id", currentUser);
+      //removed previous piececode for taking the user because user was already in the if statement using this piece of code: currentUserChat.containedIn("user_id", currentUser);
       //after this change, the requests were reduced
       const currentUser = new Parse.User({id: loggedInUserId});
-    
 
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
       if (currentUser !== "") {
-        currentUserChat.containedIn("user_id", currentUser);
+        currentUserChat.containedIn("user_id", [currentUser.toPointer()]); 
       }
       currentUserChat.descending("updatedAt");
       currentUserChat.includeAll();
