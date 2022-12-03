@@ -10,14 +10,15 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
   useEffect(() => {
     const createInbox = async function () {
       //find the current user object in the User class
-      const currentUser = new Parse.Query("User");
-      currentUser.equalTo("objectId", loggedInUserId);
-      const userChat = await currentUser.find();
+      //removed previous piece code for taking the user because user was already in the if statement using this piece of code: currentUserChat.containedIn("user_id", currentUser);
+      //after this change, the requests were reduced
+      const currentUser = new Parse.User({id: loggedInUserId});
+    
 
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
       if (currentUser !== "") {
-        currentUserChat.containedIn("user_id", userChat);
+        currentUserChat.containedIn("user_id", currentUser);
       }
       currentUserChat.descending("updatedAt");
       currentUserChat.includeAll();
@@ -28,6 +29,7 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
           let chatUsersRelation = chat.relation("user_id");
           chat.UsersObjects = await chatUsersRelation.query().find();
         }
+
         setqueryChat(chatOrder);
         //console.log(chatOrder);
         return true;
@@ -36,8 +38,10 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
         return false;
       }
     };
-    createInbox();
-  }, []);
+   
+      createInbox();
+    
+  }, [loggedInUserId]); //this array was empty and this was maybe what caused the problem with the numerous requests. Using the loggedInUseId, this code will run only when this component is created from the beginning or when the user is changed.
 
   const toggleChat = (index) => {
     setToggleState(index);

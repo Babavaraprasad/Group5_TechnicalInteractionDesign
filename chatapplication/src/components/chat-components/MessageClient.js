@@ -16,9 +16,9 @@ function GetChatSubscription(chatId) {
     //show recent messages | code taken from: https://docs.parseplatform.org/js/guide/#queries and https://www.back4app.com/docs/platform/parse-server-live-query-example
 
     const query = new Parse.Query('Message');
-    query.ascending('createdAt').equalTo('chat', new Parse.Object('Chat', {id: chatId}));
+    query.equalTo('chat', new Parse.Object('Chat', {id: chatId})).ascending('createdAt');
+    
     const subscription = client.subscribe(query);
-
     return subscription;
 }
 
