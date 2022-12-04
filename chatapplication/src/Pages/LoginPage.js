@@ -179,6 +179,3 @@ function LoginPage() {
   );
   }
 export default LoginPage;
-
-/*<ClipArt className="clipart-1" imgUrl={"clipart2.jpg"}></ClipArt>
-          <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>*/

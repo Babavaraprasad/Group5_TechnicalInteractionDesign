@@ -33,15 +33,11 @@ export const ChatWindow = ({
                     const oldMessages = await GetChatMessages(chatId, 1000);
                     setMessages(oldMessages); 
                     
-                    //whent fetching old messages is done, scroll
-                    divRef.current.scrollIntoView({ behavior: 'instant' }); //code and use of useEffect and useRef hook is inspired and taken by stackoverflow https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
-                    
                     const subscription = GetChatSubscription(chatId);
                     //everytime a new message is created in b4app, subcription.on() will be called with the message parameter
                     subscription.on('create', message => { //step 3.1 create event code taken from: https://www.back4app.com/docs/platform/parse-server-live-query-example
                         const newMessage = ConvertResultToMessage(message);
                         setMessages(previousMessages => [...previousMessages, newMessage]); //the variable messages is an array and we add the element message to it. But we are not able to display those changes. setMessages helps us to see these changes
-                        divRef.current.scrollIntoView({ behavior: 'smooth' });
                     });
 
                     setNewMessageSubscription(subscription);
@@ -49,8 +45,10 @@ export const ChatWindow = ({
 
             SetUpChat();
                 
-            divRef.current.scrollIntoView({ behavior: 'instant' });
         },[chatId]);
+
+        useEffect(() => divRef.current.scrollIntoView({ behavior: 'instant' }), [messages]);   //code and use of useEffect and useRef hook is inspired and taken by stackoverflow https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react and https://www.folkstalk.com/2022/09/scrollbar-automatically-scroll-down-as-new-divs-are-added-reactjs-with-code-examples-2.html
+
 
     return (
          <div className={"layout"}>
