@@ -3,9 +3,14 @@ import { Button } from "../components/Button";
 import { DefaultInputField } from "../components/DefaultInputField";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Parse from "parse/dist/parse.min.js";
+import Parse, { User } from "parse/dist/parse.min.js";
 import {useNavigate} from "react-router-dom";
 import usernameContext from "../components/UsernameContext";
+import ProfilePage from "./ProfilePage" ;
+import { ChatWindow } from "../components/chat-components/ChatWindow";
+import { Logo } from "../components/Logo";
+import { Slogan } from "../components/Slogan";
+import { ClipArt } from "../components/ClipArt"
 
 //used some code from https://reactjs.org/docs/forms.html for validation handling
 function LoginPage() {
@@ -58,8 +63,6 @@ function LoginPage() {
     //return emailError === "" && passwordError === "";
   }
 
- 
-
   function onSubmitHandler(event) {
     event.preventDefault();
     if (!validate()) {
@@ -106,46 +109,76 @@ function LoginPage() {
   let SignupContent = "Sign up to find out more!";
 
   return (
+    <div className="main-container">
+      <Logo></Logo>
+      <Slogan></Slogan>
+    
+    <div className="clipart-and-card">
+    
+      <ClipArt className="clipart-1" imgUrl={"clipart1.png"}></ClipArt>
+     
+   <div>
+    <div className="card-container">
     <div className="card">
-      <form className="card--column" onSubmit={onSubmitHandler}>
-        <h1 className="title">Welcome back!</h1>
-        <DefaultInputField
-          onChange={handleEmailChange}
-          labelText={"Email"}
-          placeholder={"Email"}
-          error={formState.emailError}
-        ></DefaultInputField>
-        <DefaultInputField
-          onChange={handlePasswordChange}
-          type={"Password"}
-          labelText={"Password"}
-          placeholder={"Password"}
-          error={formState.passwordError}
-        ></DefaultInputField>
-        <a>Forgot your password?</a>
-        <Button type="submit" buttonSize="btn--width140--height40">
-          Login
-        </Button>
-      </form>
-
-      <div className="vertical-line"></div>
-
-      <div className="card--column">
-        <h1 className="title">New here?</h1>
-        <p>{StaticTextNewhere}</p>
-        <p>{SignupContent}</p>
-        <Link to="/registration">
-          <Button
-            type="button"
-            buttonSize="btn--width140--height40"
-            buttonStyle={"btn--white"}
-          >
-            Register
+        <form className="card--column" onSubmit={onSubmitHandler}>
+          <div className="title">Welcome back!</div>
+          <DefaultInputField
+            onChange={handleEmailChange}
+            labelText={"Email"}
+            placeholder={"Email"}
+            error={formState.emailError}
+          ></DefaultInputField>
+          <DefaultInputField
+            onChange={handlePasswordChange}
+            type={"password"}
+            labelText={"Password"}
+            placeholder={"Password"}
+            error={formState.passwordError}
+          ></DefaultInputField>
+          <a>Forgot your password?</a>
+          <Button type="submit" buttonSize="btn--width140--height40">
+            Login
           </Button>
-        </Link>
+        </form>
+
+        <div className="vertical-line"></div>
+
+        <div className="card--column">
+          <div className="title">New here?</div>
+          <p>{StaticTextNewhere}</p>
+          <p>{SignupContent}</p>
+          <Link to="/registration">
+            <Button
+              id="button-id"
+              type="button"
+              buttonSize="btn--width140--height40"
+              buttonStyle={"btn--white"}
+            >
+              Register
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
+    </div>
+
+        <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>
+    
+        
+    </div>
+
+      <div className="clipart-3-container">
+        <ClipArt className="clipart-3" imgUrl={"clipart2.jpg"}></ClipArt>
+      </div>
+
+  </div>
+
+
+  /*<ChatWindow chatId={"SNAj1SfBTE"} loggedInUserId={"SS"}></ChatWindow>*/
   );
 }
 
 export default LoginPage;
+
+/*<ClipArt className="clipart-1" imgUrl={"clipart2.jpg"}></ClipArt>
+          <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>*/
