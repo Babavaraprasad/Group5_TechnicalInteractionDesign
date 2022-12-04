@@ -133,14 +133,14 @@ function RegisterForm(props) {
         ></DefaultInputField>
 
         <DefaultInputField
-          labelText={"Email"}
+          labelText={"Email*"}
           placeholder={"Please type your Email"}
           onChange={onchangeEmail}
           error={Error.emailError}
         ></DefaultInputField>
 
         <DefaultInputField
-          labelText={"Password"}
+          labelText={"Password*"}
           placeholder={"Choose your Password"}
           type={"password"}
           onChange={onchangePassword}
