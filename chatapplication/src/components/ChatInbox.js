@@ -18,7 +18,7 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
       if (currentUser !== "") {
-        currentUserChat.containedIn("user_id", currentUser);
+        currentUserChat.containedIn("user_id", [currentUser.toPointer()]);
       }
       currentUserChat.descending("updatedAt");
       currentUserChat.includeAll();
