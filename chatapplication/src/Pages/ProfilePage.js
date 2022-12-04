@@ -7,6 +7,7 @@ import { AcademicSkill } from '../components/AcademicSkill';
 import { useContext ,createContext,useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
 
@@ -16,6 +17,7 @@ export default function ProfilePage() {
 //const user=useContext(usernameContext);
 const location=useLocation();
 const useriddata=location.state.data.currentUser2;
+const navigate = useNavigate();
 
 /*async function getStudentdata(useriddata)
 {
@@ -56,7 +58,7 @@ console.log(useriddata);
           <div className="profile--controls">
           <Button
             onClick={() => {
-              console.log("You clicked on me!");
+              navigate("/chat");
             }}
             type="button"
             buttonSize="btn--width120--height50"
