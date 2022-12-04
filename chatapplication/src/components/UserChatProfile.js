@@ -16,7 +16,7 @@ export const UserChatProfile = () => {
     const query = new Parse.Query("Person");
     // use the equalTo filter to look for user which the name is John. this filter can be used in any data type
     query.equalTo("name", "John");
-
+ 
     // run the query
     const Person = await query.first();
     setName(Person.get("name"));
