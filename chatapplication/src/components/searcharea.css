@@ -1,5 +1,10 @@
 @import "palette.css";
 
+.search-area-wrapper {
+  display: flex;
+  width: 80%;
+}
+
 .search-area {
   display: flex;
   flex-direction: row;
@@ -11,11 +16,11 @@
   border-radius: 4px;
   font-size: 14px;
   line-height: 2;
-  width: 380px;
+  width: 90%;
   height: 34px;
 }
 input[type="text"] {
-  width: 380px;
+  width: 100%;
   text-align: left;
   outline: none;
   border: 0;

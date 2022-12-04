@@ -32,7 +32,9 @@
 .search-area-wrapper {
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 }
+
 
 .sender-card {
     width: 100%;
