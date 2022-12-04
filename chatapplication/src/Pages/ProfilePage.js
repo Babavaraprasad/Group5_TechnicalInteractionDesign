@@ -5,7 +5,6 @@ import { UserAvatar } from "../components/UserAvatar";
 import avartarImg from "../images/main-avatar-image.png";
 import { AcademicSkill } from '../components/AcademicSkill';
 import { useContext ,createContext,useState, useEffect} from "react";
-import usernameContext from "../components/UsernameContext";
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
 

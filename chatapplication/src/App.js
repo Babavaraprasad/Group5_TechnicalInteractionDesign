@@ -26,6 +26,8 @@ function App() {
       <Route exact path="/registration" element={<Registration />} />
       <Route exact path="/profile" element={<ProfilePage />} />
       <Route exact path="/chat" element={<ChatPageLayout />} />
+      <Route exact path="/registration/popup" element={<PopUp />} />
+      
     </Routes>
   </BrowserRouter>
   );

@@ -12,7 +12,7 @@ function PopUp(props) {
   //function on the popup 
   const toggleModal = () => {
     setModal(!modal);
-    navigateregisterpage("/registration");
+    navigateregisterpage("/");
   };
 
   return (
