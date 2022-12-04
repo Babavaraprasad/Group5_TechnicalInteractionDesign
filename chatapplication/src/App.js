@@ -6,9 +6,9 @@ import ProfilePage from './Pages/ProfilePage';
 import Parse from "parse/dist/parse.min.js";
 import { ChatPageLayout } from './Pages/ChatPageLayout';
 
-const Parse_application_id='iGGclABDkQ4dkphbfmHIFyDQAymrHtm5hzYGqEoy';
+const Parse_application_id='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
 const Parse_host_URL='https://parseapi.back4app.com';
-const Parse_Javascript_key='UJL0HBwieX5r4RoYvesJHG5MMxUIZCFCtQVL17dI';
+const Parse_Javascript_key='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
 
 Parse.initialize(Parse_application_id, Parse_Javascript_key);
 Parse.serverURL = Parse_host_URL;

@@ -19,7 +19,7 @@ export const ChatPageLayout = () => {
         <div className="user-card"> User Card </div>
         <Searcharea></Searcharea>
         <ChatInbox
-          loggedInUserId="CSldIhjC2W"
+          loggedInUserId="mzNz8bWAbC"
           selectChatCallback={doSelectChat}
         />
       </div>
@@ -30,7 +30,7 @@ export const ChatPageLayout = () => {
           //console.log(currentChat.id),
           <ChatWindow
             chatId={currentChat.id}
-            loggedInUserId="CSldIhjC2W"
+            loggedInUserId="mzNz8bWAbC"
           />
         )}
 

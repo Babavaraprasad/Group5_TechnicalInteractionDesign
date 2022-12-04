@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatInbox.css";
-import { ChatInboxCard } from "../components/ChatInboxCard";
+import { ChatInboxCard } from "./ChatInboxCard";
 
 export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
   const [queryChat, setqueryChat] = useState();
@@ -14,7 +14,6 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
       //after this change, the requests were reduced
       const currentUser = new Parse.User({id: loggedInUserId});
     
-
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
       if (currentUser !== "") {
@@ -70,7 +69,6 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
                 }).join("")}`}
                 name={`${data.UsersObjects.map((user) => {
                   if (user.id !== loggedInUserId) {
-                    //hard coded now! To be changed!
                     return `${user.get("firstName")} ${user.get("lastName")}`;
                   }
                 }).join("")}`}
