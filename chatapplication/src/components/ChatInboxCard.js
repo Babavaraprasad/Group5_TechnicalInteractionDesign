@@ -53,7 +53,7 @@ export const ChatInboxCard = ({
           console.log("You clicked on me!");
         }}
         avatarSize="size48"
-        statusIcon="icon--for--size48"
+        statusIcon="icon--off"
         imgUrl={avatar}
       ></UserAvatar>
 

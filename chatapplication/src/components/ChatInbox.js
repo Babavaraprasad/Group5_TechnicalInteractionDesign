@@ -12,8 +12,8 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
       //find the current user object in the User class
       //removed previous piece code for taking the user because user was already in the if statement using this piece of code: currentUserChat.containedIn("user_id", currentUser);
       //after this change, the requests were reduced
-      const currentUser = new Parse.User({id: loggedInUserId});
-    
+      const currentUser = new Parse.User({ id: loggedInUserId });
+
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
       if (currentUser !== "") {
@@ -37,13 +37,40 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
         return false;
       }
     };
-   
-      createInbox();
-    
+
+    createInbox();
   }, [loggedInUserId]); //this array was empty and this was maybe what caused the problem with the numerous requests. Using the loggedInUseId, this code will run only when this component is created from the beginning or when the user is changed.
 
   const toggleChat = (index) => {
     setToggleState(index);
+  };
+
+  const displayAvatar = (data) => {
+    if (data.get("group_name") !== undefined) {
+      return `${data.get("group_image")._url}`;
+    } else {
+      let userInfo;
+      data.UsersObjects.map((user) => {
+        if (user.id !== loggedInUserId) {
+          userInfo = `${user.get("Image")._url}`
+        }
+      });
+      return userInfo;
+    }
+  };
+
+  const displayName = (data) => {
+    if (data.get("group_name") !== undefined) {
+      return `${data.get("group_name")}`;
+    } else {
+      let userInfo;
+      data.UsersObjects.map((user) => {
+        if (user.id !== loggedInUserId) {
+          userInfo = `${user.get("firstName")} ${user.get("lastName")}`
+        }
+      });
+      return userInfo;
+    }
   };
 
   return (
@@ -62,19 +89,12 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
                   toggleChat(index);
                   selectChatCallback(data);
                 }}
-                avatar={`${data.UsersObjects.map((user) => {
-                  if (user.id !== loggedInUserId) {
-                    return `${user.get("Image")._url}`;
-                  }
-                }).join("")}`}
-                name={`${data.UsersObjects.map((user) => {
-                  if (user.id !== loggedInUserId) {
-                    return `${user.get("firstName")} ${user.get("lastName")}`;
-                  }
-                }).join("")}`}
+                avatar={displayAvatar(data)}
+                name={displayName(data)}
                 lastMessage={`${data.get("last_message").get("content")}`}
                 time={`${data.get("last_message").get("timestamp")}`}
                 status={toggleState === index ? "reading" : "unread"}
+                
               ></ChatInboxCard>
             </div>
           ))}
