@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 import "./PopUp.css";
+import {useNavigate,useLocation} from "react-router-dom";
 
 function PopUp(props) {
   //Usestate - using "setModal" to change the state of "modal"
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
+  const navigateregisterpage=useNavigate();
+  const location=useLocation();
+  const successContent=`${location.state.name} have been successfully registered!!`;
   
   //function on the popup 
   const toggleModal = () => {
     setModal(!modal);
+    navigateregisterpage("/");
   };
 
   return (
   <>
-      <button onClick={toggleModal} className="btn-modal"> Open🚀</button>
 
       {modal && (
         <div className="modal">
           <div onClick={toggleModal} className="popup--overlay"></div>
           <div className="modal-content">
-          
-            <p> You can add your own components <br />
-            Hello Again <br />
-            Goodbye
-
+            <h2>Register</h2>
+            <p> {successContent}<br />
+            <br/>
+            Please close to go back to registration <br />
             </p>
             <button className="close-modal" onClick={toggleModal}>❌</button>
+          
           </div>
         </div>
       )}
