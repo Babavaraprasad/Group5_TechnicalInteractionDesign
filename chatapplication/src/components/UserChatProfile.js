@@ -18,7 +18,6 @@ export const UserChatProfile = () => {
 
   async function fetchPerson() {
     // create your Parse Query using the Person Class you've created
-
     const query = new Parse.Query("User"); // user name
     const schoolQuery = new Parse.Query("Course"); // user school
 
@@ -32,8 +31,9 @@ export const UserChatProfile = () => {
 
     // access the Parse Object attributes
     console.log("person name: ", Person.get("lastName"));
+    console.log("person picture: ", Person.get("Image").url);
     console.log("person SCHOOLL: ", School.get("Home_university"));
-    
+
     setPerson(Person);
     SetSchool(School);
   }
@@ -42,13 +42,15 @@ export const UserChatProfile = () => {
     <div>
       <button onClick={fetchPerson}>Fetch Person</button>
       {person !== null && (
-        <div className="user-info">
-            <img src={ProfilePicture} id="profile-picture" />
-            <div className="user-sort-info">
-
-            <p>{`${person.get("lastName")}`}</p>
-            <p>{`${school.get("Home_university")}`}</p>
-            </div>
+        <div>
+          <div className="user-info">
+            <img src={""} id="profile-picture" />
+            <img src={person.get("Image")} id="profile-picture" />
+            
+          <p>{`${person.get("lastName")}`}</p>
+          <p>{`${school.get("Home_university")}`}</p>
+          </div>
+          
         </div>
       )}
     </div>
