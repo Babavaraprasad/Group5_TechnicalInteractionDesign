@@ -17,35 +17,44 @@ export const UserChatProfile = () => {
   const [person, setPerson] = useState(null);
   const [school, SetSchool] = useState(null);
 
+  //mzNz8bWAbC
+  // fetchPerson("mzNz8bWAbC");
+
+
   var personImage;
-  async function fetchPerson() {
+  async function fetchPerson(userid) {
     // create your Parse Query using the Person Class you've created
     const query = new Parse.Query("User"); // user name
     const schoolQuery = new Parse.Query("Course"); // user school
 
     // use the equalTo filter to look for user with this id.
-    query.equalTo("objectId", "mzNz8bWAbC");
-    schoolQuery.equalTo("objectId", "dFcXARy2gS");
-
+    
+    
+    
     // run the query
+    query.equalTo("objectId", userid);
     const Person = await query.first();
+    schoolQuery.equalTo("User_ID", Person.toPointer());
     const School = await schoolQuery.first();
-
+    
     // Get User Image and save it to global variable
     const personPicture = Person.get("Image")._url;
     personImage = personPicture;
-
+    
+    console.log( " ASHAHAHH" + Person.id);
     // access the Parse Object attributes
     console.log("person name: ", Person.get("lastName"));
     console.log("person SCHOOLL: ", School.get("Home_university"));
 
     setPerson(Person);
     SetSchool(School);
+
   }
+
 
   return (
     <div>
-      <button onClick={fetchPerson}>Fetch Person</button>
+      
       {person !== null && (
         <div className="user-info">
           <div>
