@@ -1,52 +1,71 @@
 import "./UserChatProfile.css";
-import React, { useState } from "react";
-import Parse from "parse/dist/parse.min.js";
 import ProfilePicture from "../images/daniel-avatar.png";
+import Parse from "parse/dist/parse.min.js";
+import React, { useState } from "react";
+import { User } from "parse";
+
+const Parse_application_id = "IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh";
+const Parse_host_URL = "https://parseapi.back4app.com";
+const Parse_Javascript_key = "D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs";
+
+Parse.initialize(Parse_application_id, Parse_Javascript_key);
+Parse.serverURL = Parse_host_URL;
 
 export const UserChatProfile = () => {
   // State variables
   const [person, setPerson] = useState(null);
-
-  const [name, setName] = useState("Name");
-  const [school, setSchool] = useState("School");
-  const [skill, setSkill] = useState("Skill");
+  const [school, SetSchool] = useState(null);
 
   async function fetchPerson() {
     // create your Parse Query using the Person Class you've created
-    const query = new Parse.Query("Person");
-    // use the equalTo filter to look for user which the name is John. this filter can be used in any data type
-    query.equalTo("name", "John");
- 
+
+    const query = new Parse.Query("User"); // user name
+    const schoolQuery = new Parse.Query("Course"); // user school
+
+    // use the equalTo filter to look for user with this id.
+    query.equalTo("objectId", "mzNz8bWAbC");
+    schoolQuery.equalTo("objectId", "dFcXARy2gS");
+
     // run the query
     const Person = await query.first();
-    setName(Person.get("name"));
-    setSchool(Person.get("email"));
-    setSkill("Programmer");
+    const School = await schoolQuery.first();
 
     // access the Parse Object attributes
-    console.log("person name: ", Person.get("name"));
-    console.log("person email: ", Person.get("email"));
-
+    console.log("person name: ", Person.get("lastName"));
+    console.log("person SCHOOLL: ", School.get("Home_university"));
+    
     setPerson(Person);
+    SetSchool(School);
   }
 
   return (
     <div>
-      <img src={ProfilePicture} id="profile-picture" />
-      <div className="user-info">
-        <h1>Name: {name}</h1>
-        <h2>School: {school}</h2>
-        <h2>Skill: {skill}</h2>
-      </div>
-
       <button onClick={fetchPerson}>Fetch Person</button>
       {person !== null && (
-        <div>
-          <p>{`Name: ${person.get("name")}`}</p>
-          <p>{`Email: ${person.get("email")}`}</p>
-          <p>{`ID: ${person.get(person.id)}`}</p>
+        <div className="user-info">
+            <img src={ProfilePicture} id="profile-picture" />
+            <div className="user-sort-info">
+
+            <p>{`${person.get("lastName")}`}</p>
+            <p>{`${school.get("Home_university")}`}</p>
+            </div>
         </div>
       )}
     </div>
   );
 };
+
+/*
+
+export function UserChatProfile() {
+  retrieveUser();
+  
+  return (
+      <div className={"user-name"}>
+      </div>
+        <UserName name={userName}/>
+        <UserSchool school="ITU, Front-End Developer" />
+  );
+}
+
+*/
