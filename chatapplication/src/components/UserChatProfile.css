@@ -1,7 +1,16 @@
 .user-info{
     background-color: white;
     color: black;
-    display: table-row;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.user-sort-info.p{
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 10px;
 }

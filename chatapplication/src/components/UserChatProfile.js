@@ -3,6 +3,7 @@ import ProfilePicture from "../images/daniel-avatar.png";
 import Parse from "parse/dist/parse.min.js";
 import React, { useState } from "react";
 import { User } from "parse";
+import { UserAvatar } from "../components/UserAvatar";
 
 const Parse_application_id = "IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh";
 const Parse_host_URL = "https://parseapi.back4app.com";
@@ -16,6 +17,7 @@ export const UserChatProfile = () => {
   const [person, setPerson] = useState(null);
   const [school, SetSchool] = useState(null);
 
+  var personImage;
   async function fetchPerson() {
     // create your Parse Query using the Person Class you've created
     const query = new Parse.Query("User"); // user name
@@ -29,9 +31,12 @@ export const UserChatProfile = () => {
     const Person = await query.first();
     const School = await schoolQuery.first();
 
+    // Get User Image and save it to global variable
+    const personPicture = Person.get("Image")._url;
+    personImage = personPicture;
+
     // access the Parse Object attributes
     console.log("person name: ", Person.get("lastName"));
-    console.log("person picture: ", Person.get("Image").url);
     console.log("person SCHOOLL: ", School.get("Home_university"));
 
     setPerson(Person);
@@ -42,15 +47,19 @@ export const UserChatProfile = () => {
     <div>
       <button onClick={fetchPerson}>Fetch Person</button>
       {person !== null && (
-        <div>
-          <div className="user-info">
-            <img src={""} id="profile-picture" />
-            <img src={person.get("Image")} id="profile-picture" />
-            
-          <p>{`${person.get("lastName")}`}</p>
-          <p>{`${school.get("Home_university")}`}</p>
+        <div className="user-info">
+          <div>
+            <UserAvatar
+              avatarSize="size52"
+              statusIcon="icon--off"
+              imgUrl={`${person.get("Image")._url}`}
+            ></UserAvatar>
           </div>
-          
+
+          <div className="user-sort-info">
+            <p>{`${person.get("lastName")}`}</p>
+            <p>{`${school.get("Home_university")}`}</p>
+          </div>
         </div>
       )}
     </div>
