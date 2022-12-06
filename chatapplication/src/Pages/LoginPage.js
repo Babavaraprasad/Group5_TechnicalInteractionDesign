@@ -91,7 +91,6 @@ function LoginPage() {
     //<usernameContext.userdataProvider value={getCurrentUser()}/>
     navigate("/profile", {state:{data:{currentUser2}}});
     //<usernameContext.userdataProvider/>
-    const currentUser = await Parse.User.current();
     console.log(loggedInUser === currentUser);
     setFormState({...formState,emailText:""});
     setFormState({...formState,password:""});

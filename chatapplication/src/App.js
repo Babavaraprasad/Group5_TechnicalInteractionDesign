@@ -7,9 +7,9 @@ import Parse from "parse/dist/parse.min.js";
 import PopUp from "./components/PopUp";
 import  { createContext } from "react";
 
-const Parse_application_id='3mi9ZqXheK4giQrfbj1Lr0YMea1Xh8htrniG2Bs6';
+const Parse_application_id='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
 const Parse_host_URL='https://parseapi.back4app.com';
-const Parse_Javascript_key='6TfX9LutYmZlnSfyLvP0JAuguBwAMKg4NLpSQUtN';
+const Parse_Javascript_key='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
 
 
 Parse.initialize(Parse_application_id, Parse_Javascript_key);

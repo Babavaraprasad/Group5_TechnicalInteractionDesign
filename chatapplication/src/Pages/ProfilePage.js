@@ -6,38 +6,49 @@ import avartarImg from "../images/main-avatar-image.png";
 import { AcademicSkill } from '../components/AcademicSkill';
 import { useContext ,createContext,useState, useEffect} from "react";
 import usernameContext from "../components/UsernameContext";
-import { useLocation } from "react-router-dom";
-import Parse from "parse";
+import { useLocation, useNavigate } from "react-router-dom";
+import Parse, { User } from "parse/dist/parse.min.js";
+
+// Validation handling to prevent not logged in people from accessing Profile page
+// useEffect(() => {
+//   async function checkUser() {
+//     const currentUser = await Parse.User.currentAsync();
+//     if (!currentUser) {
+//       alert('You need to be logged in to access this page');
+//       // history.push("/auth");
+//     }
+//   }
+//   checkUser();
+// }, []);
+// https://blog.back4app.com/building-a-real-time-react-application-with-parse/ 
 
 export default function ProfilePage() {
+  const [user, setUser] = useState(null);
 
-  const [studentdata, setStudentdata]=useState({firstname:"",
-   lastname:"",
-})
-//const user=useContext(usernameContext);
-const location=useLocation();
-const useriddata=location.state.data.currentUser2;
+  const [firstName, setfirstName] = useState("Firstname");
+  const [email, setEmail] = useState("Email");
 
-/*async function getStudentdata(useriddata)
-{
-  const ParseQuery= Parse.Query("User");
-  let todo= await ParseQuery.find(useriddata);
-  if(todo !==null)
-  {
-  try
-  {
-  const name =ParseQuery.get("firstName");
-  const lastname=ParseQuery.get("lastName");
-  setStudentdata({...studentdata,firstname:name,lastname:lastname});
+  const location=useLocation();
+  const useriddata2=location.state.data.currentUser2;
+  console.log(useriddata2)
+
+  async function fetchUser() {
+    // creating Parse Query using User class
+    const query = new Parse.Query('User');
+    // this filter can be used in any data type
+    query.equalTo('id', useriddata2); // useriddata2
+    // run the query
+    const User = await query.first();
+    setfirstName(User).get("firstName");
+    setEmail(User).get("email");
+    // access the Parse Object attributes
+    console.log('person name: ', User.get('firstName'));
+    console.log('person email: ', User.get('email'));
+    console.log('person id: ', User.id);
+
+    setUser(User);
+    // fetchPerson();
   }
-  catch(error)
-  {alert(`error message: ${error.message}`)}
-}else
-  {alert("There are no records with given email")}
-}
-
-console.log(useriddata);
-*/
 
   return (
     <div className="profile--page">
@@ -51,7 +62,15 @@ console.log(useriddata);
             statusIcon="icon--for--size250"
             imgUrl={avartarImg}
           ></UserAvatar>
-          <h4>{useriddata}</h4>
+          {/* <h4>{useriddata2}</h4> */}
+          <p>useriddata2</p>
+
+          <button onClick={fetchUser}>Fetch User</button>
+          {user !== null && (
+            <div>
+              <p>{`Email: ${user.get("email")}`}</p>
+            </div>
+            )}
           <p>Bio</p>
           
           <div className="profile--controls">
