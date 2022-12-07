@@ -5,11 +5,14 @@ import { Searcharea } from "../components/Searcharea";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
+import { useNavigate } from "react-router-dom";
 
 export const ChatPageLayout = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
+
+  const navigate = useNavigate();
 
   //codes partially from https://github.com/templates-back4app/react-js-slack-clone/blob/main/src/Home.js
   useEffect(() => {
@@ -38,14 +41,19 @@ export const ChatPageLayout = () => {
   const dofindContact = (contact) => {
     console.log(contact);
     setContactInfo(null);
-    setContactInfo(contact)//another user's id
-  }
+    setContactInfo(contact); //another user's id
+  };
 
   return (
     <div className="main--container">
       <div className="left-container">
         <div className="user-card">
-          <UserChatProfile userId={currentUser} />
+          <UserChatProfile
+            userId={currentUser}
+            onClick={() => {
+              navigate("/profile");
+            }}
+          />
         </div>
         <Searcharea></Searcharea>
         <div className="inbox">

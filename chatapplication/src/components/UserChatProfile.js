@@ -3,7 +3,7 @@ import Parse from "parse/dist/parse.min.js";
 import React, { useState, useEffect } from "react";
 import { UserAvatar } from "../components/UserAvatar";
 
-export const UserChatProfile = ({ userId }) => {
+export const UserChatProfile = ({ userId, onClick }) => {
   // State variables
   const [person, setPerson] = useState(null);
   const [school, SetSchool] = useState(null);
@@ -39,7 +39,7 @@ export const UserChatProfile = ({ userId }) => {
   }, [userId]);
 
   return (
-    <div>
+    <div onClick={onClick}>
       {person !== null && person !== undefined && (
         <div className="user-info">
           <UserAvatar
