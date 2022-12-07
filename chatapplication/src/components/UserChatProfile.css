@@ -1,28 +1,29 @@
 .user-info{
-    background-color: white;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+
     color: black;
     display: flex;
     align-items: center;
     padding: 10px;
 }
 
-.user-sort-info.p{
-    background-color: white;
-    color: black;
+.user-sort-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
+    padding-left: 10px;
 }
 
-#profile-picture{
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    height: 100px;
-    width: 100px;
+p {
+    margin: 2px;
 }
 
 .user-name{
-    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
+
+

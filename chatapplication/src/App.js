@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import ProfilePage from './Pages/ProfilePage';
 import Parse from "parse/dist/parse.min.js";
-import { UserChatProfile } from './components/UserChatProfile';
 import { ChatPageLayout } from './Pages/ChatPageLayout';
 import PopUp from "./components/PopUp";
 import  { createContext } from "react";
@@ -23,7 +22,6 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route exact path="/" element={<UserChatProfile />} />
       <Route exact path="/" element={<LoginPage />} />
       <Route exact path="/registration" element={<Registration />} />
       <Route exact path="/profile" element={<ProfilePage />} />

@@ -3,7 +3,7 @@ import Parse from "parse/dist/parse.min.js";
 import "./ChatInbox.css";
 import { ChatInboxCard } from "./ChatInboxCard";
 
-export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
+export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallback }) => {
   const [queryChat, setqueryChat] = useState();
   const [toggleState, setToggleState] = useState();
 
@@ -45,33 +45,39 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
     setToggleState(index);
   };
 
+  let displayName;
+
   const displayAvatar = (data) => {
     if (data.get("group_name") !== undefined) {
+      displayName = `${data.get("group_name")}`
       return `${data.get("group_image")._url}`;
     } else {
       let userInfo;
       data.UsersObjects.map((user) => {
         if (user.id !== loggedInUserId) {
           userInfo = `${user.get("Image")._url}`
+          displayName = `${user.get("firstName")} ${user.get("lastName")}`;
         }
       });
       return userInfo;
     }
   };
 
-  const displayName = (data) => {
+  
+  const checkUser = (data) => {
     if (data.get("group_name") !== undefined) {
-      return `${data.get("group_name")}`;
+      return data.id;
     } else {
       let userInfo;
       data.UsersObjects.map((user) => {
         if (user.id !== loggedInUserId) {
-          userInfo = `${user.get("firstName")} ${user.get("lastName")}`
+          userInfo = user.id
         }
       });
       return userInfo;
     }
   };
+
 
   return (
     <div>
@@ -88,9 +94,10 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
                 onClick={() => {
                   toggleChat(index);
                   selectChatCallback(data);
+                  contactInfoCallback(checkUser(data))
                 }}
                 avatar={displayAvatar(data)}
-                name={displayName(data)}
+                name={displayName}
                 lastMessage={`${data.get("last_message").get("content")}`}
                 time={`${data.get("last_message").get("timestamp")}`}
                 status={toggleState === index ? "reading" : "unread"}
@@ -109,6 +116,4 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback }) => {
 Currently query user relations in Chat class twice for name and avatar separately, 
 how to save the picked user as a varaible/state and use it in the return?
 1. use liveQuery?
-2. select chat, set read status (learn from "home" in back4app slack clone)
-3. how about group chat? no name/avatar for groups yet
 */

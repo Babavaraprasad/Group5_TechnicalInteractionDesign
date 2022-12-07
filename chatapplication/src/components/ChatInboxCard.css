@@ -28,6 +28,7 @@
 
 .inbox--card--content{
     width: 325px;
+    padding-top: 8px;
 }
 
 .inbox--card--name--time{
@@ -46,7 +47,7 @@
 }
 
 .inbox--card--message{
-    margin: -5px 0 4px 0;
+    margin: 5px 0 4px 1px;
 }
 
 .read{
