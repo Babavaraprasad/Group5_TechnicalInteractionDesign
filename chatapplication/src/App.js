@@ -7,6 +7,8 @@ import Parse from "parse/dist/parse.min.js";
 import { ChatPageLayout } from './Pages/ChatPageLayout';
 import PopUp from "./components/PopUp";
 import  { createContext } from "react";
+import EditProfile from './components/EditProfile';
+import SendMessage from './components/SendMessage/SendMessage';
 
 const Parse_application_id='MVy8szIW1fArDFhiZuo8qcwBzN4JF1vqrxSOEaTB';
 const Parse_host_URL='https://parseapi.back4app.com';
@@ -27,7 +29,8 @@ function App() {
       <Route exact path="/profile" element={<ProfilePage />} />
       <Route exact path="/chat" element={<ChatPageLayout />} />
       <Route exact path="/registration/popup" element={<PopUp />} />
-      
+      <Route exact path="/profile/edit" element={<EditProfile/>} />
+      <Route exact path="/sendmessage" element={<SendMessage/>} />
     </Routes>
   </BrowserRouter>
   );

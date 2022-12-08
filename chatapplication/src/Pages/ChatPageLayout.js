@@ -6,6 +6,7 @@ import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
 import { useNavigate } from "react-router-dom";
 import { SearchChat } from "../components/chat-components/SearchChat";
+import SendMessage from "../components/SendMessage/SendMessage";
 
 export const ChatPageLayout = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -80,7 +81,14 @@ export const ChatPageLayout = () => {
           <ChatWindow chatId={currentChat.id} loggedInUserId={currentUser} />
         )}
 
-        <div className="text-input">Send a message</div>
+        <div className="text-input"></div>
+        {currentChat !== null && (
+         
+          <SendMessage
+            chatId={currentChat.id}
+            loggedInUserId={currentUser}
+          />
+        )}
       </div>
     </div>
   );
