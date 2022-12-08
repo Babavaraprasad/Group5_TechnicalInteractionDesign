@@ -5,41 +5,72 @@ import { UserAvatar } from "../components/UserAvatar";
 import avartarImg from "../images/main-avatar-image.png";
 import { AcademicSkill } from '../components/AcademicSkill';
 import { useContext ,createContext,useState, useEffect} from "react";
-import { useLocation } from "react-router-dom";
-import Parse from "parse";
-import { useNavigate } from "react-router-dom";
+import usernameContext from "../components/UsernameContext";
+import { useLocation, useNavigate } from "react-router-dom";
+//import Parse, { User } from "parse";
+import Parse from "parse/dist/parse.min.js";
+
+// Validation handling to prevent not logged in people from accessing Profile page
+// useEffect(() => {
+//   async function checkUser() {
+//     const currentUser = await Parse.User.currentAsync();
+//     if (!currentUser) {
+//       alert('You need to be logged in to access this page');
+//       // history.push("/auth");
+//     }
+//   }
+//   checkUser();
+// }, []);
+
+// https://blog.back4app.com/building-a-real-time-react-application-with-parse/ 
 
 export default function ProfilePage() {
 
-  const [studentdata, setStudentdata]=useState({firstname:"",
-   lastname:"",
-})
-//const user=useContext(usernameContext);
-const location=useLocation();
-const useriddata=location.state.data.currentUser2;
-const navigate = useNavigate();
+  const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:""});
+  const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
 
-/*async function getStudentdata(useriddata)
-{
-  const ParseQuery= Parse.Query("User");
-  let todo= await ParseQuery.find(useriddata);
-  if(todo !==null)
+  const location=useLocation();
+  const useriddata2=location.state.data.currentUser2;
+  console.log(useriddata2);
+
+  const navigate=useNavigate();
+
+useEffect(()=>{
+  async function fetchusername()
   {
-  try
-  {
-  const name =ParseQuery.get("firstName");
-  const lastname=ParseQuery.get("lastName");
-  setStudentdata({...studentdata,firstname:name,lastname:lastname});
-  }
-  catch(error)
-  {alert(`error message: ${error.message}`)}
-}else
-  {alert("There are no records with given email")}
+    //const currentname = new Parse.User({ id: useriddata2 });
+   // const parsequery=new Parse.Query("User");
+    //parsequery.get("objectId", useriddata2);
+    //let done=await currentname.find();
+   // const firstname=currentname.get("firstName",currentname.firstName);
+   const currentuser= await Parse.User.current();
+   const query = new Parse.Query("User");
+   try{//const student=await query.equalTo("objectId", currentuser.id);
+  //console.log(student);
+  const student=await query.get(currentuser.id);
+  const studentFirstname=student.get("firstName");
+  const studentLastname=student.get("lastName");
+  const studentEmail=student.get("email");
+  const studentBiodata=student.get("bio");
+  const studentAge=student.get("Age");
+  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge});
+  /*const course= new Parse.Query("Course");
+  const academicInfo=await course.equalTo("User_ID", currentuser.id);
+  let isbdQueryResult = await academicInfo.first();
+  console.log(isbdQueryResult);
+  const studentHomeuniversity=academicInfo.get("Home_university");
+  console.log(studentHomeuniversity);
+  const studentHomeuniversityDegree=academicInfo.get("Home_university_degree");
+  const studentGuestuniversityCourse=academicInfo.get("Guest_uni_course");
+  fetchStudyInfo({HomeUniversity:studentHomeuniversity,StudyProgram:studentHomeuniversityDegree,ITUcourse:studentGuestuniversityCourse});
+  */
 }
-
-console.log(useriddata);
-*/
-
+  catch(error)
+  {alert(`Failed to retrieve the object, with error code: ${error.message}`);}
+  };
+ fetchusername();
+},[]);
+  
   return (
     <div className="profile--page">
       <div className="profile--page--layout">
@@ -52,8 +83,15 @@ console.log(useriddata);
             statusIcon="icon--for--size250"
             imgUrl={avartarImg}
           ></UserAvatar>
-          <h4>{useriddata}</h4>
-          <p>Bio</p>
+          {/* <h4>{useriddata2}</h4> */}
+          <p>{`${studentData.fname} ${studentData.lastname}`}</p>
+
+          {useriddata2 !== null && (
+            <div>
+              <p>{`${studentData.email}`}</p>
+            </div>
+            )}
+          <p>{studentData.bio}</p>
           
           <div className="profile--controls">
           <Button
@@ -81,25 +119,14 @@ console.log(useriddata);
         <div className="profile--info">
           <div className="personal--info">
             <h3>Personal Information</h3>
-            <h5 >Name</h5>
-            <h5>Age</h5>
+            <h5 >Name : {`${studentData.fname} ${studentData.lastname}`}</h5>
+            <h5>Age : {studentData.age}</h5>
             <h5>Academic Skills</h5>
             <div className="skill--section">
               <AcademicSkill skillName="Programming" skillRating="4"></AcademicSkill>
               <AcademicSkill skillName="Graphic Design" skillRating="4"></AcademicSkill>
               <AcademicSkill skillName="Project Management" skillRating="3"></AcademicSkill>
             </div>
-            <div className="profile--controls">
-                    <Button
-            onClick={() => {
-              navigate("/profile/edit");
-            }}
-            type="button"
-            buttonSize="btn--width120--height50"
-          >
-            Edit
-          </Button>
-          </div>
           </div>
 
           <div className="study--info">
@@ -111,7 +138,7 @@ console.log(useriddata);
           <div className="profile--controls">
                     <Button
             onClick={() => {
-              console.log("You clicked on me!");
+              navigate("/profile/edit");
             }}
             type="button"
             buttonSize="btn--width120--height50"
