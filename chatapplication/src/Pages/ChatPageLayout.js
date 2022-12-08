@@ -13,6 +13,7 @@ export const ChatPageLayout = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
   const [newChatWith, setNewChatWith] = useState(null);
+  const [test, setTest] = useState(null);
 
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ export const ChatPageLayout = () => {
         } else {
           if (currentUser === null) {
             setCurrentUser(user.id);
+            setTest(user);
           }
         }
         return true;
@@ -34,7 +36,7 @@ export const ChatPageLayout = () => {
     };
     checkCurrentUser();
   }, [currentUser]);
-  
+
   const doSelectChat = (chat) => {
     setCurrentChat(null);
     setCurrentChat(chat);
@@ -61,7 +63,13 @@ export const ChatPageLayout = () => {
             }}
           />
         </div>
-        <SearchChat className="search-area-wrapper" newChatCallback={startNewChatWith}/>
+        <SearchChat
+          className="search-area-wrapper"
+          loggedInUser={test}
+          newChatCallback={startNewChatWith}
+          selectChatCallback={doSelectChat}
+          contactInfoCallback={dofindContact}
+        />
         <div className="inbox">
           <ChatInbox
             loggedInUserId={currentUser}
@@ -74,7 +82,9 @@ export const ChatPageLayout = () => {
 
       <div className="right--container">
         <div className="sender-card">
-          <UserChatProfile userId={contactInfo} />
+          {contactInfo !== null &&(
+            <UserChatProfile userId={contactInfo} />
+          )}
         </div>
         {currentChat !== null && (
           //console.log(currentChat.id),
@@ -83,11 +93,7 @@ export const ChatPageLayout = () => {
 
         <div className="text-input"></div>
         {currentChat !== null && (
-         
-          <SendMessage
-            chatId={currentChat.id}
-            loggedInUserId={currentUser}
-          />
+          <SendMessage chatId={currentChat.id} loggedInUserId={currentUser} />
         )}
       </div>
     </div>
