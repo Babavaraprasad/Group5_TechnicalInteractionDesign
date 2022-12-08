@@ -3,6 +3,8 @@
 .search-area-wrapper {
   display: flex;
   width: 80%;
+  margin-bottom: -2px;
+  padding-bottom: 0;
 }
 
 .search-area {
@@ -18,6 +20,7 @@
   line-height: 2;
   width: 90%;
   height: 34px;
+  margin-bottom: 0;
 }
 input[type="text"] {
   width: 100%;

@@ -3,7 +3,7 @@ import "./searcharea.css";
 
 const STYLES = "search-area";
 
-export const Searcharea = ({ type, searchStyle }) => {
+export const Searcharea = ({ type, searchStyle, onChange }) => {
   const SearchStyle = STYLES.includes(searchStyle) ? searchStyle : STYLES;
   return (
     <div className="search-area-wrapper">
@@ -14,7 +14,7 @@ export const Searcharea = ({ type, searchStyle }) => {
         method="GET"
       >
         <img className={"search-icon"} src="searchicon.png" alt="search-icon" />
-        <input type="text" placeholder="Search..." />
+        <input type="text" placeholder="Search..." onChange={onChange}/>
       </div>
     </div>
   );

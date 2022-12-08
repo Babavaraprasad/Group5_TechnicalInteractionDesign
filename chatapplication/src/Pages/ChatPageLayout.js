@@ -6,6 +6,7 @@ import Parse from "parse/dist/parse.min.js";
 import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
 import { useNavigate } from "react-router-dom";
+import { SearchChat } from "../components/chat-components/SearchChat";
 
 export const ChatPageLayout = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -55,7 +56,7 @@ export const ChatPageLayout = () => {
             }}
           />
         </div>
-        <Searcharea></Searcharea>
+        <SearchChat className="search-area-wrapper" />
         <div className="inbox">
           <ChatInbox
             loggedInUserId={currentUser}

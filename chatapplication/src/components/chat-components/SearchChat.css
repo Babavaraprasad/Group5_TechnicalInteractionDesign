@@ -1,0 +1,20 @@
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.result-container{
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border: 1px solid grey;
+    width: 80%;
+    padding-top:0;
+    margin-top: -8px;
+}
+
+.result-list{
+    list-style-type:none;
+}

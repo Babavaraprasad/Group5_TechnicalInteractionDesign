@@ -56,6 +56,7 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
       data.UsersObjects.map((user) => {
         if (user.id !== loggedInUserId) {
           userInfo = `${user.get("Image")._url}`
+          console.log(userInfo);
           displayName = `${user.get("firstName")} ${user.get("lastName")}`;
         }
       });
