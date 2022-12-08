@@ -25,7 +25,7 @@ function PopUp(props) {
             <h2>Register</h2>
             <p> {successContent}<br />
             <br/>
-            Please close to go back to registration <br />
+            Please close to go back to login<br />
             </p>
             <button className="close-modal" onClick={toggleModal}>❌</button>
           

@@ -68,7 +68,7 @@ console.log(useriddata);
 
           <Button
             onClick={() => {
-              console.log("You clicked on me!");
+              navigate("/");
             }}
             type="button"
             buttonSize="btn--width120--height50"
@@ -92,7 +92,7 @@ console.log(useriddata);
             <div className="profile--controls">
                     <Button
             onClick={() => {
-              console.log("You clicked on me!");
+              navigate("/profile/edit");
             }}
             type="button"
             buttonSize="btn--width120--height50"
