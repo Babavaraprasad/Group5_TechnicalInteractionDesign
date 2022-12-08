@@ -3,7 +3,7 @@
 .search-area-wrapper {
   display: flex;
   width: 80%;
-  margin-bottom: -2px;
+  margin-bottom: 0;
   padding-bottom: 0;
 }
 

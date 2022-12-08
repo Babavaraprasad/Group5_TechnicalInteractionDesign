@@ -3,7 +3,7 @@ import "./SearchChat.css";
 import { Searcharea } from "../Searcharea";
 import Parse from "parse/dist/parse.min.js";
 
-export const SearchChat = ({}) => {
+export const SearchChat = ({ newChatCallback }) => {
   const [search, setSearch] = useState(null);
   const [course, setCourse] = useState(null);
   //console.log(course);
@@ -29,11 +29,12 @@ export const SearchChat = ({}) => {
     return data
       .filter((item) =>
         //console.log(item.get("Guest_uni_course").toLowerCase().includes(search));
+        //also get rid of logged in user here!
         item.get("Guest_uni_course").toLowerCase().includes(search)
       )
       .map((item, index) => (
         <li key={`${index}`} className="list-item" onClick={() => {
-            console.log(index);
+          newChatCallback(item.get("User_ID")); // deliver a user object
           }}>
           {`${item.get("User_ID").get("firstName")} 
             ${item.get("User_ID").get("lastName")}:

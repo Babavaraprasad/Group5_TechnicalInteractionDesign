@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChatWindow } from "../components/chat-components/ChatWindow";
 import { ChatInbox } from "../components/ChatInbox";
-import { Searcharea } from "../components/Searcharea";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
@@ -12,6 +11,7 @@ export const ChatPageLayout = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
+  const [newChatWith, setNewChatWith] = useState(null);
 
   const navigate = useNavigate();
 
@@ -33,16 +33,20 @@ export const ChatPageLayout = () => {
     };
     checkCurrentUser();
   }, [currentUser]);
-
+  
   const doSelectChat = (chat) => {
     setCurrentChat(null);
     setCurrentChat(chat);
   };
 
   const dofindContact = (contact) => {
-    console.log(contact);
     setContactInfo(null);
     setContactInfo(contact); //another user's id
+  };
+
+  const startNewChatWith = (contact) => {
+    setNewChatWith(null);
+    setNewChatWith(contact);
   };
 
   return (
@@ -56,12 +60,13 @@ export const ChatPageLayout = () => {
             }}
           />
         </div>
-        <SearchChat className="search-area-wrapper" />
+        <SearchChat className="search-area-wrapper" newChatCallback={startNewChatWith}/>
         <div className="inbox">
           <ChatInbox
             loggedInUserId={currentUser}
             selectChatCallback={doSelectChat}
             contactInfoCallback={dofindContact}
+            newChatwith={newChatWith}
           />
         </div>
       </div>
