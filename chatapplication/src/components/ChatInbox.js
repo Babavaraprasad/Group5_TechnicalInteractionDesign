@@ -33,9 +33,47 @@ export const ChatInbox = ({
           let chatUsersRelation = chat.relation("user_id");
           chat.UsersObjects = await chatUsersRelation.query().find();
         }
-
         setqueryChat(chatOrder);
+
+        let isExisting;
+        chatOrder !== null && chatOrder.map((data)=>{
+          data.UsersObjects.map((user) => {
+            if (newChatwith !== null) {
+              if (user.id === newChatwith.id) {
+                //jump to the existing chat
+                toggleChat(data.id);
+                selectChatCallback(data);
+                contactInfoCallback(checkUser(data));
+              return isExisting = true;
+        }
+      }});
+        });
+
+      //create new individual chat from searching
+      const startNewChat = async (contactUser) => {
+      const theNewChat = new Parse.Object("Chat");
+           //start new chat
+            let usersInChat = theNewChat.relation("user_id");
+            usersInChat.add(contactUser);
+            usersInChat.add(currentUser);
+      try {
+        await theNewChat.save();
+        theNewChat.UsersObjects = await usersInChat.query().find();
+        setqueryChat([...queryChat, theNewChat]);
+        //jump to the new chat directly
+        toggleChat(theNewChat.id);
+        selectChatCallback(theNewChat);
+        contactInfoCallback(checkUser(theNewChat));
+        //console.log(theNewChat);
         return true;
+      } catch (error) {
+        alert(`Error!${error.message}`);
+        return false;
+      }
+    };
+
+    isExisting !== null && isExisting !== true && startNewChat(newChatwith);
+
       } catch (error) {
         alert(`Error!${error.message}`);
         return false;

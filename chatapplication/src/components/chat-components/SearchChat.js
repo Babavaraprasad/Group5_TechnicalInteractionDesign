@@ -25,26 +25,6 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
     findCourseList();
   }, []);
 
-
-    //only for individual chats
-    const startNewChat = async (contactUser) => {
-      const theNewChat = new Parse.Object("Chat");
-           //start new chat
-            let usersInChat = theNewChat.relation("user_id");
-            usersInChat.add(contactUser);
-            usersInChat.add(loggedInUser);
-      try {
-        await theNewChat.save();
-        selectChatCallback(theNewChat);
-        console.log(theNewChat);
-        return true;
-      } catch (error) {
-        alert(`Error!${error.message}`);
-        return false;
-      }
-    };
-
-
   const findUserInCourse = (data) => {
     return data
       .filter((item) =>
@@ -54,7 +34,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
       )
       .map((item, index) => (
         <li key={`${index}`} className="list-item" onClick={() => {
-          startNewChat(item.get("User_ID"));
+          //startNewChat(item.get("User_ID"));
           newChatCallback(item.get("User_ID")); // deliver a user object
           contactInfoCallback(item.get("User_ID"));
           setSearch(null);
