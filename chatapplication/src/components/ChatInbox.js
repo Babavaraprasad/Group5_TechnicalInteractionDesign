@@ -7,6 +7,27 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
   const [queryChat, setqueryChat] = useState();
   const [toggleState, setToggleState] = useState();
 
+  function toUserObject(user) {
+    return {
+      firstName : user.get("firstName"),
+      lastName : user.get("lastName"),
+      userId : user.id,
+      userImage : user.get("Image")?._url
+      }
+  }
+
+  function toChatObject(chat){
+    return {
+      updatedAt : chat.get("updatedAt"),
+      groupName : chat.get("group_name"),
+      groupImage : chat.get("group_image")?._url,
+      lastMessageTimestamp : chat.get("last_message").get("timestamp"),
+      lastMessageContent : chat.get("last_message").get("content"),
+      users : chat.UsersObjects.map(toUserObject),
+      id : chat.id
+    }
+  }
+
   useEffect(() => {
     const createInbox = async function () {
       //find the current user object in the User class
@@ -29,7 +50,12 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
           chat.UsersObjects = await chatUsersRelation.query().find();
         }
 
-        setqueryChat(chatOrder);
+        const chatObjects = chatOrder.map(chat => {
+          const newChat = toChatObject(chat);
+          return newChat;
+        })
+
+        setqueryChat(chatObjects);
         //console.log(chatOrder);
         return true;
       } catch (error) {
@@ -48,15 +74,15 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
   let displayName;
 
   const displayAvatar = (data) => {
-    if (data.get("group_name") !== undefined) {
-      displayName = `${data.get("group_name")}`
-      return `${data.get("group_image")._url}`;
+    if (data.groupName !== undefined) {
+      displayName = `${data.groupName}`
+      return `${data.groupImage}`;
     } else {
       let userInfo;
-      data.UsersObjects.map((user) => {
+      data.users.map((user) => {
         if (user.id !== loggedInUserId) {
-          userInfo = `${user.get("Image")._url}`
-          displayName = `${user.get("firstName")} ${user.get("lastName")}`;
+          userInfo = `${user.userImage}`
+          displayName = `${user.firstName} ${user.lastName}`;
         }
       });
       return userInfo;
@@ -65,7 +91,7 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
 
   
   const checkUser = (data) => {
-    if (data.get("group_name") !== undefined) {
+    if (data.groupName !== undefined) {
       return data.id;
     } else {
       let userInfo;
@@ -78,15 +104,19 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
     }
   };
 
+  const sortingFunction = (a, b) =>
+  {
+    const difference = b.lastMessageTimestamp - a.lastMessageTimestamp;
+    return difference;
+  };
+
 
   return (
     <div>
       {queryChat !== undefined &&
         queryChat
           .sort(
-            (a, b) =>
-              b.get("last_message").get("timestamp") -
-              a.get("last_message").get("timestamp")
+            sortingFunction
           )
           .map((data, index) => (
             <div key={`${index}`}>
@@ -98,8 +128,8 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
                 }}
                 avatar={displayAvatar(data)}
                 name={displayName}
-                lastMessage={`${data.get("last_message").get("content")}`}
-                time={`${data.get("last_message").get("timestamp")}`}
+                lastMessage={`${data.lastMessageContent}`}
+                time={`${data.lastMessageTimestamp}`}
                 status={toggleState === index ? "reading" : "unread"}
                 
               ></ChatInboxCard>
