@@ -13,7 +13,7 @@ function CreateChatRow(message, loggedInUserId) {
    
     return (
             <div className={rowStyle} key={message.messageId}>
-                <ChatBubble bubbleStyle={bubbleStyle} seen={message.seen} time={message.date}>{message.content}</ChatBubble>
+                <ChatBubble bubbleStyle={bubbleStyle} userName={message.userName} seen={message.seen} time={message.date}>{message.content}</ChatBubble>
             </div>
     );
 }
