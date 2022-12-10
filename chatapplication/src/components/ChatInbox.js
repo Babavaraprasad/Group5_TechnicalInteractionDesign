@@ -79,8 +79,8 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
       return `${data.groupImage}`;
     } else {
       let userInfo;
-      data.users.map((user) => {
-        if (user.id !== loggedInUserId) {
+      data.users.forEach((user) => {
+        if (user.userId !== loggedInUserId) {
           userInfo = `${user.userImage}`
           displayName = `${user.firstName} ${user.lastName}`;
         }
@@ -95,9 +95,9 @@ export const ChatInbox = ({ loggedInUserId, selectChatCallback, contactInfoCallb
       return data.id;
     } else {
       let userInfo;
-      data.UsersObjects.map((user) => {
-        if (user.id !== loggedInUserId) {
-          userInfo = user.id
+      data.users.forEach((user) => {
+        if (user.userId !== loggedInUserId) {
+          userInfo = user.userId;
         }
       });
       return userInfo;
