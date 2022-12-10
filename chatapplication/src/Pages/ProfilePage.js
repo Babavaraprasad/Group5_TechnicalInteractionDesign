@@ -26,12 +26,12 @@ import Parse from "parse/dist/parse.min.js";
 
 export default function ProfilePage() {
 
-  const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:""});
+  const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:"",image:""});
   const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
 
-  const location=useLocation();
-  const useriddata2=location.state.data.currentUser2;
-  console.log(useriddata2);
+  // const location=useLocation();
+  // const useriddata2=location.state.data.currentUser2;
+  // console.log(useriddata2);
 
   const navigate=useNavigate();
 
@@ -53,7 +53,8 @@ useEffect(()=>{
   const studentEmail=student.get("email");
   const studentBiodata=student.get("bio");
   const studentAge=student.get("Age");
-  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge});
+  const studentImage=student.get("Image") // not working yet
+  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
   /*const course= new Parse.Query("Course");
   const academicInfo=await course.equalTo("User_ID", currentuser.id);
   let isbdQueryResult = await academicInfo.first();
@@ -83,14 +84,7 @@ useEffect(()=>{
             statusIcon="icon--for--size250"
             imgUrl={avartarImg}
           ></UserAvatar>
-          {/* <h4>{useriddata2}</h4> */}
           <p>{`${studentData.fname} ${studentData.lastname}`}</p>
-
-          {useriddata2 !== null && (
-            <div>
-              <p>{`${studentData.email}`}</p>
-            </div>
-            )}
           <p>{studentData.bio}</p>
           
           <div className="profile--controls">
@@ -101,7 +95,17 @@ useEffect(()=>{
             type="button"
             buttonSize="btn--width120--height50"
           >
-            Back to Chat
+            To Chatroom
+          </Button>
+
+          <Button
+            onClick={() => {
+              navigate("/profile/edit");
+            }}
+            type="button"
+            buttonSize="btn--width120--height50"
+          >
+            Edit Profile
           </Button>
 
           <Button
@@ -118,7 +122,7 @@ useEffect(()=>{
 
         <div className="profile--info">
           <div className="personal--info">
-            <h3>Personal Information</h3>
+            <h1>Personal Information 🧑</h1>
             <h5 >Name : {`${studentData.fname} ${studentData.lastname}`}</h5>
             <h5>Age : {studentData.age}</h5>
             <h5>Academic Skills</h5>
@@ -130,25 +134,13 @@ useEffect(()=>{
           </div>
 
           <div className="study--info">
-            <h3>Study Information</h3>
+            <h1>Study Information 🎓</h1>
             <h5>Home University</h5>
             <h5>Study Program</h5>
             <h5>Course at ITU</h5>
-
-          <div className="profile--controls">
-                    <Button
-            onClick={() => {
-              navigate("/profile/edit");
-            }}
-            type="button"
-            buttonSize="btn--width120--height50"
-          >
-            Edit
-          </Button>
           </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
