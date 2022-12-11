@@ -10,9 +10,9 @@ import  { createContext } from "react";
 import EditProfile from './components/EditProfile';
 import SendMessage from './components/SendMessage/SendMessage';
 
-const Parse_application_id='IBqvSrnvlyfIBLTKOD9wyPdva1DVFg2uBq742IHh';
+const Parse_application_id='gvIXi223QYLFMqdL8dMAd8yRUptGZkDjKkCOf7bk';
 const Parse_host_URL='https://parseapi.back4app.com';
-const Parse_Javascript_key='D6vNSmMupgdE0RoG1RdAABCMTygugjgxAUeC7Hjs';
+const Parse_Javascript_key='SRsW7tBVQHEDAlOlS2xBqwy6vaFRndgcBUlF5G4Z';
 
 Parse.initialize(Parse_application_id, Parse_Javascript_key);
 Parse.serverURL = Parse_host_URL;

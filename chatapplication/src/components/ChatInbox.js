@@ -12,7 +12,6 @@ export const ChatInbox = ({
 }) => {
   const [queryChat, setqueryChat] = useState();
   const [toggleState, setToggleState] = useState();
-  console.log(queryChat);
 
   function toUserObject(user) {
     return {

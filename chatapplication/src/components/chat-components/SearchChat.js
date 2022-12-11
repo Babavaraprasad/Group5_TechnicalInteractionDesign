@@ -38,7 +38,8 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
           contactInfoCallback(item.get("User_ID"));
           setSearch(null);
           }}>
-          {`${item.get("User_ID").get("firstName")} 
+          {item.get("User_ID").id !== loggedInUser &&
+          `${item.get("User_ID").get("firstName")} 
             ${item.get("User_ID").get("lastName")}:
             ${item.get("Guest_uni_course")}`}
         </li>
