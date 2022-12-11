@@ -28,7 +28,6 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
   const findUserInCourse = (data) => {
     return data
       .filter((item) =>
-        //console.log(item.get("Guest_uni_course").toLowerCase().includes(search));
         //also get rid of logged in user here!
         item.get("Guest_uni_course").toLowerCase().includes(search)
       )

@@ -13,7 +13,7 @@ export const ChatPageLayout = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
   const [newChatWith, setNewChatWith] = useState(null);
-  const [test, setTest] = useState(null);
+  const [currentUserObject, setCurrentUserObject] = useState(null);
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export const ChatPageLayout = () => {
         } else {
           if (currentUser === null) {
             setCurrentUser(user.id);
-            setTest(user);
+            setCurrentUserObject(user);
           }
         }
         return true;
@@ -65,7 +65,7 @@ export const ChatPageLayout = () => {
         </div>
         <SearchChat
           className="search-area-wrapper"
-          loggedInUser={test}
+          loggedInUser={currentUser}
           newChatCallback={startNewChatWith}
           selectChatCallback={doSelectChat}
           contactInfoCallback={dofindContact}
