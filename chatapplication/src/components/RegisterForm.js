@@ -159,13 +159,15 @@ function RegisterForm(props) {
           Already registered? Go to <Link to="/">Login</Link>
         </div>
 
-        <Button 
-          type="button"
-          buttonSize="btn--width140--height40"
-          onClick={submitRegistration}
-        >
-          Register
-        </Button>
+        <div className="register-account-button-container">
+          <Button 
+            type="button"
+            buttonSize="btn--width140--height40"
+            onClick={submitRegistration}
+          >
+            Register
+          </Button>
+        </div>
       </form>
     </Layout>
   );

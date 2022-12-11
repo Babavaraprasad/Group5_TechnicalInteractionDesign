@@ -1,14 +1,23 @@
 import React from 'react'
-import './UserAvatar.css';
+import './ClipArt.css';
+
 
 export const ClipArt = ({ 
-   imgUrl
+   imgUrl,
+   width,
+   height
 }) => {
+
+    const style = {
+        width: width,
+        height: height
+    };
+
     return (
          <div 
             className={"clipart"} 
                 imgUrl={imgUrl}>
-                <img src={`${imgUrl}`}/>
+                <img style={style} src={`${imgUrl}`}/>
          </div>  
     )
 }
