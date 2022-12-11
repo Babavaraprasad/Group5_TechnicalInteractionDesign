@@ -13,7 +13,6 @@ export const ChatPageLayout = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
   const [newChatWith, setNewChatWith] = useState(null);
-  const [currentUserObject, setCurrentUserObject] = useState(null);
 
   const navigate = useNavigate();
 
@@ -27,7 +26,6 @@ export const ChatPageLayout = () => {
         } else {
           if (currentUser === null) {
             setCurrentUser(user.id);
-            setCurrentUserObject(user);
           }
         }
         return true;
