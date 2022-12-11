@@ -43,3 +43,8 @@
   flex-direction: row;
   padding-left: 10px;
 }
+
+.user-name-text {
+  font-size: 14px;
+  font-weight: bold;
+}

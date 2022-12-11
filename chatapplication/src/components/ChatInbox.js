@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatInbox.css";
 import { ChatInboxCard } from "./ChatInboxCard";
+import avartarImg from '../images/main-avatar-image.png'
 
 export const ChatInbox = ({
   loggedInUserId,
@@ -11,6 +12,28 @@ export const ChatInbox = ({
 }) => {
   const [queryChat, setqueryChat] = useState();
   const [toggleState, setToggleState] = useState();
+  console.log(queryChat);
+
+  function toUserObject(user) {
+    return {
+      firstName : user.get("firstName"),
+      lastName : user.get("lastName"),
+      userId : user.id,
+      userImage : user.get("Image") ? user.get("Image")._url : avartarImg,
+      }
+  }
+
+  function toChatObject(chat){
+    return {
+      updatedAt : chat.get("updatedAt"),
+      groupName : chat.get("group_name"),
+      groupImage : chat.get("group_image"),
+      lastMessageTimestamp : chat.get("last_message") ? chat.get("last_message").get("timestamp") : new Date(),
+      lastMessageContent : chat.get("last_message") ? chat.get("last_message").get("content") : "no contenet yet",
+      users : chat.UsersObjects.map(toUserObject),
+      id : chat.id
+    }
+  }
 
   useEffect(() => {
     const createInbox = async function () {
@@ -33,13 +56,19 @@ export const ChatInbox = ({
           let chatUsersRelation = chat.relation("user_id");
           chat.UsersObjects = await chatUsersRelation.query().find();
         }
-        setqueryChat(chatOrder);
+        const chatObjects = chatOrder.map(chat => {
+          const newChat = toChatObject(chat);
+          return newChat;
+        })
+
+        setqueryChat(chatObjects);
 
         let isExisting;
-        chatOrder !== null && chatOrder.map((data)=>{
-          data.UsersObjects.map((user) => {
+        //error provention for same user in the group with loggedInUser
+        chatObjects !== null && chatObjects.map((data)=>{
+          data.users.forEach((user) => {
             if (newChatwith !== null) {
-              if (user.id === newChatwith.id) {
+              if (user.userId === newChatwith.id) {
                 //jump to the existing chat
                 toggleChat(data.id);
                 selectChatCallback(data);
@@ -59,12 +88,14 @@ export const ChatInbox = ({
       try {
         await theNewChat.save();
         theNewChat.UsersObjects = await usersInChat.query().find();
-        setqueryChat([...queryChat, theNewChat]);
+        const theNewChatObject = toChatObject(theNewChat);
+        setqueryChat([...queryChat, theNewChatObject]);
         //jump to the new chat directly
-        toggleChat(theNewChat.id);
-        selectChatCallback(theNewChat);
-        contactInfoCallback(checkUser(theNewChat));
+        toggleChat(theNewChatObject.id);
+        selectChatCallback(theNewChatObject);
+        contactInfoCallback(checkUser(theNewChatObject));
         //console.log(theNewChat);
+
         return true;
       } catch (error) {
         alert(`Error!${error.message}`);
@@ -72,7 +103,7 @@ export const ChatInbox = ({
       }
     };
 
-    isExisting !== null && isExisting !== true && startNewChat(newChatwith);
+    isExisting !== null && isExisting !== true && newChatwith !== null && startNewChat(newChatwith);
 
       } catch (error) {
         alert(`Error!${error.message}`);
@@ -89,15 +120,15 @@ export const ChatInbox = ({
   let displayName;
 
   const displayAvatar = (data) => {
-    if (data.get("group_name") !== undefined) {
-      displayName = `${data.get("group_name")}`;
-      return `${data.get("group_image")._url}`;
+    if (data.groupName !== undefined) {
+      displayName = `${data.groupName}`
+      return `${data.groupImage}`;
     } else {
       let userInfo;
-      data.UsersObjects.map((user) => {
-        if (user.id !== loggedInUserId) {
-          userInfo = `${user.get("Image")._url}`;
-          displayName = `${user.get("firstName")} ${user.get("lastName")}`;
+      data.users.forEach((user) => {
+        if (user.userId !== loggedInUserId) {
+          userInfo = `${user.userImage}`
+          displayName = `${user.firstName} ${user.lastName}`;
         }
       });
       return userInfo;
@@ -105,26 +136,35 @@ export const ChatInbox = ({
   };
 
   const checkUser = (data) => {
-    if (data.get("group_name") !== undefined) {
+    if (data.groupName !== undefined) {
       return data.id;
     } else {
       let userInfo;
-      data.UsersObjects.map((user) => {
-        if (user.id !== loggedInUserId) {
-          userInfo = user.id;
+      data.users.forEach((user) => {
+        if (user.userId !== loggedInUserId) {
+          userInfo = user.userId;
         }
       });
       return userInfo;
     }
   };
 
+  const sortingFunction = (a, b) =>
+  {
+    const difference = b.lastMessageTimestamp - a.lastMessageTimestamp;
+    return difference;
+  };
+
+
   return (
     <div>
       {queryChat !== undefined &&
         queryChat
-          .sort((a, b) => b.get("updatedAt") - a.get("updatedAt"))
-          .map((data) => (
-            <div key={`${data.id}`}>
+          .sort(
+            sortingFunction
+          )
+          .map((data, index) => (
+            <div key={`${index}`}>
               <ChatInboxCard
                 onClick={() => {
                   toggleChat(data.id);
@@ -133,13 +173,10 @@ export const ChatInbox = ({
                 }}
                 avatar={displayAvatar(data)}
                 name={displayName}
-                lastMessage={
-                  data.get("last_message") !== undefined
-                    ? `${data.get("last_message").get("content")}`
-                    : " "
-                }
-                time={`${data.get("updatedAt")}`}
-                status={toggleState === data.id ? "reading" : "unread"}
+                lastMessage={`${data.lastMessageContent}`}
+                time={`${data.lastMessageTimestamp}`}
+                status={toggleState === index ? "reading" : "unread"}
+                
               ></ChatInboxCard>
             </div>
           ))}

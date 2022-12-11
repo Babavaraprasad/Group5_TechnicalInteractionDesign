@@ -16,7 +16,10 @@ function GetChatSubscription(chatId) {
     //show recent messages | code taken from: https://docs.parseplatform.org/js/guide/#queries and https://www.back4app.com/docs/platform/parse-server-live-query-example
 
     const query = new Parse.Query('Message');
-    query.equalTo('chat', new Parse.Object('Chat', {id: chatId})).ascending('createdAt');
+    query
+    .equalTo('chat', new Parse.Object('Chat', {id: chatId}))
+    .includeAll()
+    .ascending('createdAt');
     
     const subscription = client.subscribe(query);
     return subscription;
@@ -25,7 +28,11 @@ function GetChatSubscription(chatId) {
 //show old messages 
 async function GetChatMessages(chatID, limit) {
     const query = new Parse.Query('Message');
-    query.ascending('createdAt').equalTo('chat', new Parse.Object('Chat', {id: chatID})).limit(limit); 
+    query
+    .includeAll()
+    .ascending('createdAt')
+    .equalTo('chat', new Parse.Object('Chat', {id: chatID}))
+    .limit(limit); 
     const results = await query.find();
 
     const messages = [];
@@ -40,15 +47,17 @@ async function GetChatMessages(chatID, limit) {
 //Convert back4app message to message
 function ConvertResultToMessage(result) {
     const id = result.id;
-    const userId = result.get('user');
-    const  date = result.get('timestamp')
-    const content = result.get('content')
+    const user = result.get('user');
+    const userName = user !== undefined ? user.get('firstName') + ' ' + user.get('lastName') : 'Unknown User';
+    const  date = result.get('timestamp');
+    const content = result.get('content');
     return {
         messageId: id,
-        userId: userId.id,
+        userId: user?.id ?? 'Unknown ID',
         date: date,
         seen: false,
-        content: content
+        content: content,
+        userName: userName
     };
 }
 

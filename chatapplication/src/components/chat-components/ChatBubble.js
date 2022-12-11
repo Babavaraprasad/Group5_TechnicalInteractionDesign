@@ -4,20 +4,26 @@ import "./chat-bubble.css";
 //use one of these array elements when getting the component
 const STYLES = ["chat--bubble--receiver", "chat--bubble--sender"];
 //children prop = bubble text string
-export const ChatBubble = ({ type, bubbleStyle, children, seen, time }) => {
+export const ChatBubble = ({type, 
+                            bubbleStyle,
+                            userName, 
+                            children, 
+                            seen, 
+                            time }) => {
   const BubbleStyle = STYLES.includes(bubbleStyle) ? bubbleStyle : STYLES[0];
   const seenText = seen ? "Seen" : ""; //if true return "Seen", else return an empty string ""
 
   return (
-    <div className={`bubble ${BubbleStyle}`} type={type}>
-      {children}
-      <div className="footer">
-        <div className="time-seen-container">
-          <div className="time">{getTimeText(time)}</div>
-          <div className="seen">{seenText}</div>
+      <div className={`bubble ${BubbleStyle}`} type={type}>
+      <div className="user-name-text">{userName}</div>
+        {children}
+        <div className="footer">
+          <div className="time-seen-container">
+            <div className="time">{getTimeText(time)}</div>
+            <div className="seen">{seenText}</div>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 //to get the exact time of a message we need to get a new Date (prop: time={new Date()})
