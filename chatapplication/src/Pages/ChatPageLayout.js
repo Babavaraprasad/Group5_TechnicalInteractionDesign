@@ -33,7 +33,7 @@ export const ChatPageLayout = () => {
       return false;
     };
     checkCurrentUser();
-  }, [currentUser]);
+  }, []);
 
   const doSelectChat = (chat) => {
     setCurrentChat(null);

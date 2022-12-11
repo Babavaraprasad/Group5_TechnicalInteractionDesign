@@ -2,12 +2,38 @@ import "./UserChatProfile.css";
 import Parse from "parse/dist/parse.min.js";
 import React, { useState, useEffect } from "react";
 import { UserAvatar } from "../components/UserAvatar";
+import avartarImg from "../images/main-avatar-image.png";
 
 export const UserChatProfile = ({ userId, onClick }) => {
   // State variables
   const [person, setPerson] = useState(null);
   const [school, SetSchool] = useState(null);
   const [group, setGroup] = useState(null);
+
+  function toUserObject(user) {
+    return {
+      firstName: user.get("firstName"),
+      lastName: user.get("lastName"),
+      userId: user.id,
+      userImage: user.get("Image") ? user.get("Image")._url : avartarImg,
+    };
+  }
+
+  function toGroupObject(group) {
+    return {
+      groupName: group.get("group_name") ? group.get("group_name") : "Group Name",
+      groupImage: group.get("group_image") ? group.get("group_image")._url : avartarImg,
+      id: group.id,
+    };
+  }
+
+  function toSchoolObject(school){
+    return {
+      university: school.get("Home_university") ? school.get("Home_university") : "No home uni info yet",
+      degree: school.get("Home_university_degree") ? school.get("Home_university_degree") : "No degree info yet",
+      id: school.id,
+    };
+  }
 
   useEffect(() => {
     async function fetchPerson() {
@@ -24,14 +50,18 @@ export const UserChatProfile = ({ userId, onClick }) => {
       if (Person === undefined) {
         chatQuery.equalTo("objectId", userId);
         const Group = await chatQuery.first();
+        const groupOject = Group !== undefined ? toGroupObject(Group) : null;
         setPerson(null);
-        setGroup(Group);
+        SetSchool(null);
+        setGroup(groupOject);
       } else {
         schoolQuery.equalTo("User_ID", Person.toPointer());
         const School = await schoolQuery.first();
+        const personObject = toUserObject(Person);
+        const schoolObject = toSchoolObject(School);
         setGroup(null);
-        setPerson(Person);
-        SetSchool(School);
+        setPerson(personObject);
+        SetSchool(schoolObject);
       }
     }
 
@@ -45,16 +75,12 @@ export const UserChatProfile = ({ userId, onClick }) => {
           <UserAvatar
             avatarSize="size52"
             statusIcon="icon--off"
-            imgUrl={`${person.get("Image")._url}`}
+            imgUrl={person.userImage}
           ></UserAvatar>
 
           <div className="user-sort-info">
-            <p className="user-name">{`${person.get("firstName")} ${person.get(
-              "lastName"
-            )}`}</p>
-            <p>{`${school.get("Home_university")} ${school.get(
-              "Home_university_degree"
-            )}`}</p>
+            <p className="user-name">{`${person.firstName} ${person.lastName}`}</p>
+            <p>{`${school.university} ${school.degree}`}</p>
           </div>
         </div>
       )}
@@ -64,11 +90,11 @@ export const UserChatProfile = ({ userId, onClick }) => {
           <UserAvatar
             avatarSize="size52"
             statusIcon="icon--off"
-            imgUrl={`${group.get("group_image")._url}`}
+            imgUrl={group.groupImage}
           ></UserAvatar>
 
           <div className="user-sort-info">
-            <p className="user-name">{`${group.get("group_name")}`}</p>
+            <p className="user-name">{group.groupName}</p>
           </div>
         </div>
       )}
