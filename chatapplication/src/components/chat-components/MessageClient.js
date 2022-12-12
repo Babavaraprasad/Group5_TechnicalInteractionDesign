@@ -1,9 +1,9 @@
 import Parse from "parse/dist/parse.min.js";
 
 function GetChatSubscription(chatId) {
-    const parseApplicationId ='MVy8szIW1fArDFhiZuo8qcwBzN4JF1vqrxSOEaTB';
-    const serverUrl ='wss://nansenditgroup5.b4a.io';//'wss://senditgroup5.b4a.io' 'wss://group5tid.b4a.io'
-    const parseJsKey ='SWeoiB6okRNA8gMrG3CbbIqlGbnqRRmoFj7BwXZa';
+    const parseApplicationId ='gvIXi223QYLFMqdL8dMAd8yRUptGZkDjKkCOf7bk';
+    const serverUrl ='wss://senditgroup5.b4a.io';//'wss://senditgroup5.b4a.io' 'wss://group5tid.b4a.io'
+    const parseJsKey ='SRsW7tBVQHEDAlOlS2xBqwy6vaFRndgcBUlF5G4Z';
 
     const client = new Parse.LiveQueryClient({
         applicationId: parseApplicationId,
