@@ -9,6 +9,7 @@ export const LargeInputField = ({
   largeStyle,
   labelText,
   placeholder,
+  onChange,
 }) => {
   const checkLargeStyle = STYLES.includes(largeStyle) ? largeStyle : STYLES;
 
@@ -29,6 +30,7 @@ export const LargeInputField = ({
           rows="8"
           cols="50"
           placeholder={placeholder}
+          onChange={onChange}
         ></textarea>
       </div>
     </div>
