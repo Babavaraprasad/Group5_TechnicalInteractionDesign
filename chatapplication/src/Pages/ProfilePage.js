@@ -187,7 +187,7 @@ export default function ProfilePage() {
             <div className="skill--section">
               {skill !== null &&
                 skill.map((data, index) => {
-                  if (data !== 0) {
+                  if (data !== "0") {
                     return (
                       <AcademicSkill
                         key={`${index}`}
