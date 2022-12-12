@@ -1,3 +1,5 @@
+@import "../palette.css";
+
 .container{
     position: relative;
     display: flex;
@@ -9,7 +11,7 @@
     background-color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
-    border: 1px solid grey;
+    border: 1px solid linear-gradient(var(--SurfaceVariant),var(--SurfaceVariant));
     width: 80%;
     padding-top:0;
     margin-top: 0;
@@ -17,4 +19,18 @@
 
 .result-list{
     list-style-type:none;
+    padding: 5px;
+    margin:0;
+}
+
+.list-item{
+    padding: 10px;
+}
+
+.list-item:hover {
+    background: linear-gradient(0deg, rgba(45, 106, 60, 0.08), rgba(45, 106, 60, 0.08)), #FCFCF8;
+}
+
+.list-item:active {
+    background: var(--SecondaryContainer);
 }

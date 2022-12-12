@@ -31,15 +31,15 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
         //also get rid of logged in user here!
         item.get("Guest_uni_course") !== undefined ? item.get("Guest_uni_course").toLowerCase().includes(search) : console.log()
       )
-      .map((item, index) => (
-        <li key={`${index}`} className="list-item" onClick={() => {
+      .map((item, index) => (item.get("User_ID").id !== loggedInUser &&
+        <li key={`${index}`} className="list-item" 
+        onClick={() => {
           //startNewChat(item.get("User_ID"));
           newChatCallback(item.get("User_ID")); // deliver a user object
           contactInfoCallback(item.get("User_ID"));
           setSearch(null);
           }}>
-          {item.get("User_ID").id !== loggedInUser &&
-          `${item.get("User_ID").get("firstName")} 
+          {`${item.get("User_ID").get("firstName")} 
             ${item.get("User_ID").get("lastName")}:
             ${item.get("Guest_uni_course")}`}
         </li>
