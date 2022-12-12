@@ -5,12 +5,13 @@
 .input-container{
     position: relative;
     width: 100%;
+    z-index: 10;
 }
 
 .arrow-container{
     position: absolute;
     right: 10px;
-    top: 75%;
+    top: 65px;
     transform: translateY(-50%);
     margin-top: -20;
     cursor: pointer;
@@ -23,13 +24,12 @@
     padding: 3px;
     transform: translateY(45deg);
     -webkit-transform: rotate(45deg);
-    z-index: 0;
 }
 
 .input-clear{
     position: absolute;
     right: 30px;
-    top:77%;
+    top:67px;
     transform: translateY(-50%);
     cursor: pointer;
 }

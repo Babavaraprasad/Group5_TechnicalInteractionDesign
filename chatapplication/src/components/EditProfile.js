@@ -59,6 +59,7 @@ function EditProfile() {
   ];
 
   const navigate = useNavigate();
+  console.log(Error);
 
   useEffect(() => {
     const checkCurrentUser = async () => {
@@ -130,7 +131,7 @@ function EditProfile() {
     });
   }
 
-  async function saveChanges() {
+  async function saveChanges(e) {
     let hasError = false;
 
     if (selectRating !== null || selectSkill !== null) {
@@ -158,6 +159,7 @@ function EditProfile() {
               skillError: "Please select a skill for this rating",
             });
         hasError = true;
+        e.preventDefault();
       }
     }
 
@@ -251,7 +253,7 @@ function EditProfile() {
             onChange={(item) => setSelectSkill(item)}
             open={openSkill}
             setOpen={setOpenSkill}
-            //error={Error.emailError}
+            error={Error.skillError}
           ></DropDown>
 
           <DropDown
@@ -261,7 +263,7 @@ function EditProfile() {
             onChange={(item) => setSelectRating(item)}
             open={openRating}
             setOpen={setOpenRating}
-            //error={Error.emailError}
+            error={Error.ratingError}
           ></DropDown>
         </div>
 

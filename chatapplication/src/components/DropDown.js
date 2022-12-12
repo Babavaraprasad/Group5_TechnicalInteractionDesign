@@ -10,6 +10,7 @@ export const DropDown = ({
   open,
   setOpen,
   labelText,
+  error,
 }) => {
   const [input, setInput] = useState("");
 
@@ -35,7 +36,7 @@ export const DropDown = ({
         placeholder={placeholder}
         value={input}
         onChange={handleInput}
-        error={Error.firstnameError}
+        error={error}
         readonly={true}
       ></DefaultInputField>
       <div className="arrow-container">
