@@ -28,8 +28,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
   const findUserInCourse = (data) => {
     return data
       .filter((item) =>
-        //also get rid of logged in user here!
-        item.get("Guest_uni_course") !== undefined ? item.get("Guest_uni_course").toLowerCase().includes(search) : console.log()
+        item.get("Guest_uni_course") !== undefined ? item.get("Guest_uni_course").toLowerCase().includes(search.toLowerCase()) : console.log()
       )
       .map((item, index) => (item.get("User_ID").id !== loggedInUser &&
         <li key={`${index}`} className="list-item" 

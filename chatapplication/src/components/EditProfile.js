@@ -6,10 +6,12 @@ import { DefaultInputField } from "./DefaultInputField";
 import { LargeInputField } from "./LargeInputField";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
+import { DropDown } from "./DropDown";
 
 function EditProfile() {
-  const [currentCourseId, setCurrentCourseId] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentCourseId, setCurrentCourseId] = useState(null);
+  const [currentSkillId, setCurrentSkillId] = useState(null);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -22,6 +24,39 @@ function EditProfile() {
     StudyProgram: "",
     ITUcourse: "",
   });
+  const [Error, setError] = useState({
+    skillError: "",
+    ratingError: "",
+  });
+  const [selectSkill, setSelectSkill] = useState(null);
+  const [openSkill, setOpenSkill] = useState(false);
+  const [selectRating, setSelectRating] = useState(null);
+  const [openRating, setOpenRating] = useState(false);
+  const skillSet = [
+    "Front-end Development",
+    "Back-end Development",
+    "Python",
+    "Design",
+    "Business Analytics",
+    "Cloud Architecture",
+    "Product Management",
+    "Scrum Master",
+    "Information Security",
+    "Research",
+  ];
+  const ratings = ["0", "1", "2", "3", "4", "5"];
+  const skillBackend = [
+    "Front_end_development",
+    "Backend_development",
+    "python",
+    "Design",
+    "Business_Analytics",
+    "CloudArchitecture",
+    "ProductManagement",
+    "ScrumMaster",
+    "InformationSecurity",
+    "Research",
+  ];
 
   const navigate = useNavigate();
 
@@ -39,6 +74,11 @@ function EditProfile() {
             courseQuery.equalTo("User_ID", user.toPointer());
             const course = await courseQuery.first();
             setCurrentCourseId(course.id);
+
+            const skillQuery = new Parse.Query("Skills");
+            skillQuery.equalTo("User_ID", user.toPointer());
+            const skill = await skillQuery.first();
+            setCurrentSkillId(skill.id);
           }
         }
         return true;
@@ -91,32 +131,80 @@ function EditProfile() {
   }
 
   async function saveChanges() {
-    const updateUser = new Parse.User();
-    updateUser.set("objectId", currentUserId);
-    userInfo.firstName.trim() !== "" &&
-      updateUser.set("firstName", userInfo.firstName);
-    userInfo.lastName.trim() !== "" &&
-      updateUser.set("lastName", userInfo.lastName);
-    userInfo.bio.trim() !== "" && updateUser.set("bio", userInfo.bio);
-    console.log(userInfo.bio);
+    let hasError = false;
 
-    const updateCourse = new Parse.Object("Course");
-    updateCourse.set("objectId", currentCourseId);
-    studyinfo.HomeUniversity.trim() !== "" &&
-      updateCourse.set("Home_university", studyinfo.HomeUniversity);
-    studyinfo.StudyProgram.trim() !== "" &&
-      updateCourse.set("Home_university_degree", studyinfo.StudyProgram);
-    studyinfo.ITUcourse.trim() !== "" &&
-      updateCourse.set("Guest_uni_course", studyinfo.ITUcourse);
-
-    try {
-      await updateUser.save();
-      await updateCourse.save();
-      console.log("success!");
-    } catch (error) {
-      alert(`Error!${error.message}`);
-      return false;
+    if (selectRating !== null || selectSkill !== null) {
+      if (selectRating !== null && selectSkill !== null) {
+        const updateSkill = new Parse.Object("Skills");
+        updateSkill.set("objectId", currentSkillId);
+        selectSkill !== null &&
+          skillSet.map(
+            (item, index) =>
+              item === selectSkill &&
+              selectRating !== null &&
+              updateSkill.set(skillBackend[index], selectRating)
+          );
+          try {
+          await updateSkill.save();
+          } catch (error) {
+            alert(`Error!${error.message}`);
+            return false;
+          }
+      } else {
+        selectRating === null
+          ? setError({ ...Error, ratingError: "Please rate this skill" })
+          : setError({
+              ...Error,
+              skillError: "Please select a skill for this rating",
+            });
+        hasError = true;
+      }
     }
+
+    if (!hasError) {
+      if (
+        userInfo.firstName.trim() !== "" ||
+        userInfo.lastName.trim() !== "" ||
+        userInfo.bio.trim() !== ""
+      ) {
+        const updateUser = new Parse.User();
+        updateUser.set("objectId", currentUserId);
+        userInfo.firstName.trim() !== "" &&
+          updateUser.set("firstName", userInfo.firstName);
+        userInfo.lastName.trim() !== "" &&
+          updateUser.set("lastName", userInfo.lastName);
+        userInfo.bio.trim() !== "" && updateUser.set("bio", userInfo.bio);
+        try {
+          await updateUser.save();
+        } catch (error) {
+          alert(`Error!${error.message}`);
+          return false;
+        }
+      }
+
+      if (
+        studyinfo.HomeUniversity.trim() !== "" ||
+        studyinfo.StudyProgram.trim() !== "" ||
+        studyinfo.ITUcourse.trim() !== ""
+      ) {
+        const updateCourse = new Parse.Object("Course");
+        updateCourse.set("objectId", currentCourseId);
+        studyinfo.HomeUniversity.trim() !== "" &&
+          updateCourse.set("Home_university", studyinfo.HomeUniversity);
+        studyinfo.StudyProgram.trim() !== "" &&
+          updateCourse.set("Home_university_degree", studyinfo.StudyProgram);
+        studyinfo.ITUcourse.trim() !== "" &&
+          updateCourse.set("Guest_uni_course", studyinfo.ITUcourse);
+          try {
+            await updateCourse.save();
+          } catch (error) {
+            alert(`Error!${error.message}`);
+            return false;
+          }
+      }
+    }
+
+    navigate("/profile");
   }
 
   return (
@@ -129,48 +217,53 @@ function EditProfile() {
           labelText={"First Name"}
           placeholder={"Modify your First Name"}
           onChange={handleFirstName}
-          error={Error.firstnameError}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Last Name"}
           placeholder={"Modify your Last Name"}
           onChange={handleLastName}
-          error={Error.lastnameError}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Home University"}
           placeholder={"Enter your current uni name here"}
           onChange={handleHomeUni}
-          error={Error.emailError}
         ></DefaultInputField>
+
         <DefaultInputField
           labelText={"Study program"}
           placeholder={"study program(eg,masters, bachelors etc)"}
           onChange={handleMajor}
-          error={Error.emailError}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Course at ITU"}
           placeholder={"course enrolled at ITU"}
           onChange={handleCourse}
-          error={Error.emailError}
         ></DefaultInputField>
 
-        <DefaultInputField
-          labelText={"Academic skill"}
-          placeholder={"Enter skill(among drop down"}
-          //onChange={onchangeEmail}
-          error={Error.emailError}
-        ></DefaultInputField>
-        <DefaultInputField
-          labelText={"skill Rating"}
-          placeholder={"Rate your skill(1-5)"}
-          //onChange={onchangeEmail}
-          error={Error.emailError}
-        ></DefaultInputField>
+        <div className="skill-rating">
+          <DropDown
+            labelText={"Academic skill"}
+            placeholder={"Select skill from the list"}
+            options={skillSet}
+            onChange={(item) => setSelectSkill(item)}
+            open={openSkill}
+            setOpen={setOpenSkill}
+            //error={Error.emailError}
+          ></DropDown>
+
+          <DropDown
+            labelText={"Skill Rating"}
+            placeholder={"Rate your skill(1-5)"}
+            options={ratings}
+            onChange={(item) => setSelectRating(item)}
+            open={openRating}
+            setOpen={setOpenRating}
+            //error={Error.emailError}
+          ></DropDown>
+        </div>
 
         <LargeInputField
           type={"text"}
@@ -184,10 +277,18 @@ function EditProfile() {
           buttonSize="btn--width140--height40"
           onClick={() => {
             saveChanges();
-            navigate("/profile");
           }}
         >
           save
+        </Button>
+        <Button
+          type="button"
+          buttonSize="btn--width140--height40"
+          onClick={() => {
+            navigate("/profile");
+          }}
+        >
+          Cancel
         </Button>
       </form>
     </div>

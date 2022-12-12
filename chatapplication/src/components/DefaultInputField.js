@@ -11,6 +11,8 @@ export const DefaultInputField = ({
   placeholder,
   error = "",
   required = false,
+  value,
+  readonly = false
 }) => {
   const checkInputFieldStyle = STYLES.includes(inputFieldStyle)
     ? inputFieldStyle
@@ -36,6 +38,8 @@ export const DefaultInputField = ({
           placeholder={placeholder}
           required={required}
           onChange={onChange}
+          value={value}
+          readOnly={readonly}
         />
       </div>
       {ErrorComponent}
