@@ -19,6 +19,7 @@ function EditProfile() {
     bio: "",
     image: "",
   });
+  const [image, setImage] = useState(null);
   const [studyinfo, setStudyInfo] = useState({
     HomeUniversity: "",
     StudyProgram: "",
@@ -59,7 +60,6 @@ function EditProfile() {
   ];
 
   const navigate = useNavigate();
-  console.log(Error);
 
   useEffect(() => {
     const checkCurrentUser = async () => {
@@ -101,6 +101,10 @@ function EditProfile() {
       ...userInfo,
       lastName: e.target.value,
     });
+  }
+
+  function handleImage(e) {
+    setImage(e.target.files[0]);
   }
 
   function handleHomeUni(e) {
@@ -167,7 +171,8 @@ function EditProfile() {
       if (
         userInfo.firstName.trim() !== "" ||
         userInfo.lastName.trim() !== "" ||
-        userInfo.bio.trim() !== ""
+        userInfo.bio.trim() !== "" ||
+        image !== null
       ) {
         const updateUser = new Parse.User();
         updateUser.set("objectId", currentUserId);
@@ -176,6 +181,11 @@ function EditProfile() {
         userInfo.lastName.trim() !== "" &&
           updateUser.set("lastName", userInfo.lastName);
         userInfo.bio.trim() !== "" && updateUser.set("bio", userInfo.bio);
+        if (image !== null){
+          const userImage = new Parse.File(image.name, image);
+          await userImage.save();
+          updateUser.set("Image", userImage);
+        }
         try {
           await updateUser.save();
         } catch (error) {
@@ -225,6 +235,13 @@ function EditProfile() {
           labelText={"Last Name"}
           placeholder={"Modify your Last Name"}
           onChange={handleLastName}
+        ></DefaultInputField>
+        
+        <DefaultInputField
+          type={"file"}
+          labelText={"Profile Picture"}
+          placeholder={"Upload your image"}
+          onChange={handleImage}
         ></DefaultInputField>
 
         <DefaultInputField
