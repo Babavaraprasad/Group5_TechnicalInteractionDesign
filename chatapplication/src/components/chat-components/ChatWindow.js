@@ -40,6 +40,8 @@ export const ChatWindow = ({
                         const newMessage = ConvertResultToMessage(message);
                         //setMessages(previousMessages => [...previousMessages, newMessage]); //the variable messages is an array and we add the element message to it. But we are not able to display those changes. setMessages helps us to see these changes
                         setMessages(previousMessages => {const newMessages = [...previousMessages, newMessage]; return newMessages;})
+
+                        console.log(newMessage);
                     });
 
                     setNewMessageSubscription(subscription);
