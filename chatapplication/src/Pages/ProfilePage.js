@@ -99,27 +99,27 @@ useEffect(()=>{
   // Fetching data from Skills class
   //const skillQuery = new Parse.Query("Skills");
   skillQuery.equalTo("User_ID", student.toPointer());
-  const skill = await skillQuery.first();
+  const userSkill = await skillQuery.first();
   //console.log(skill);
-  skill && setSkill([
-    skill.get("Front_end_development")
-      ? skill.get("Front_end_development")
+  userSkill && setSkill([
+    userSkill.get("Front_end_development")
+      ? userSkill.get("Front_end_development")
       : "0",
-    skill.get("Backend_development")
-      ? skill.get("Backend_development")
+    userSkill.get("Backend_development")
+      ? userSkill.get("Backend_development")
       : "0",
-    skill.get("python") ? skill.get("python") : "0",
-    skill.get("Design") ? skill.get("Design") : "0",
-    skill.get("Business_Analytics")
-      ? skill.get("Business_Analytics")
+    userSkill.get("python") ? userSkill.get("python") : "0",
+    userSkill.get("Design") ? userSkill.get("Design") : "0",
+    userSkill.get("Business_Analytics")
+      ? userSkill.get("Business_Analytics")
       : "0",
-    skill.get("CloudArchitecture") ? skill.get("CloudArchitecture") : "0",
-    skill.get("ProductManagement") ? skill.get("ProductManagement") : "0",
-    skill.get("ScrumMaster") ? skill.get("ScrumMaster") : "0",
-    skill.get("InformationSecurity")
-      ? skill.get("InformationSecurity")
+    userSkill.get("CloudArchitecture") ? userSkill.get("CloudArchitecture") : "0",
+    userSkill.get("ProductManagement") ? userSkill.get("ProductManagement") : "0",
+    userSkill.get("ScrumMaster") ? userSkill.get("ScrumMaster") : "0",
+    userSkill.get("InformationSecurity")
+      ? userSkill.get("InformationSecurity")
       : "0",
-    skill.get("Research") ? skill.get("Research") : "0",
+    userSkill.get("Research") ? userSkill.get("Research") : "0",
   ]);
 
   //skillQuery.equalTo("User_ID", studentid.toPointer());
