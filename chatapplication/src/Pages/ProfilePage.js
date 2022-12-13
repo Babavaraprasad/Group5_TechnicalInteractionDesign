@@ -24,70 +24,77 @@ import Parse from "parse/dist/parse.min.js";
 
 // https://blog.back4app.com/building-a-real-time-react-application-with-parse/ 
 
+
 export default function ProfilePage() {
 
   const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:"",image:""});
   const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
-
-  // const location=useLocation();
-  // const useriddata2=location.state.data.currentUser2;
-  // console.log(useriddata2);
+  const [skillData, fetchSkillData]=useState({Front_end_development:"",Business_analytics:"",CloudArchitecture:"",InformationSecurity:"",Backend_development:"",ProductManagement:"",Research:"",python:"",ScrumMaster:"",Design:"",})
 
   const navigate=useNavigate();
 
 useEffect(()=>{
-  async function fetchusername()
+  async function fetchuserdata()
   {
-    //const currentname = new Parse.User({ id: useriddata2 });
-   // const parsequery=new Parse.Query("User");
-    //parsequery.get("objectId", useriddata2);
-    //let done=await currentname.find();
-   // const firstname=currentname.get("firstName",currentname.firstName);
-   const currentuser= await Parse.User.current();
+  // Creating the Parse query
    const query = new Parse.Query("User");
-   try{//const student=await query.equalTo("objectId", currentuser.id);
-  //console.log(student);
-  const student=await query.get(currentuser.id);
-  const studentFirstname=student.get("firstName");
-  const studentLastname=student.get("lastName");
-  const studentEmail=student.get("email");
-  const studentBiodata=student.get("bio");
-  const studentAge=student.get("Age");
-  const studentImage=student.get("Image") // not working yet
+   const courseQuery = new Parse.Query("Course");
+   const skillQuery = new Parse.Query("Skills");
+
+   const currentuser= await Parse.User.current();
+  //  const studentid = await query.get(currentuser.id);
+  //  console.log(studentid);
+
+   try{
+  const studentid=await query.get(currentuser.id);
+  // Fetching data from User class
+  const studentFirstname=studentid.get("firstName");
+  const studentLastname=studentid.get("lastName");
+  const studentEmail=studentid.get("email");
+  const studentBiodata=studentid.get("bio");
+  const studentAge=studentid.get("Age");
+  const studentImage=studentid.get("Image")._url; // not working yet
   fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
-  /*const course= new Parse.Query("Course");
-  const academicInfo=await course.equalTo("User_ID", currentuser.id);
-  let isbdQueryResult = await academicInfo.first();
-  console.log(isbdQueryResult);
-  const studentHomeuniversity=academicInfo.get("Home_university");
-  console.log(studentHomeuniversity);
-  const studentHomeuniversityDegree=academicInfo.get("Home_university_degree");
-  const studentGuestuniversityCourse=academicInfo.get("Guest_uni_course");
-  fetchStudyInfo({HomeUniversity:studentHomeuniversity,StudyProgram:studentHomeuniversityDegree,ITUcourse:studentGuestuniversityCourse});
-  */
+  // Fetching data from Course class
+  
+  courseQuery.equalTo("User_ID", studentid.toPointer());
+  const course = await courseQuery.first();
+  // fetchStudyInfo(studyinfo);
+  // console.log(course.get("Home_university"));
+  const studentHomeUniversity=course.get("Home_university");
+  const studentStudyProgram=course.get("Home_university_degree");
+  const studentGuestUniCourse=course.get("Guest_uni_course");
+  fetchStudyInfo({HomeUniversity:studentHomeUniversity,StudyProgram:studentStudyProgram,ITUcourse:studentGuestUniCourse});
+
+  // Fetching data from Skills class
+  skillQuery.equalTo("User_ID", studentid.toPointer());
+  const skill = await skillQuery.first();
+  const studentFront=skill.get("Front_end_development");
+  fetchSkillData({Front_end_development:studentFront});
 }
   catch(error)
   {alert(`Failed to retrieve the object, with error code: ${error.message}`);}
   };
- fetchusername();
+ fetchuserdata();
 },[]);
-  
+
   return (
-    <div className="profile--page">
-      <div className="profile--page--layout">
-        <div className="profile--avatar--bio">
+    <div className="profile--main--container">
+      <div className="profile--leftcontainer">
+        <div className="profile--leftcontainer--userinformation">
           <UserAvatar
             onClick={() => {
               console.log("You clicked on me!");
             }}
             avatarSize="size250"
             statusIcon="icon--for--size250"
-            imgUrl={avartarImg}
+            imgUrl={studentData.image}
           ></UserAvatar>
-          <p>{`${studentData.fname} ${studentData.lastname}`}</p>
+          <p><b>{studentData.fname} {studentData.lastname}</b></p>
+          <p><b>{studyinfo.ITUcourse}</b></p>
           <p>{studentData.bio}</p>
           
-          <div className="profile--controls">
+          <div className="profile--leftcontainer--pagecontrols">
           <Button
             onClick={() => {
               navigate("/chat");
@@ -119,28 +126,27 @@ useEffect(()=>{
           </Button>
           </div>
         </div>
+      </div>
+      <div classname="profile--rightcontainer">
+          <div className="profile--rightcontainer--studyinformation">
+            <h1>Study Information 🎓</h1>
+            <p>Home University: {studyinfo.HomeUniversity}</p>
+            <p>Study Program: {studyinfo.StudyProgram}</p>
+            <p>Course at ITU: {studyinfo.ITUcourse}</p>
+          </div>
 
-        <div className="profile--info">
-          <div className="personal--info">
-            <h1>Personal Information 🧑</h1>
-            <h5 >Name : {`${studentData.fname} ${studentData.lastname}`}</h5>
-            <h5>Age : {studentData.age}</h5>
-            <h5>Academic Skills</h5>
+          <div className="profile--rightcontainer--personalinformation">
+            <h1>Skills 🧩</h1>
+            {/* <p>Name : {`${studentData.fname} ${studentData.lastname}`}</p> */}
+            {/* <p>Age : {studentData.age}</p> */}
+            {/* <h5>Skills</h5> */}
             <div className="skill--section">
-              <AcademicSkill skillName="Programming" skillRating="4"></AcademicSkill>
+              <AcademicSkill skillName="Programming" skillRating={skillData.Front_end_development}></AcademicSkill>
               <AcademicSkill skillName="Graphic Design" skillRating="4"></AcademicSkill>
               <AcademicSkill skillName="Project Management" skillRating="3"></AcademicSkill>
             </div>
           </div>
-
-          <div className="study--info">
-            <h1>Study Information 🎓</h1>
-            <h5>Home University</h5>
-            <h5>Study Program</h5>
-            <h5>Course at ITU</h5>
-          </div>
-          </div>
-        </div>
       </div>
+    </div>
     );
 }
