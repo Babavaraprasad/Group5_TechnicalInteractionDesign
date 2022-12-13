@@ -29,7 +29,7 @@ export const UserAvatar = ({
     return (
          <div 
             className={`avatar ${checkAvatarSize}`} 
-            onClick={onClick} imgUrl={imgUrl}>
+            onClick={onClick}>
                 <img src={`${imgUrl}`} className={`${checkAvatarSize}`}/>
                 <p className={`icon ${checkStatusIcon}`}></p>
          </div>  
