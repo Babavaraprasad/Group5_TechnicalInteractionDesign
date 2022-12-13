@@ -101,7 +101,7 @@ useEffect(()=>{
   skillQuery.equalTo("User_ID", student.toPointer());
   const skill = await skillQuery.first();
   //console.log(skill);
-  setSkill([
+  skill && setSkill([
     skill.get("Front_end_development")
       ? skill.get("Front_end_development")
       : "0",
