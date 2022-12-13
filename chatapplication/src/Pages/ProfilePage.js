@@ -53,7 +53,11 @@ useEffect(()=>{
   const studentEmail=studentid.get("email");
   const studentBiodata=studentid.get("bio");
   const studentAge=studentid.get("Age");
-  const studentImage=studentid.get("Image")._url; // not working yet
+  let studentImage = '';
+  if (studentid.get("Image")){
+     studentImage=studentid.get("Image")._url} else{
+      studentImage = avartarImg;
+    }; // not working yet
   fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
   // Fetching data from Course class
   
@@ -127,7 +131,7 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-      <div classname="profile--rightcontainer">
+      <div className="profile--rightcontainer">
           <div className="profile--rightcontainer--studyinformation">
             <h1>Study Information 🎓</h1>
             <p>Home University: {studyinfo.HomeUniversity}</p>
