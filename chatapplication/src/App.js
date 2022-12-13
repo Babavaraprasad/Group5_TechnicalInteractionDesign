@@ -31,6 +31,7 @@ function App() {
       <Route exact path="/registration/popup" element={<PopUp />} />
       <Route exact path="/profile/edit" element={<EditProfile/>} />
       <Route exact path="/sendmessage" element={<SendMessage/>} />
+      <Route exact path="/profile/:userId" element={<ProfilePage />} />
     </Routes>
   </BrowserRouter>
   );

@@ -6,7 +6,7 @@ import avartarImg from "../images/main-avatar-image.png";
 import { AcademicSkill } from '../components/AcademicSkill';
 import { useContext ,createContext,useState, useEffect} from "react";
 import usernameContext from "../components/UsernameContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 //import Parse, { User } from "parse";
 import Parse from "parse/dist/parse.min.js";
 
@@ -25,10 +25,11 @@ import Parse from "parse/dist/parse.min.js";
 // https://blog.back4app.com/building-a-real-time-react-application-with-parse/ 
 
 export default function ProfilePage() {
-
+  const userId = useParams().userId;
+  console.log(userId);
   const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:"",image:""});
   const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
-
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
   // const location=useLocation();
   // const useriddata2=location.state.data.currentUser2;
   // console.log(useriddata2);
@@ -47,7 +48,14 @@ useEffect(()=>{
    const query = new Parse.Query("User");
    try{//const student=await query.equalTo("objectId", currentuser.id);
   //console.log(student);
-  const student=await query.get(currentuser.id);
+  let student;
+  if(userId === currentuser.id || userId === undefined){
+    setIsCurrentUser(true);
+    student=await query.get(currentuser.id);
+  } else {
+    student=await query.get(userId);
+  }
+  console.log(isCurrentUser);
   const studentFirstname=student.get("firstName");
   const studentLastname=student.get("lastName");
   const studentEmail=student.get("email");
@@ -98,6 +106,7 @@ useEffect(()=>{
             To Chatroom
           </Button>
 
+          {isCurrentUser &&
           <Button
             onClick={() => {
               navigate("/profile/edit");
@@ -106,8 +115,9 @@ useEffect(()=>{
             buttonSize="btn--width120--height50"
           >
             Edit Profile
-          </Button>
+          </Button>}
 
+          {isCurrentUser &&
           <Button
             onClick={() => {
               navigate("/");
@@ -116,7 +126,7 @@ useEffect(()=>{
             buttonSize="btn--width120--height50"
           >
             Logout
-          </Button>
+          </Button>}
           </div>
         </div>
 

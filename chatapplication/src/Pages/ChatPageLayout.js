@@ -4,7 +4,6 @@ import { ChatInbox } from "../components/ChatInbox";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
-import { useNavigate } from "react-router-dom";
 import { SearchChat } from "../components/chat-components/SearchChat";
 import SendMessage from "../components/SendMessage/SendMessage";
 
@@ -13,8 +12,6 @@ export const ChatPageLayout = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
   const [newChatWith, setNewChatWith] = useState(null);
-
-  const navigate = useNavigate();
 
   //codes partially from https://github.com/templates-back4app/react-js-slack-clone/blob/main/src/Home.js
   useEffect(() => {
@@ -54,12 +51,7 @@ export const ChatPageLayout = () => {
     <div className="main--container">
       <div className="left-container">
         <div className="user-card">
-          <UserChatProfile
-            userId={currentUser}
-            onClick={() => {
-              navigate("/profile");
-            }}
-          />
+          <UserChatProfile userId={currentUser} />
         </div>
         <SearchChat
           className="search-area-wrapper"
@@ -80,9 +72,7 @@ export const ChatPageLayout = () => {
 
       <div className="right--container">
         <div className="sender-card">
-          {contactInfo !== null &&(
-            <UserChatProfile userId={contactInfo} />
-          )}
+          {contactInfo !== null && <UserChatProfile userId={contactInfo} />}
         </div>
         {currentChat !== null && (
           //console.log(currentChat.id),

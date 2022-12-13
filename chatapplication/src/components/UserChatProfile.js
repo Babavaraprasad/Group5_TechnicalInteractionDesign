@@ -3,12 +3,14 @@ import Parse from "parse/dist/parse.min.js";
 import React, { useState, useEffect } from "react";
 import { UserAvatar } from "../components/UserAvatar";
 import avartarImg from "../images/main-avatar-image.png";
+import { useNavigate } from "react-router-dom";
 
-export const UserChatProfile = ({ userId, onClick }) => {
+export const UserChatProfile = ({ userId }) => {
   // State variables
   const [person, setPerson] = useState(null);
   const [school, SetSchool] = useState(null);
   const [group, setGroup] = useState(null);
+  const navigate = useNavigate();
 
   function toUserObject(user) {
     return {
@@ -69,13 +71,14 @@ export const UserChatProfile = ({ userId, onClick }) => {
   }, [userId]);
 
   return (
-    <div onClick={onClick}>
+    <div>
       {person !== null && person !== undefined && (
         <div className="user-info">
           <UserAvatar
             avatarSize="size52"
             statusIcon="icon--off"
             imgUrl={person.userImage}
+            onClick={()=> navigate(`/profile/${person.userId}`)}
           ></UserAvatar>
 
           <div className="user-sort-info">
