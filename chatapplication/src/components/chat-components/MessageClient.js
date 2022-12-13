@@ -2,7 +2,7 @@ import Parse from "parse/dist/parse.min.js";
 
 function GetChatSubscription(chatId) {
     const parseApplicationId ='gvIXi223QYLFMqdL8dMAd8yRUptGZkDjKkCOf7bk';
-    const serverUrl ='wss://group5tid.b4a.io';//'wss://senditgroup5.b4a.io' previous project subdomainn
+    const serverUrl ='wss://senditgroup5.b4a.io';//'wss://senditgroup5.b4a.io' 'wss://group5tid.b4a.io'
     const parseJsKey ='SRsW7tBVQHEDAlOlS2xBqwy6vaFRndgcBUlF5G4Z';
 
     const client = new Parse.LiveQueryClient({
