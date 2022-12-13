@@ -5,10 +5,12 @@ import "./button.css";
 //Button size refers to the width and height of the button
 const STYLES = [
   "btn--default", 
-  "btn--white"];
+  "btn--white",
+  "btn--red"];
 const SIZES = [
   "btn--width170--height60",
   "btn--width230--height50",
+  "btn--width250--height50",
   "btn--width195--height50",
   "btn--width120--height50",
   "btn--width140--height40",

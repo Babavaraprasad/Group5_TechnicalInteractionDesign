@@ -83,7 +83,7 @@ useEffect(()=>{
   if (student.get("Image")){
      studentImage=student.get("Image")._url} else{
       studentImage = avartarImg;
-    }; // not working yet
+    };
   fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
   // Fetching data from Course class
   
@@ -155,7 +155,7 @@ useEffect(()=>{
               navigate("/chat");
             }}
             type="button"
-            buttonSize="btn--width120--height50"
+            buttonSize="btn--width250--height50"
           >
             To Chatroom
           </Button>
@@ -166,7 +166,8 @@ useEffect(()=>{
                 navigate("/profile/edit");
               }}
               type="button"
-              buttonSize="btn--width120--height50"
+              buttonStyle="btn--white"
+              buttonSize="btn--width250--height50"
             >
               Edit Profile
             </Button>}
@@ -177,7 +178,8 @@ useEffect(()=>{
                 navigate("/");
               }}
               type="button"
-              buttonSize="btn--width120--height50"
+              buttonSize="btn--width250--height50"
+              buttonStyle="btn--red"
             >
               Logout
             </Button>}
@@ -192,7 +194,7 @@ useEffect(()=>{
             <p>Course at ITU: {studyinfo.ITUcourse}</p>
           </div>
 
-          <div className="profile--rightcontainer--personalinformation">
+          <div className="profile--rightcontainer--skills">
             <h1>Skills 🧩</h1>
             {/* <p>Name : {`${studentData.fname} ${studentData.lastname}`}</p> */}
             {/* <p>Age : {studentData.age}</p> */}

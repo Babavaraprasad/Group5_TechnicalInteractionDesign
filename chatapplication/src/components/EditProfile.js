@@ -291,6 +291,7 @@ function EditProfile() {
           onChange={handleBio}
         ></LargeInputField>
 
+        <div className="pagecontrols">
         <Button
           type="button"
           buttonSize="btn--width140--height40"
@@ -303,12 +304,14 @@ function EditProfile() {
         <Button
           type="button"
           buttonSize="btn--width140--height40"
+          buttonStyle="btn--white"
           onClick={() => {
             navigate("/profile");
           }}
         >
           Cancel
         </Button>
+        </div>
       </form>
     </div>
   );
