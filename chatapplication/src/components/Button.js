@@ -29,7 +29,6 @@ export const Button = ({
     ? buttonSize 
     : SIZES[0];
   return (
-    <div className="default-button-container">
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
@@ -37,7 +36,6 @@ export const Button = ({
       >
         {children}
       </button>
-    </div>
   );
 };
 

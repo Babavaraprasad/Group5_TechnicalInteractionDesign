@@ -24,6 +24,7 @@ import Parse from "parse/dist/parse.min.js";
 
 // https://blog.back4app.com/building-a-real-time-react-application-with-parse/
 
+
 export default function ProfilePage() {
   const skillSet = [
     "Front-end Development",
@@ -37,28 +38,19 @@ export default function ProfilePage() {
     "Information Security",
     "Research",
   ];
-  const [studentData, fetchData] = useState({
-    fname: "",
-    lastname: "",
-    email: "",
-    bio: "",
-    age: "",
-    image: "",
-  });
-  const [studyinfo, fetchStudyInfo] = useState({
-    HomeUniversity: "",
-    StudyProgram: "",
-    ITUcourse: "",
-  });
   const [skill, setSkill] = useState(null);
-  console.log(skill);
 
   // const location=useLocation();
   // const useriddata2=location.state.data.currentUser2;
   // console.log(useriddata2);
 
+  const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:"",image:""});
+  const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
+  //const [skillData, fetchSkillData]=useState({Front_end_development:"",Business_analytics:"",CloudArchitecture:"",InformationSecurity:"",Backend_development:"",ProductManagement:"",Research:"",python:"",ScrumMaster:"",Design:"",})
+
   const navigate = useNavigate();
 
+  /*
   useEffect(() => {
     async function fetchusername() {
       //const currentname = new Parse.User({ id: useriddata2 });
@@ -95,32 +87,9 @@ export default function ProfilePage() {
   const studentHomeuniversityDegree=academicInfo.get("Home_university_degree");
   const studentGuestuniversityCourse=academicInfo.get("Guest_uni_course");
   fetchStudyInfo({HomeUniversity:studentHomeuniversity,StudyProgram:studentHomeuniversityDegree,ITUcourse:studentGuestuniversityCourse});
-  */
+  
 
-        const skillQuery = new Parse.Query("Skills");
-        skillQuery.equalTo("User_ID", currentuser.toPointer());
-        const skill = await skillQuery.first();
-        //console.log(skill);
-        setSkill([
-          skill.get("Front_end_development")
-            ? skill.get("Front_end_development")
-            : "0",
-          skill.get("Backedn_development")
-            ? skill.get("Backedn_development")
-            : "0",
-          skill.get("python") ? skill.get("python") : "0",
-          skill.get("Design") ? skill.get("Design") : "0",
-          skill.get("Business_Analytics")
-            ? skill.get("Business_Analytics")
-            : "0",
-          skill.get("CloudArchitecture") ? skill.get("CloudArchitecture") : "0",
-          skill.get("ProductManagement") ? skill.get("ProductManagement") : "0",
-          skill.get("ScrumMaster") ? skill.get("ScrumMaster") : "0",
-          skill.get("InformationSecurity")
-            ? skill.get("InformationSecurity")
-            : "0",
-          skill.get("Research") ? skill.get("Research") : "0",
-        ]);
+        
       } catch (error) {
         alert(
           `Failed to retrieve the object, with error code: ${error.message}`
@@ -129,32 +98,107 @@ export default function ProfilePage() {
     }
     fetchusername();
   }, []);
+  */
+useEffect(()=>{
+  async function fetchuserdata()
+  {
+  // Creating the Parse query
+   const query = new Parse.Query("User");
+   const courseQuery = new Parse.Query("Course");
+   const skillQuery = new Parse.Query("Skills");
+
+   const currentuser= await Parse.User.current();
+  //  const studentid = await query.get(currentuser.id);
+  //  console.log(studentid);
+
+   try{
+  const studentid=await query.get(currentuser.id);
+  // Fetching data from User class
+  const studentFirstname=studentid.get("firstName");
+  const studentLastname=studentid.get("lastName");
+  const studentEmail=studentid.get("email");
+  const studentBiodata=studentid.get("bio");
+  const studentAge=studentid.get("Age");
+  let studentImage = '';
+  if (studentid.get("Image")){
+     studentImage=studentid.get("Image")._url} else{
+      studentImage = avartarImg;
+    }; // not working yet
+  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
+  // Fetching data from Course class
+  
+  courseQuery.equalTo("User_ID", studentid.toPointer());
+  const course = await courseQuery.first();
+  // fetchStudyInfo(studyinfo);
+  // console.log(course.get("Home_university"));
+  const studentHomeUniversity=course.get("Home_university");
+  const studentStudyProgram=course.get("Home_university_degree");
+  const studentGuestUniCourse=course.get("Guest_uni_course");
+  fetchStudyInfo({HomeUniversity:studentHomeUniversity,StudyProgram:studentStudyProgram,ITUcourse:studentGuestUniCourse});
+
+  // Fetching data from Skills class
+  //const skillQuery = new Parse.Query("Skills");
+  skillQuery.equalTo("User_ID", currentuser.toPointer());
+  const skill = await skillQuery.first();
+  //console.log(skill);
+  setSkill([
+    skill.get("Front_end_development")
+      ? skill.get("Front_end_development")
+      : "0",
+    skill.get("Backend_development")
+      ? skill.get("Backend_development")
+      : "0",
+    skill.get("python") ? skill.get("python") : "0",
+    skill.get("Design") ? skill.get("Design") : "0",
+    skill.get("Business_Analytics")
+      ? skill.get("Business_Analytics")
+      : "0",
+    skill.get("CloudArchitecture") ? skill.get("CloudArchitecture") : "0",
+    skill.get("ProductManagement") ? skill.get("ProductManagement") : "0",
+    skill.get("ScrumMaster") ? skill.get("ScrumMaster") : "0",
+    skill.get("InformationSecurity")
+      ? skill.get("InformationSecurity")
+      : "0",
+    skill.get("Research") ? skill.get("Research") : "0",
+  ]);
+
+  //skillQuery.equalTo("User_ID", studentid.toPointer());
+  //const skill = await skillQuery.first();
+  //const studentFront=skill.get("Front_end_development");
+  //fetchSkillData({Front_end_development:studentFront});
+}
+  catch(error)
+  {alert(`Failed to retrieve the object, with error code: ${error.message}`);}
+  };
+ fetchuserdata();
+},[]);
 
   return (
-    <div className="profile--page">
-      <div className="profile--page--layout">
-        <div className="profile--avatar--bio">
+    <div className="profile--main--container">
+      <div className="profile--leftcontainer">
+        <div className="profile--leftcontainer--userinformation">
           <UserAvatar
             onClick={() => {
               console.log("You clicked on me!");
             }}
             avatarSize="size250"
             statusIcon="icon--for--size250"
-            imgUrl={avartarImg}
+            imgUrl={studentData.image}
           ></UserAvatar>
-          <p>{`${studentData.fname} ${studentData.lastname}`}</p>
+          <p><b>{studentData.fname} {studentData.lastname}</b></p>
+          <p><b>{studyinfo.ITUcourse}</b></p>
           <p>{studentData.bio}</p>
-
-          <div className="profile--controls">
-            <Button
-              onClick={() => {
-                navigate("/chat");
-              }}
-              type="button"
-              buttonSize="btn--width120--height50"
-            >
-              To Chatroom
-            </Button>
+          
+          <div className="profile--leftcontainer--pagecontrols">
+          <Button
+            onClick={() => {
+              navigate("/chat");
+            }}
+            type="button"
+            buttonSize="btn--width120--height50"
+          >
+            To Chatroom
+          </Button>
 
             <Button
               onClick={() => {
@@ -177,15 +221,22 @@ export default function ProfilePage() {
             </Button>
           </div>
         </div>
+      </div>
+      <div className="profile--rightcontainer">
+          <div className="profile--rightcontainer--studyinformation">
+            <h1>Study Information 🎓</h1>
+            <p>Home University: {studyinfo.HomeUniversity}</p>
+            <p>Study Program: {studyinfo.StudyProgram}</p>
+            <p>Course at ITU: {studyinfo.ITUcourse}</p>
+          </div>
 
-        <div className="profile--info">
-          <div className="personal--info">
-            <h1>Personal Information 🧑</h1>
-            <h5>Name : {`${studentData.fname} ${studentData.lastname}`}</h5>
-            <h5>Age : {studentData.age}</h5>
-            <h5>Academic Skills</h5>
+          <div className="profile--rightcontainer--personalinformation">
+            <h1>Skills 🧩</h1>
+            {/* <p>Name : {`${studentData.fname} ${studentData.lastname}`}</p> */}
+            {/* <p>Age : {studentData.age}</p> */}
+            {/* <h5>Skills</h5> */}
             <div className="skill--section">
-              {skill !== null &&
+            {skill !== null &&
                 skill.map((data, index) => {
                   if (data !== "0") {
                     return (
@@ -199,17 +250,9 @@ export default function ProfilePage() {
                 })}
             </div>
           </div>
-
-          <div className="study--info">
-            <h1>Study Information 🎓</h1>
-            <h5>Home University</h5>
-            <h5>Study Program</h5>
-            <h5>Course at ITU</h5>
-          </div>
-        </div>
       </div>
     </div>
-  );
+    );
 }
 /*
 

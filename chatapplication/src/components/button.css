@@ -1,7 +1,6 @@
 @import "palette.css";
 .default-button-container{
   display: flex;
-  justify-content: center;
 }
 .btn {
   border-radius: 8px;

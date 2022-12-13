@@ -115,7 +115,7 @@ function LoginPage() {
     
     <div className="clipart-and-card">
     
-      <ClipArt className="clipart-1" imgUrl={"clipart1.png"}></ClipArt>
+      <ClipArt width={"250px"} height={"auto"} imgUrl={"clipart1.png"}></ClipArt>
      
    <div>
     <div className="card-container">
@@ -136,9 +136,13 @@ function LoginPage() {
             error={formState.passwordError}
           ></DefaultInputField>
           <a>Forgot your password?</a>
-          <Button type="submit" buttonSize="btn--width140--height40">
-            Login
-          </Button>
+          <div className="button-login-container">
+            <Button 
+              type="submit" 
+              buttonSize="btn--width140--height40">
+              Login
+            </Button>
+          </div>
         </form>
 
         <div className="vertical-line"></div>
@@ -147,6 +151,7 @@ function LoginPage() {
           <div className="title">New here?</div>
           <p>{StaticTextNewhere}</p>
           <p>{SignupContent}</p>
+          <div className="go-to-register-button-container">
           <Link to="/registration">
             <Button
               id="button-id"
@@ -158,17 +163,18 @@ function LoginPage() {
             </Button>
           </Link>
         </div>
+        </div>
       </div>
     </div>
     </div>
 
-        <ClipArt className="clipart-2" imgUrl={"clipart3.png"}></ClipArt>
+        <ClipArt  width={"350px"} height={"auto"} imgUrl={"clipart3.png"}></ClipArt>
     
         
     </div>
 
       <div className="clipart-3-container">
-        <ClipArt className="clipart-3" imgUrl={"clipart2.jpg"}></ClipArt>
+        <ClipArt  width={"350px"} height={"auto"} imgUrl={"clipart2.jpg"}></ClipArt>
       </div>
 
   </div>
