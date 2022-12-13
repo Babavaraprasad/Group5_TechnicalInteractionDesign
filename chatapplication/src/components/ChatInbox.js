@@ -66,21 +66,27 @@ export const ChatInbox = ({
 
         setqueryChat(chatObjects);
 
-        let isExisting;
-        //!!error provention for same user in the group with loggedInUser
-        chatObjects !== null &&
-          chatObjects.map((data) => {
-            if (data.groupName === undefined) {
-              data.users.forEach((user) => {
-                if (newChatwith !== null) {
-                  if (user.userId === newChatwith.id) {
-                    //jump to the existing chat
+        let isIndividExisting;
+        let isGroupExisting;
 
-                    toggleChat(data.id);
-                    selectChatCallback(data);
-                    contactInfoCallback(checkUser(data));
-                    return (isExisting = true);
-                  }
+        chatObjects !== null &&
+          newChatwith !== null &&
+          chatObjects.map((data) => {
+            if (data.groupName !== undefined) {
+              if (data.id === newChatwith.id) {
+                toggleChat(data.id);
+                selectChatCallback(data);
+                contactInfoCallback(checkUser(data));
+                return (isGroupExisting = true);
+              }
+            } else {
+              data.users.forEach((user) => {
+                if (user.userId === newChatwith.id) {
+                  //jump to the existing chat
+                  toggleChat(data.id);
+                  selectChatCallback(data);
+                  contactInfoCallback(checkUser(data));
+                  return (isIndividExisting = true);
                 }
               });
             }
@@ -102,8 +108,6 @@ export const ChatInbox = ({
             toggleChat(theNewChatObject.id);
             selectChatCallback(theNewChatObject);
             contactInfoCallback(checkUser(theNewChatObject));
-            //console.log(theNewChat);
-
             return true;
           } catch (error) {
             alert(`Error!${error.message}`);
@@ -111,10 +115,39 @@ export const ChatInbox = ({
           }
         };
 
-        isExisting !== null &&
-          isExisting !== true &&
-          newChatwith !== null &&
+        //join the group
+        const joinGroupChat = async (group) => {
+          const chatQuery = new Parse.Query("Chat");
+          chatQuery.equalTo("objectId", group.id);
+          chatQuery.includeAll();
+          let chat = await chatQuery.first();
+          let userRelation = chat.relation("user_id");
+          userRelation.add(currentUser);
+          try {
+            await chat.save();
+            chat.UsersObjects = await userRelation.query().find();
+            const theGroupObject = toChatObject(chat);
+            setqueryChat([...queryChat, theGroupObject]);
+            //jump to the new group directly
+            toggleChat(theGroupObject.id);
+            selectChatCallback(theGroupObject);
+            contactInfoCallback(checkUser(theGroupObject));
+            return true;
+          } catch (error) {
+            alert(`Error!${error.message}`);
+            return false;
+          }
+        };
+
+        newChatwith !== null &&
+          isIndividExisting !== true &&
+          newChatwith.className === "_User" &&
           startNewChat(newChatwith);
+
+        newChatwith !== null &&
+          isGroupExisting !== true &&
+          newChatwith.className === "Chat" &&
+          joinGroupChat(newChatwith);
       } catch (error) {
         alert(`Error!${error.message}`);
         return false;
