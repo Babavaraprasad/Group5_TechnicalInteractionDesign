@@ -15,6 +15,13 @@ function SendMessage(props) {
   const userid = props.loggedInUserId;
   let date1 = new Date();
 
+  async function handleEnter(event) {
+    if (event.key === "Enter") {
+      await insertdataintoMessage();
+    }
+  }
+
+
   async function insertdataintoMessage() {
     if (message !== "") {
       let Message = new Parse.Object("Message");
@@ -34,7 +41,8 @@ function SendMessage(props) {
 
       senderNicknameObject.set("last_message", Message.toPointer());
       senderNicknameObject.save();
-  
+      
+      updateMessage("");
     }
   }
  
@@ -44,6 +52,8 @@ function SendMessage(props) {
         type="text"
         placeholder={"send this message"}
         onChange={setMessagecontent}
+        value={message}
+        onKeyDown={handleEnter}
       ></DefaultInputField>
       <button
         className="btn--width70--height40"

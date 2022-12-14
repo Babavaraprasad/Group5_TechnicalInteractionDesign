@@ -18,6 +18,18 @@ function CreateChatRow(message, loggedInUserId) {
     );
 }
 
+function insertIfNotExists(message, messages) {
+    for(let i = 0; i < messages.length; i++) {
+        if (message.messageId === messages[i].messageId) {
+            return messages;
+        }
+    }
+    const newMessages = [...messages, message]; 
+    
+    return newMessages;
+
+}
+
 export const ChatWindow = ({
   chatId,
   loggedInUserId
@@ -29,6 +41,7 @@ export const ChatWindow = ({
         //show old and new messages 
         useEffect( () => {
             async function SetUpChat() {
+                //console.log('SetUpChat called!');
                 // You can await here
                     const oldMessages = await GetChatMessages(chatId, 1000);
                     setMessages(oldMessages); 
@@ -37,7 +50,10 @@ export const ChatWindow = ({
                     //everytime a new message is created in b4app, subcription.on() will be called with the message parameter
                     subscription.on('create', message => { //step 3.1 create event code taken from: https://www.back4app.com/docs/platform/parse-server-live-query-example
                         const newMessage = ConvertResultToMessage(message);
-                        setMessages(previousMessages => [...previousMessages, newMessage]); //the variable messages is an array and we add the element message to it. But we are not able to display those changes. setMessages helps us to see these changes
+                        //setMessages(previousMessages => [...previousMessages, newMessage]); //the variable messages is an array and we add the element message to it. But we are not able to display those changes. setMessages helps us to see these changes
+                        setMessages(previousMessages => insertIfNotExists(newMessage, previousMessages))
+
+                        console.log(newMessage);
                     });
 
                     setNewMessageSubscription(subscription);
