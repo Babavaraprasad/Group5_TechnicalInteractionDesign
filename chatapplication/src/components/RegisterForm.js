@@ -105,6 +105,7 @@ function RegisterForm(props) {
       //put the logic of what happens after registration inside try
       try {
         await props.registerFunction(registrationData);
+        console.log(props.success);
       } catch (error) {
         setError({ ...Error, confirmPasswordError: error.message });
       }
@@ -132,14 +133,14 @@ function RegisterForm(props) {
         ></DefaultInputField>
 
         <DefaultInputField
-          labelText={"Email"}
+          labelText={"Email*"}
           placeholder={"Please type your Email"}
           onChange={onchangeEmail}
           error={Error.emailError}
         ></DefaultInputField>
 
         <DefaultInputField
-          labelText={"Password"}
+          labelText={"Password*"}
           placeholder={"Choose your Password"}
           type={"password"}
           onChange={onchangePassword}
@@ -158,13 +159,15 @@ function RegisterForm(props) {
           Already registered? Go to <Link to="/">Login</Link>
         </div>
 
-        <Button 
-          type="button"
-          buttonSize="btn--width140--height40"
-          onClick={submitRegistration}
-        >
-          Register
-        </Button>
+        <div className="register-account-button-container">
+          <Button 
+            type="button"
+            buttonSize="btn--width140--height40"
+            onClick={submitRegistration}
+          >
+            Register
+          </Button>
+        </div>
       </form>
     </Layout>
   );

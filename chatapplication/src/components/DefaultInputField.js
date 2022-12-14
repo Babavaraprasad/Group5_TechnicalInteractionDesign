@@ -6,11 +6,14 @@ const STYLES = "default--input";
 export const DefaultInputField = ({
   type,
   onChange,
+  onKeyDown,
   inputFieldStyle,
   labelText,
   placeholder,
   error = "",
   required = false,
+  value,
+  readonly = false
 }) => {
   const checkInputFieldStyle = STYLES.includes(inputFieldStyle)
     ? inputFieldStyle
@@ -36,6 +39,9 @@ export const DefaultInputField = ({
           placeholder={placeholder}
           required={required}
           onChange={onChange}
+          value={value}
+          readOnly={readonly}
+          onKeyDown={onKeyDown}
         />
       </div>
       {ErrorComponent}

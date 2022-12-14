@@ -16,9 +16,9 @@ function starDisplay(skillRating){
 
     for(let i = 0; i < 5; i++){
         if(Number(skillRating) > i){
-            content.push(<Icon icon="ic:round-star" color="#50a161" inline={true}/>);
+            content.push(<Icon key={i} icon="ic:round-star" color="#50a161" inline={true}/>);
         } else {
-            content.push(<Icon icon="ic:round-star-border" color="#50a161" inline={true} />);
+            content.push(<Icon key={i} icon="ic:round-star-border" color="#50a161" inline={true} />);
         }
     }
 
@@ -28,7 +28,6 @@ function starDisplay(skillRating){
 
 /*
 //COMPONENT IN JSX! DON'T FORGET TO IMPORT THE COMPONENT!
-npm install --save-dev @iconify/react
 import {AcademicSkill} from '../components/AcademicSkill'
     <div>
         <AcademicSkill skillName="Python" skillRating="3"> 
