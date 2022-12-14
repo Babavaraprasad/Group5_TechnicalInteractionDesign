@@ -14,7 +14,7 @@ export const Searcharea = ({ type, searchStyle, onChange, value }) => {
         method="GET"
       >
         <img className={"search-icon"} src="searchicon.png" alt="search-icon" />
-        <input type="text" placeholder="Search..." onChange={onChange} value={value}/>
+        <input type="text" placeholder="Search by a course name" onChange={onChange} value={value}/>
       </div>
     </div>
   );

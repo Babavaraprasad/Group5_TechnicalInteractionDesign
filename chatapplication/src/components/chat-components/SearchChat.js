@@ -74,11 +74,11 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
       {search !== "" &&
       <div className="result-container">
         <ul className="result-list">
-          <p>Users:</p>
+          <p className="category">Users</p>
           {course !== null && findUserInCourse(course)}
         </ul>
         <ul className="result-list">
-        <p>Groups:</p>
+        <p className="category">Groups</p>
         {groupChat !==null && findCourseGroup(groupChat)}
         </ul>
       </div>}
