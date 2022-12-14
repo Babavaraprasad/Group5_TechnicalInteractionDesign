@@ -27,6 +27,7 @@
 
 .skill-rating{
   display: flex;
+  gap: 10px;
 }
 
 .pagecontrols {
