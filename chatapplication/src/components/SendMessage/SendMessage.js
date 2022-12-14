@@ -2,6 +2,7 @@ import { DefaultInputField } from "../DefaultInputField";
 import "./SendMessage";
 import { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
+import { Button } from "../Button";
 
 function SendMessage(props) {
   //react hook to update the message state
@@ -55,12 +56,12 @@ function SendMessage(props) {
         value={message}
         onKeyDown={handleEnter}
       ></DefaultInputField>
-      <button
-        className="btn--width70--height40"
+      <Button
+        buttonSize="btn--width100--height40"
         onClick={insertdataintoMessage}
       >
         send
-      </button>
+      </Button>
     </div>
   );
 }

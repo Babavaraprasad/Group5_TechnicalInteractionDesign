@@ -1,130 +1,80 @@
 @import "../components/palette.css";
 
-/* .profile--page{
-    margin-left: 40px;
-    display:block;
-}
-
-.profile--page--layout{
-    margin: 20px;
-    display: flex;
-    border-radius: 30px;
-}
-
-.profile--avatar--bio{
-    width: 300px;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--Secondary80);
-    border-radius: 5px;
-    padding: 20px;
-    margin-right: 40px;
-}
-
-.personal--info{
-    width: 1000px;
-    margin-bottom: 20px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--Secondary80);
-    border-radius: 5px;
-    padding: 20px;
-}
-
-.study--info{
-    width: 1000px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--Secondary80);
-    border-radius: 5px;
-    padding: 20px;
-}
-
-.profile--controls {
-    margin-top: 60px;
-}
-
-.profile--controls button{
-    margin-bottom: 20px;
-} */
-
-
 /* Improved flexbox CSS - work in progress */
 .profile--main--container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100vh;
-    /* padding: 1%; */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  /* padding: 1%; */
 }
 
 .profile--rightcontainer {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
 }
 
 .profile--leftcontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 23%;
-    height: 100%;
-    background-color: var(--Surface);
-    padding-top: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
-    margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 23%;
+  height: 100%;
+  background-color: var(--Surface);
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-right: 20px;
 }
 
 .profile--leftcontainer--userinformation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 40%;
 }
 
 .profile--leftcontainer--pagecontrols {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    /* height: 60%; */
-    padding-top: 35%;
-    /* justify-content: space-between; */
-    /* align-content: space-between; */
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* height: 60%; */
+  padding-top: 35%;
+  /* justify-content: space-between; */
+  /* align-content: space-between; */
+  gap: 10px;
 }
 
 .profile--rightcontainer--studyinformation {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    width: 100%;
-    height: 30%;
-    /* border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+  height: 30%;
+  /* border-style: solid;
     border-width: 1px;
     border-color: var(--Secondary80);
     border-radius: 5px; */
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-left: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-left: 20px;
 }
 
 .profile--rightcontainer--skills {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    width: 100%;
-    height: 40%;
-    /* border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+  height: 40%;
+  /* border-style: solid;
     border-width: 1px;
     border-color: var(--Secondary80);
     border-radius: 5px; */
-    margin-top: 20px;
-    padding-left: 20px;
+  margin-top: 20px;
+  padding-left: 20px;
 }
