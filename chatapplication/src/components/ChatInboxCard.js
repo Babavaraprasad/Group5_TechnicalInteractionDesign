@@ -1,4 +1,5 @@
 import React from "react";
+import { getTimeText } from "./chat-components/ChatBubble";
 import "./ChatInboxCard.css";
 import { UserAvatar } from "./UserAvatar";
 
@@ -17,8 +18,8 @@ export const ChatInboxCard = ({
     : MESSAGESTATUS[1];
 
   const messageTime = new Date(time);
-  const hour = messageTime.getHours();
-  const minute = messageTime.getMinutes();
+  //const hour = messageTime.getHours();
+  //const minute = messageTime.getMinutes();
   const dayOfWeek = messageTime.toLocaleString("default", { weekday: "long" });
   const dayOfMonth = messageTime.toLocaleDateString("default", {
     month: "numeric",
@@ -44,7 +45,9 @@ export const ChatInboxCard = ({
       ? `${dayOfWeek}`
       : messageTime < today
       ? `Yesterday`
-      : `${hour}:${minute}`;
+      : `${getTimeText(messageTime)}`;
+
+      
 
   return (
     <div className={`inbox--card ${checkStatus}`} onClick={onClick} avatar={avatar}>
@@ -58,8 +61,8 @@ export const ChatInboxCard = ({
       ></UserAvatar>
 
       <div className="inbox--card--content">
-        <div className={`inbox--card--name--time`}>
-          <p>{name}</p>
+        <div className="inbox--card--name--time">
+          <p className="inbox--card--name">{name}</p>
           <p className="inbox--card--time">{displayTime}</p>
         </div>
         <p className="inbox--card--message">{lastMessage}</p>

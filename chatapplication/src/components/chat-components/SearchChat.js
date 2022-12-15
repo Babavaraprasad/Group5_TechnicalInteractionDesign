@@ -34,7 +34,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
     const filterUser = data.filter((item) =>
   item.get("Guest_uni_course") !== undefined ? item.get("Guest_uni_course").toLowerCase().includes(search.toLowerCase()) : console.log()
   );
-    if(!filterUser.length) return <p>No users Found</p>
+    if(!filterUser.length) return <li className="list-item" >No users found</li>
     return filterUser.map((item, index) => (item.get("User_ID").id !== loggedInUser &&
         <li key={`${index}`} className="list-item" 
         onClick={() => {
@@ -54,7 +54,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
     const filterGroup = data.filter((item) =>
     item.get("group_name") !== undefined ? item.get("group_name").toLowerCase().includes(search.toLowerCase()) : console.log()
     );
-    if(!filterGroup.length) return <p>No Group Found</p>
+    if(!filterGroup.length) return <li className="list-item" >No group found</li>
     return filterGroup
       .map((item, index) => (
         <li key={`${index}`} className="list-item" 

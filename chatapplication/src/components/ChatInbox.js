@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import "./ChatInbox.css";
 import { ChatInboxCard } from "./ChatInboxCard";
-import avartarImg from "../images/main-avatar-image.png";
+import avatarImg from "../images/main-avatar-image.png";
+import groupAvatar from "../images/group-avatar.png";
 
 export const ChatInbox = ({
   loggedInUserId,
@@ -18,7 +19,7 @@ export const ChatInbox = ({
       firstName: user.get("firstName"),
       lastName: user.get("lastName"),
       userId: user.id,
-      userImage: user.get("Image") ? user.get("Image")._url : avartarImg,
+      userImage: user.get("Image") ? user.get("Image")._url : avatarImg,
     };
   }
 
@@ -26,13 +27,13 @@ export const ChatInbox = ({
     return {
       updatedAt: chat.get("updatedAt"),
       groupName: chat.get("group_name"),
-      groupImage: chat.get("group_image")?._url,
+      groupImage: chat.get("group_image") ? chat.get("group_image")._url : groupAvatar,
       lastMessageTimestamp: chat.get("last_message")
         ? chat.get("last_message").get("timestamp")
         : new Date(),
       lastMessageContent: chat.get("last_message")
         ? chat.get("last_message").get("content")
-        : "no contenet yet",
+        : " ",
       users: chat.UsersObjects.map(toUserObject),
       id: chat.id,
     };
@@ -43,7 +44,7 @@ export const ChatInbox = ({
       //find the current user object in the User class
       //removed previous piece code for taking the user because user was already in the if statement using this piece of code: currentUserChat.containedIn("user_id", currentUser);
       //after this change, the requests were reduced
-      const currentUser = new Parse.User({ id: loggedInUserId });
+      const currentUser = new Parse.User.current();
 
       //query the Chat class to find ones include the current user
       const currentUserChat = new Parse.Query("Chat");
