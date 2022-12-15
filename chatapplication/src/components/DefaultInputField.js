@@ -6,6 +6,7 @@ const STYLES = "default--input";
 export const DefaultInputField = ({
   type,
   onChange,
+  onKeyDown,
   inputFieldStyle,
   labelText,
   placeholder,
@@ -40,6 +41,7 @@ export const DefaultInputField = ({
           onChange={onChange}
           value={value}
           readOnly={readonly}
+          onKeyDown={onKeyDown}
         />
       </div>
       {ErrorComponent}

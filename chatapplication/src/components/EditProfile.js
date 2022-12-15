@@ -227,13 +227,13 @@ function EditProfile() {
       <form className="edit-form">
         <DefaultInputField
           labelText={"First Name"}
-          placeholder={"Modify your First Name"}
+          placeholder={"Modify your first name"}
           onChange={handleFirstName}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Last Name"}
-          placeholder={"Modify your Last Name"}
+          placeholder={"Modify your last name"}
           onChange={handleLastName}
         ></DefaultInputField>
         
@@ -246,26 +246,26 @@ function EditProfile() {
 
         <DefaultInputField
           labelText={"Home University"}
-          placeholder={"Enter your current uni name here"}
+          placeholder={"Your home university name"}
           onChange={handleHomeUni}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Study program"}
-          placeholder={"study program(eg,masters, bachelors etc)"}
+          placeholder={"Your Study program (e.g. Software Design)"}
           onChange={handleMajor}
         ></DefaultInputField>
 
         <DefaultInputField
           labelText={"Course at ITU"}
-          placeholder={"course enrolled at ITU"}
+          placeholder={"Name of the course you're taking at ITU"}
           onChange={handleCourse}
         ></DefaultInputField>
 
         <div className="skill-rating">
           <DropDown
             labelText={"Academic skill"}
-            placeholder={"Select skill from the list"}
+            placeholder={"Select a skill from the dropdown"}
             options={skillSet}
             onChange={(item) => setSelectSkill(item)}
             open={openSkill}
@@ -275,7 +275,7 @@ function EditProfile() {
 
           <DropDown
             labelText={"Skill Rating"}
-            placeholder={"Rate your skill(1-5)"}
+            placeholder={"Rate your skill (1-5)"}
             options={ratings}
             onChange={(item) => setSelectRating(item)}
             open={openRating}
@@ -286,11 +286,12 @@ function EditProfile() {
 
         <LargeInputField
           type={"text"}
-          labelText={"Describe yourself in few Words"}
-          placeholder={"Add your bio"}
+          labelText={"Add your bio"}
+          placeholder={"Describe yourself in few words"}
           onChange={handleBio}
         ></LargeInputField>
 
+        <div className="pagecontrols">
         <Button
           type="button"
           buttonSize="btn--width140--height40"
@@ -303,12 +304,14 @@ function EditProfile() {
         <Button
           type="button"
           buttonSize="btn--width140--height40"
+          buttonStyle="btn--white"
           onClick={() => {
             navigate("/profile");
           }}
         >
           Cancel
         </Button>
+        </div>
       </form>
     </div>
   );

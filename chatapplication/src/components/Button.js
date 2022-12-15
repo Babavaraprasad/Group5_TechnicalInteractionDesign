@@ -5,14 +5,16 @@ import "./button.css";
 //Button size refers to the width and height of the button
 const STYLES = [
   "btn--default", 
-  "btn--white"];
+  "btn--white",
+  "btn--red"];
 const SIZES = [
   "btn--width170--height60",
   "btn--width230--height50",
+  "btn--width250--height50",
   "btn--width195--height50",
   "btn--width120--height50",
   "btn--width140--height40",
-  "btn--width70--height40",
+  "btn--width100--height40",
 ];
 //It is not a wrapper. This pattern(children prop) allows you to put other children inside(i.e images) and has the potential of becoming a wrapper
 export const Button = ({
