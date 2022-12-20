@@ -14,7 +14,7 @@ const SIZES = [
   "btn--width195--height50",
   "btn--width120--height50",
   "btn--width140--height40",
-  "btn--width70--height40",
+  "btn--width100--height40",
 ];
 //It is not a wrapper. This pattern(children prop) allows you to put other children inside(i.e images) and has the potential of becoming a wrapper
 export const Button = ({

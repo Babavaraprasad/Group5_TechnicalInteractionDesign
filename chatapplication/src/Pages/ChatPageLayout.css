@@ -37,6 +37,7 @@
     position: absolute;
     bottom: 0;
     height: 80%;
+    overflow-y: scroll;
 }
 
 .sender-card {

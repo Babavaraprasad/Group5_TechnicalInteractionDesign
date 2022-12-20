@@ -30,7 +30,7 @@ export const ChatBubble = ({type,
 // this function gets the hours and the minutes, turns them into strings
 //and adds 0 wherever is missing because the initial form of the time is something like this: 8:9 instead of 08:09
 //Then we use a ternary to add either the AM string or the PM
-function getTimeText(time) {
+export function getTimeText(time) {
   const hours = time.getHours();
   const displayHours = hours === 12 ? 12 : hours % 12; //if time is 12 return 12, else return the remainder of hours / 12
   const displayHoursPadded = displayHours.toString().padStart(2, "0"); //3 -> 03 Reference:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart

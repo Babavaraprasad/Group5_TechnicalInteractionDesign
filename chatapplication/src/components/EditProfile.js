@@ -45,7 +45,7 @@ function EditProfile() {
     "Information Security",
     "Research",
   ];
-  const ratings = ["0", "1", "2", "3", "4", "5"];
+  const ratings = ["1", "2", "3", "4", "5"];
   const skillBackend = [
     "Front_end_development",
     "Backend_development",
@@ -65,8 +65,9 @@ function EditProfile() {
     const checkCurrentUser = async () => {
       try {
         const user = await Parse.User.current();
-        if (user.id === null || user.id === undefined) {
-          console.log("no user logged in yet!");
+        if (user === null || user === undefined) {
+          alert("Please log in first!");
+          navigate("/");
         } else {
           if (currentUserId === null) {
             setCurrentUserId(user.id);
