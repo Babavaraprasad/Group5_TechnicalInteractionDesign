@@ -50,98 +50,115 @@ export default function ProfilePage() {
 
   useEffect(() => {
     async function fetchuserdata() {
-      // Creating the Parse query
-      const query = new Parse.Query("User");
-      const courseQuery = new Parse.Query("Course");
-      const skillQuery = new Parse.Query("Skills");
-
       const currentuser = await Parse.User.current();
-      //  const studentid = await query.get(currentuser.id);
-      //  console.log(studentid);
+      if (currentuser === null || currentuser === undefined) {
+        alert("Please log in first!");
+        navigate("/");
+      } else {
+        // Creating the Parse query
+        const query = new Parse.Query("User");
+        const courseQuery = new Parse.Query("Course");
+        const skillQuery = new Parse.Query("Skills");
 
-      try {
-        //const studentid=await query.get(currentuser.id);
-        let student;
-        if (userId === currentuser.id || userId === undefined) {
-          setIsCurrentUser(true);
-          student = await query.get(currentuser.id);
-        } else {
-          student = await query.get(userId);
+        try {
+          //const studentid=await query.get(currentuser.id);
+          let student;
+          if (userId === currentuser.id || userId === undefined) {
+            setIsCurrentUser(true);
+            student = await query.get(currentuser.id);
+          } else {
+            student = await query.get(userId);
+          }
+
+          // Fetching data from User class
+          const studentFirstname = student.get("firstName");
+          const studentLastname = student.get("lastName");
+          const studentEmail = student.get("email");
+          const studentBiodata = student.get("bio");
+          const studentAge = student.get("Age");
+          let studentImage = "";
+          if (student.get("Image")) {
+            studentImage = student.get("Image")._url;
+          } else {
+            studentImage = avartarImg;
+          }
+          fetchData({
+            fname: studentFirstname,
+            lastname: studentLastname,
+            email: studentEmail,
+            bio: studentBiodata,
+            age: studentAge,
+            image: studentImage,
+          });
+          // Fetching data from Course class
+
+          courseQuery.equalTo("User_ID", student.toPointer());
+          const course = await courseQuery.first();
+          // fetchStudyInfo(studyinfo);
+          // console.log(course.get("Home_university"));
+          const studentHomeUniversity = course.get("Home_university");
+          const studentStudyProgram = course.get("Home_university_degree");
+          const studentGuestUniCourse = course.get("Guest_uni_course");
+          fetchStudyInfo({
+            HomeUniversity: studentHomeUniversity,
+            StudyProgram: studentStudyProgram,
+            ITUcourse: studentGuestUniCourse,
+          });
+
+          // Fetching data from Skills class
+          //const skillQuery = new Parse.Query("Skills");
+          skillQuery.equalTo("User_ID", student.toPointer());
+          const userSkill = await skillQuery.first();
+          //console.log(skill);
+          userSkill &&
+            setSkill([
+              userSkill.get("Front_end_development")
+                ? userSkill.get("Front_end_development")
+                : "0",
+              userSkill.get("Backend_development")
+                ? userSkill.get("Backend_development")
+                : "0",
+              userSkill.get("python") ? userSkill.get("python") : "0",
+              userSkill.get("Design") ? userSkill.get("Design") : "0",
+              userSkill.get("Business_Analytics")
+                ? userSkill.get("Business_Analytics")
+                : "0",
+              userSkill.get("CloudArchitecture")
+                ? userSkill.get("CloudArchitecture")
+                : "0",
+              userSkill.get("ProductManagement")
+                ? userSkill.get("ProductManagement")
+                : "0",
+              userSkill.get("ScrumMaster") ? userSkill.get("ScrumMaster") : "0",
+              userSkill.get("InformationSecurity")
+                ? userSkill.get("InformationSecurity")
+                : "0",
+              userSkill.get("Research") ? userSkill.get("Research") : "0",
+            ]);
+        } catch (error) {
+          alert(
+            `Failed to retrieve the object, with error code: ${error.message}`
+          );
         }
-
-        // Fetching data from User class
-        const studentFirstname = student.get("firstName");
-        const studentLastname = student.get("lastName");
-        const studentEmail = student.get("email");
-        const studentBiodata = student.get("bio");
-        const studentAge = student.get("Age");
-        let studentImage = "";
-        if (student.get("Image")) {
-          studentImage = student.get("Image")._url;
-        } else {
-          studentImage = avartarImg;
-        }
-        fetchData({
-          fname: studentFirstname,
-          lastname: studentLastname,
-          email: studentEmail,
-          bio: studentBiodata,
-          age: studentAge,
-          image: studentImage,
-        });
-        // Fetching data from Course class
-
-        courseQuery.equalTo("User_ID", student.toPointer());
-        const course = await courseQuery.first();
-        // fetchStudyInfo(studyinfo);
-        // console.log(course.get("Home_university"));
-        const studentHomeUniversity = course.get("Home_university");
-        const studentStudyProgram = course.get("Home_university_degree");
-        const studentGuestUniCourse = course.get("Guest_uni_course");
-        fetchStudyInfo({
-          HomeUniversity: studentHomeUniversity,
-          StudyProgram: studentStudyProgram,
-          ITUcourse: studentGuestUniCourse,
-        });
-
-        // Fetching data from Skills class
-        //const skillQuery = new Parse.Query("Skills");
-        skillQuery.equalTo("User_ID", student.toPointer());
-        const userSkill = await skillQuery.first();
-        //console.log(skill);
-        userSkill &&
-          setSkill([
-            userSkill.get("Front_end_development")
-              ? userSkill.get("Front_end_development")
-              : "0",
-            userSkill.get("Backend_development")
-              ? userSkill.get("Backend_development")
-              : "0",
-            userSkill.get("python") ? userSkill.get("python") : "0",
-            userSkill.get("Design") ? userSkill.get("Design") : "0",
-            userSkill.get("Business_Analytics")
-              ? userSkill.get("Business_Analytics")
-              : "0",
-            userSkill.get("CloudArchitecture")
-              ? userSkill.get("CloudArchitecture")
-              : "0",
-            userSkill.get("ProductManagement")
-              ? userSkill.get("ProductManagement")
-              : "0",
-            userSkill.get("ScrumMaster") ? userSkill.get("ScrumMaster") : "0",
-            userSkill.get("InformationSecurity")
-              ? userSkill.get("InformationSecurity")
-              : "0",
-            userSkill.get("Research") ? userSkill.get("Research") : "0",
-          ]);
-      } catch (error) {
-        alert(
-          `Failed to retrieve the object, with error code: ${error.message}`
-        );
       }
     }
     fetchuserdata();
   }, []);
+
+  //codes partially from https://www.back4app.com/docs/react/working-with-users/react-login
+  async function userLogOut() {
+    try {
+      await Parse.User.logOut();
+      const currentUser = await Parse.User.current();
+      if (currentUser === null) {
+        navigate("/");
+      }
+      return true;
+    } catch (error) {
+      alert(`Error! ${error.message}`);
+      return false;
+    }
+  }
 
   return (
     <div className="profile--main--container">
@@ -191,9 +208,7 @@ export default function ProfilePage() {
 
             {isCurrentUser && (
               <Button
-                onClick={() => {
-                  navigate("/");
-                }}
+                onClick={userLogOut}
                 type="button"
                 buttonSize="btn--width250--height50"
                 buttonStyle="btn--red"

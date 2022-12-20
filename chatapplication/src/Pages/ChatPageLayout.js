@@ -6,27 +6,30 @@ import "./ChatPageLayout.css";
 import { UserChatProfile } from "../components/UserChatProfile";
 import { SearchChat } from "../components/chat-components/SearchChat";
 import SendMessage from "../components/SendMessage/SendMessage";
+import { useNavigate } from "react-router-dom";
 
 export const ChatPageLayout = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
   const [newChatWith, setNewChatWith] = useState(null);
+  const navigate = useNavigate();
 
   //codes partially from https://github.com/templates-back4app/react-js-slack-clone/blob/main/src/Home.js
   useEffect(() => {
     const checkCurrentUser = async () => {
       try {
         const user = await Parse.User.current();
-        if (user.id === null || user.id === undefined) {
-          console.log("no user logged in yet!");
+        if (user === null || user === undefined) {
+          alert("Please log in first!");
+          navigate("/");
         } else {
           if (currentUser === null) {
             setCurrentUser(user.id);
           }
         }
         return true;
-      } catch (_error) {}
+      } catch (error) {}
       return false;
     };
     checkCurrentUser();
