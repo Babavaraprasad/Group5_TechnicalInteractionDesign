@@ -45,11 +45,6 @@ export default function ProfilePage() {
   const [studentData, fetchData] = useState({fname:"", lastname:"",email:"",bio:"",age:"",image:""});
   const [studyinfo, fetchStudyInfo]=useState({HomeUniversity:"", StudyProgram:"",ITUcourse:""})
   //const [skillData, fetchSkillData]=useState({Front_end_development:"",Business_analytics:"",CloudArchitecture:"",InformationSecurity:"",Backend_development:"",ProductManagement:"",Research:"",python:"",ScrumMaster:"",Design:"",})
-
-  // const location=useLocation();
-  // const useriddata2=location.state.data.currentUser2;
-  // console.log(useriddata2);
-
   
 useEffect(()=>{
   async function fetchuserdata()
@@ -84,9 +79,8 @@ useEffect(()=>{
      studentImage=student.get("Image")._url} else{
       studentImage = avartarImg;
     };
-  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage});
-  // Fetching data from Course class
-  
+  fetchData({fname:studentFirstname,lastname:studentLastname,email:studentEmail,bio:studentBiodata,age:studentAge,image:studentImage}); 
+  // Fetching data from Course class  
   courseQuery.equalTo("User_ID", student.toPointer());
   const course = await courseQuery.first();
   // fetchStudyInfo(studyinfo);
@@ -147,7 +141,7 @@ useEffect(()=>{
           ></UserAvatar>
           <p><b>{studentData.fname} {studentData.lastname}</b></p>
           <p><b>{studyinfo.ITUcourse}</b></p>
-          <p>{studentData.bio}</p>
+          <p>{studentData.bio===undefined ? <i>Add your bio by clicking Edit Profile</i> : studentData.bio}</p>
           
           <div className="profile--leftcontainer--pagecontrols">
           <Button
@@ -189,9 +183,9 @@ useEffect(()=>{
       <div className="profile--rightcontainer">
           <div className="profile--rightcontainer--studyinformation">
             <h1>Study Information 🎓</h1>
-            <p>Home University: {studyinfo.HomeUniversity}</p>
-            <p>Study Program: {studyinfo.StudyProgram}</p>
-            <p>Course at ITU: {studyinfo.ITUcourse}</p>
+            <p>Home University: {studyinfo.HomeUniversity===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.HomeUniversity}</p>
+            <p>Study Program: {studyinfo.StudyProgram===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.StudyProgram}</p>
+            <p>Course at ITU: {studyinfo.ITUcourse===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.ITUcourse}</p>
           </div>
 
           <div className="profile--rightcontainer--skills">
@@ -200,6 +194,7 @@ useEffect(()=>{
             {/* <p>Age : {studentData.age}</p> */}
             {/* <h5>Skills</h5> */}
             <div className="skill--section">
+            {/* {skill === undefined ? "Empty" : */}
             {skill !== null &&
                 skill.map((data, index) => {
                   if (data !== "0") {
