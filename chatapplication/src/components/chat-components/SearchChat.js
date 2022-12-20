@@ -7,6 +7,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
   const [search, setSearch] = useState("");
   const [course, setCourse] = useState(null);
   const [groupChat, setGroupChat] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const findCourseList = async function () {
@@ -14,12 +15,15 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
       courseQuery.includeAll();
       const chatQuery = new Parse.Query("Chat");
       chatQuery.exists("group_name");
+      const userQuery = new Parse.Query("User");
 
       try {
         let courseList = await courseQuery.find();
         let chatList = await chatQuery.find();
+        let userList = await userQuery.find();
         setGroupChat(chatList);
         setCourse(courseList);
+        setUser(userList);
         return true;
       } catch (error) {
         alert(`Error!${error.message}`);
@@ -34,7 +38,7 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
     const filterUser = data.filter((item) =>
   item.get("Guest_uni_course") !== undefined ? item.get("Guest_uni_course").toLowerCase().includes(search.toLowerCase()) : console.log()
   );
-    if(!filterUser.length) return <li className="list-item" >No users found</li>
+    if(!filterUser.length) return <li className="list-item" >No users found by this course name</li>
     return filterUser.map((item, index) => (item.get("User_ID").id !== loggedInUser &&
         <li key={`${index}`} className="list-item" 
         onClick={() => {
@@ -46,6 +50,24 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
           {`${item.get("User_ID").get("firstName")} 
             ${item.get("User_ID").get("lastName")}:
             ${item.get("Guest_uni_course")}`}
+        </li>
+      ));
+  };
+
+  const findUserbyName = (data) => {
+    const filterUser = data.filter((item) =>
+    `${item.get("firstName")} ${item.get("lastName")}`.toLowerCase().includes(search.toLowerCase())
+  );
+    if(!filterUser.length) return <li className="list-item" >No users found by this name</li>
+    return filterUser.map((item, index) => (item.id !== loggedInUser &&
+        <li key={`${index}`} className="list-item" 
+        onClick={() => {
+          newChatCallback(item); // deliver a user object
+          contactInfoCallback(item);
+          setSearch("");
+          }}>
+          {`${item.get("firstName")} 
+            ${item.get("lastName")}`}
         </li>
       ));
   };
@@ -74,8 +96,12 @@ export const SearchChat = ({ loggedInUser, newChatCallback, selectChatCallback, 
       {search !== "" &&
       <div className="result-container">
         <ul className="result-list">
-          <p className="category">Users</p>
+          <p className="category">Users by course name</p>
           {course !== null && findUserInCourse(course)}
+        </ul>
+        <ul className="result-list">
+          <p className="category">Users by name</p>
+          {user !== null && findUserbyName(user)}
         </ul>
         <ul className="result-list">
         <p className="category">Groups</p>
