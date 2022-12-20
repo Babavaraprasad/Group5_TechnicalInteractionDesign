@@ -81,8 +81,6 @@ export const ChatPageLayout = () => {
           //console.log(currentChat.id),
           <ChatWindow chatId={currentChat.id} loggedInUserId={currentUser} />
         )}
-        {/* <div style={{display: "flex", justifyContent:"center"}}> Choose a chat to start the conversation </div> */}
-        <p> Choose a chat to start the conversation </p>
         <div className="text-input"></div>
         {currentChat !== null && (
           <SendMessage chatId={currentChat.id} loggedInUserId={currentUser} />
