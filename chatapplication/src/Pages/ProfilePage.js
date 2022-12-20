@@ -90,12 +90,10 @@ export default function ProfilePage() {
             age: studentAge,
             image: studentImage,
           });
-          // Fetching data from Course class
 
+          // Fetching data from Course class
           courseQuery.equalTo("User_ID", student.toPointer());
           const course = await courseQuery.first();
-          // fetchStudyInfo(studyinfo);
-          // console.log(course.get("Home_university"));
           const studentHomeUniversity = course.get("Home_university");
           const studentStudyProgram = course.get("Home_university_degree");
           const studentGuestUniCourse = course.get("Guest_uni_course");
@@ -106,10 +104,8 @@ export default function ProfilePage() {
           });
 
           // Fetching data from Skills class
-          //const skillQuery = new Parse.Query("Skills");
           skillQuery.equalTo("User_ID", student.toPointer());
           const userSkill = await skillQuery.first();
-          //console.log(skill);
           userSkill &&
             setSkill([
               userSkill.get("Front_end_development")
@@ -144,6 +140,19 @@ export default function ProfilePage() {
     }
     fetchuserdata();
   }, []);
+
+  function displaySkillHint() {
+    if (skill !== null) {
+      let totalRating = 0;
+      skill.map((data) => {
+        totalRating += Number(data);
+      });
+
+      if (totalRating === 0) {
+        return <i>Add by clicking Edit Profile</i>;
+      }
+    }
+  }
 
   //codes partially from https://www.back4app.com/docs/react/working-with-users/react-login
   async function userLogOut() {
@@ -180,7 +189,13 @@ export default function ProfilePage() {
           <p>
             <b>{studyinfo.ITUcourse}</b>
           </p>
-          <p>{studentData.bio===undefined ? <i>Add your profile picture and bio by clicking Edit Profile</i> : studentData.bio}</p>
+          <p>
+            {studentData.bio === undefined ? (
+              <i>Add your profile picture and bio by clicking Edit Profile</i>
+            ) : (
+              studentData.bio
+            )}
+          </p>
 
           <div className="profile--leftcontainer--pagecontrols">
             <Button
@@ -220,20 +235,38 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className="profile--rightcontainer">
-          <div className="profile--rightcontainer--studyinformation">
-            <h1>Study Information 🎓</h1>
-            <p>Home University: {studyinfo.HomeUniversity===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.HomeUniversity}</p>
-            <p>Study Program: {studyinfo.StudyProgram===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.StudyProgram}</p>
-            <p>Course at ITU: {studyinfo.ITUcourse===undefined ? <i>Add by clicking Edit Profile</i> : studyinfo.ITUcourse}</p>
-          </div>
+        <div className="profile--rightcontainer--studyinformation">
+          <h1>Study Information 🎓</h1>
+          <p>
+            Home University:{" "}
+            {studyinfo.HomeUniversity === undefined ? (
+              <i>Add by clicking Edit Profile</i>
+            ) : (
+              studyinfo.HomeUniversity
+            )}
+          </p>
+          <p>
+            Study Program:{" "}
+            {studyinfo.StudyProgram === undefined ? (
+              <i>Add by clicking Edit Profile</i>
+            ) : (
+              studyinfo.StudyProgram
+            )}
+          </p>
+          <p>
+            Course at ITU:{" "}
+            {studyinfo.ITUcourse === undefined ? (
+              <i>Add by clicking Edit Profile</i>
+            ) : (
+              studyinfo.ITUcourse
+            )}
+          </p>
+        </div>
 
-          <div className="profile--rightcontainer--skills">
-            <h1>Skills 🧩</h1>
-            {/* <p>Name : {`${studentData.fname} ${studentData.lastname}`}</p> */}
-            {/* <p>Age : {studentData.age}</p> */}
-            {/* <h5>Skills</h5> */}
-            <div className="skill--section">
-            {/* {skill === undefined ? "Empty" : */}
+        <div className="profile--rightcontainer--skills">
+          <h1>Skills 🧩</h1>
+          <div className="skill--section">
+            {skill !== null && displaySkillHint()}
             {skill !== null &&
               skill.map((data, index) => {
                 if (data !== "0") {
@@ -252,6 +285,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-/*
-
-              */
