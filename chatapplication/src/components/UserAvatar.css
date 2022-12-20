@@ -1,7 +1,6 @@
 @import "palette.css";
 
 .avatar {
-    cursor: pointer;
     transition: transform 0.3 ease; 
     position:relative;
 }

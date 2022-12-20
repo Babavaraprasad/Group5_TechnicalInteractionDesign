@@ -1,14 +1,14 @@
 @import "../palette.css";
 .layout {
     display: flex;
-    height: 700px;
+    height: 600px;
     width:100%;
 }
 
 .chat--bubble--box {
     overflow-y: scroll;
     flex-direction: column;
-    height: 700px;
+    height: 600px;
     width: 100%;
     background-color: var(--Surface);
     padding: 10px;

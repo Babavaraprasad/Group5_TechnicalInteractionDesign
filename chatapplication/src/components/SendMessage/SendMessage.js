@@ -51,11 +51,12 @@ function SendMessage(props) {
     <div className="send-message-container">
       <DefaultInputField
         type="text"
-        placeholder={"send this message"}
+        placeholder={"Type your message here"}
         onChange={setMessagecontent}
         value={message}
         onKeyDown={handleEnter}
       ></DefaultInputField>
+      
       <Button
         buttonSize="btn--width100--height40"
         onClick={insertdataintoMessage}

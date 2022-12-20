@@ -33,10 +33,15 @@
 
 .inbox--card--name--time{
     height: inherit;
-    line-height: 8px;
     color: var(--OnSurface);
-
     display: flex;
+}
+
+.inbox--card--name{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 76%;
 }
 
 .inbox--card--time{
@@ -48,6 +53,9 @@
 
 .inbox--card--message{
     margin: 5px 0 4px 1px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .read{
