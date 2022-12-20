@@ -52,3 +52,10 @@
     height: 1%;
     align-items: center;
 }
+
+.right--container--guidance{
+    text-align: center;
+    margin-top: 20%;
+    font-size: x-large;
+    color: var(--tertiary);
+}
