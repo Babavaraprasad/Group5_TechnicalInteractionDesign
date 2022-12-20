@@ -265,7 +265,7 @@ function EditProfile() {
 
         <div className="skill-rating">
           <DropDown
-            labelText={"Academic skill"}
+            labelText={"Academic skill (save one at a time)"}
             placeholder={"Select a skill from the dropdown"}
             options={skillSet}
             onChange={(item) => setSelectSkill(item)}

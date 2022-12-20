@@ -14,7 +14,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     border: 1px solid linear-gradient(var(--SurfaceVariant),var(--SurfaceVariant));
-    width: 80%;
+    width: 100%;
     padding-top:0;
     margin-top: 0;
     max-height: 300px;

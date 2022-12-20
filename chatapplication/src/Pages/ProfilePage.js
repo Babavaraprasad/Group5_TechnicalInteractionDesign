@@ -180,7 +180,7 @@ export default function ProfilePage() {
           <p>
             <b>{studyinfo.ITUcourse}</b>
           </p>
-          <p>{studentData.bio===undefined ? <i>Add your bio by clicking Edit Profile</i> : studentData.bio}</p>
+          <p>{studentData.bio===undefined ? <i>Add your profile picture and bio by clicking Edit Profile</i> : studentData.bio}</p>
 
           <div className="profile--leftcontainer--pagecontrols">
             <Button
